@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   receiverCard: {
-    backgroundColor: Themes.blue3a,
+    backgroundColor: Themes.gray4a,
     padding: normalize(16),
     paddingLeft: normalize(12),
     marginBottom: normalize(10),

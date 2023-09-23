@@ -4,10 +4,15 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
-    "ios": "react-native run-ios",
-    "lint": "eslint .",
+    "ios": "react-native run-ios --simulator 'iPhone 14 Pro'",
     "start": "react-native start",
-    "test": "jest"
+    "lint": "eslint .",
+    "android-release": "cd android && ./gradlew assembleRelease && ./gradlew installRelease && cd ..",
+    "clean-ios": "rm -rf node_modules/ && npm cache clean --force && npm install && rm -rf ~/.rncache && rm -rf ./ios/build ",
+    "clean-ios-build": "rm -rf ./ios/build",
+    "clean-pods": "rm -rf ios/Pods && rm -rf ios/Podfile.lock && cd iOS && pod install && cd ..",
+    "clean-android": "cd android && ./gradlew clean && cd ..",
+    "clean-bundler": "rm -rf $TMPDIR/react-native-packager-cache-* && rm -rf $TMPDIR/metro-bundler-cache-* && npm cache verify && npm start -- --reset-cache"
   },
   "dependencies": {
     "@react-navigation/native": "^6.1.7",

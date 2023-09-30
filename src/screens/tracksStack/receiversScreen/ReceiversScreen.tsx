@@ -1,3 +1,4 @@
+import React from 'react';
 import {Text, View, TouchableOpacity, FlatList} from 'react-native';
 
 import {styles} from './styles';
@@ -16,7 +17,10 @@ export const ReceiversScreen = () => {
   };
   const renderItem = ({item}: {item: {title: string; gps: string}}) => {
     return (
-      <TouchableOpacity style={styles.receiverCard} onPress={goToTracksScreen}>
+      <TouchableOpacity
+        style={styles.receiverCard}
+        onPress={goToTracksScreen}
+        activeOpacity={0.5}>
         <View style={[styles.row, styles.box]}>
           <View style={styles.buttonBox}>
             <IconButton icon={<Edit />} onPress={goToEditModal} />
@@ -35,13 +39,21 @@ export const ReceiversScreen = () => {
   return (
     <View style={styles.screen}>
       <Header title={'Получатели'} isHideBackButton />
-      <FlatList data={mockData} renderItem={renderItem} />
+      <FlatList
+        data={mockData}
+        renderItem={renderItem}
+        contentContainerStyle={styles.contentStyle}
+        showsVerticalScrollIndicator={false}
+      />
     </View>
   );
 };
 
 // TODO
 const mockData = [
+  {title: 'Кабан1', gps: '1341.243456.786'},
+  {title: 'Кабан2', gps: '876.98.234'},
+  {title: 'Пухлый', gps: '3456.87654.08'},
   {title: 'Кабан1', gps: '1341.243456.786'},
   {title: 'Кабан2', gps: '876.98.234'},
   {title: 'Пухлый', gps: '3456.87654.08'},

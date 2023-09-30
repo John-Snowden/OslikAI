@@ -1,3 +1,4 @@
+import React from 'react';
 import {View, Text} from 'react-native';
 
 import {styles} from './styles';
@@ -21,8 +22,10 @@ export const Header: React.FC<IProps> = ({title, isHideBackButton}) => {
   };
 
   return (
-    <View style={[styles.screen, styles.row]}>
-      {!isHideBackButton && (
+    <View style={[styles.header, styles.row]}>
+      {isHideBackButton ? (
+        <View style={styles.margLeft} />
+      ) : (
         <IconButton icon={<ArrowLeft />} onPress={goBack} />
       )}
       <Text style={styles.title}>{title}</Text>

@@ -51,4 +51,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     height: normalize(80),
   },
+  contentStyle: {
+    paddingVertical: normalize(24),
+  },
 });

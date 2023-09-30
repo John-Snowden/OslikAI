@@ -9,11 +9,12 @@ export const styles = StyleSheet.create({
   },
   receiverCard: {
     backgroundColor: Themes.gray4a,
+    justifyContent: 'center',
     padding: normalize(16),
-    paddingLeft: normalize(12),
-    marginBottom: normalize(10),
+    marginBottom: normalize(18),
     marginHorizontal: normalize(18),
     borderRadius: normalize(8),
+    elevation: 8,
   },
   title: {
     fontSize: normalize(20),
@@ -21,7 +22,7 @@ export const styles = StyleSheet.create({
   },
   gps: {
     fontSize: normalize(12),
-    color: Themes.grayc7,
+    color: Themes.white,
     alignSelf: 'center',
   },
   gpsTitle: {
@@ -30,7 +31,7 @@ export const styles = StyleSheet.create({
     color: Themes.white,
   },
   gpsBox: {
-    width: normalize(50),
+    width: normalize(36),
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: normalize(18),
@@ -41,21 +42,37 @@ export const styles = StyleSheet.create({
   box: {
     alignItems: 'center',
     height: normalize(50),
-    backgroundColor: Themes.asphalt,
+    backgroundColor: Themes.asphalt + '59',
     borderRadius: normalize(6),
-    elevation: 6,
+    paddingHorizontal: normalize(12),
   },
   buttonBox: {
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: normalize(18),
   },
+  footer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: normalize(16),
+    alignItems: 'center',
+  },
   gpsWrapper: {
     flexDirection: 'row',
     width: '60%',
-    marginVertical: normalize(12),
+    marginBottom: normalize(2),
     paddingVertical: normalize(12),
+    paddingHorizontal: normalize(12),
     borderRadius: normalize(6),
     backgroundColor: Themes.asphalt + '45',
+  },
+  contentStyle: {
+    paddingVertical: normalize(24),
+  },
+
+  deleteButton: {
+    borderRadius: normalize(6),
+    padding: normalize(14),
+    backgroundColor: Themes.asphalt + '59',
   },
 });

@@ -7,7 +7,7 @@ export class TrackStore {
 
   constructor(root: StoresHolder) {
     this.rootStore = root;
-    this.receivers = mockReceivers;
+    this.receivers = [...mockReceivers, ...mockReceivers];
   }
 
   receivers: TReceiver[];

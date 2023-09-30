@@ -1,11 +1,12 @@
+import React from 'react';
 import {Path, Svg, G} from 'react-native-svg';
 import {Themes} from '../../Theme';
 
 export const Menu = () => {
   return (
     <Svg
-      width="20"
-      height="30"
+      width="16"
+      height="16"
       viewBox="0 0 512.000000 512.000000"
       preserveAspectRatio="xMidYMid meet">
       <G

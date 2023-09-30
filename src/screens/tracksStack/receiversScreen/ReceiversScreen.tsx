@@ -1,3 +1,4 @@
+import React from 'react';
 import {Text, View, TouchableOpacity, FlatList} from 'react-native';
 
 import {styles} from './styles';
@@ -7,6 +8,7 @@ import {Edit} from '../../../../assets/svg/Edit';
 import {IconButton} from '../../components/iconButton';
 import {stores} from '../../stores/storesHolder';
 import {TReceiver} from '../../../types/tracks/tracksType';
+import {Delete} from '../../../../assets/svg';
 
 export const ReceiversScreen = () => {
   const {receivers, setCurrentReceiver} = stores.trackStore;
@@ -16,24 +18,37 @@ export const ReceiversScreen = () => {
     navigation.navigate('Modals', {screen: 'EditModal'});
   };
 
+  const deleteReceiver = () => {};
+
   const renderItem = ({item}: {item: TReceiver}) => {
     const goToTracksScreen = () => {
       setCurrentReceiver(item);
       navigation.navigate('Tracks', {screen: 'TracksScreen'});
     };
+
     return (
-      <TouchableOpacity style={styles.receiverCard} onPress={goToTracksScreen}>
+      <TouchableOpacity
+        style={styles.receiverCard}
+        onPress={goToTracksScreen}
+        activeOpacity={0.5}>
         <View style={[styles.row, styles.box]}>
           <View style={styles.buttonBox}>
             <IconButton icon={<Edit />} onPress={goToEditModal} />
           </View>
-          <Text style={styles.title}>{item.title}</Text>
+          <Text style={styles.title}>{item.title.toLocaleUpperCase()}</Text>
         </View>
-        <View style={styles.gpsWrapper}>
-          <View style={styles.gpsBox}>
-            <Text style={styles.gpsTitle}>gps:</Text>
+        <View style={styles.footer}>
+          <View style={styles.gpsWrapper}>
+            <View style={styles.gpsBox}>
+              <Text style={styles.gpsTitle}>gps:</Text>
+            </View>
+            <Text style={styles.gps}>{item.gps}</Text>
           </View>
-          <Text style={styles.gps}>{item.gps}</Text>
+          <IconButton
+            icon={<Delete />}
+            style={styles.deleteButton}
+            onPress={deleteReceiver}
+          />
         </View>
       </TouchableOpacity>
     );
@@ -41,7 +56,12 @@ export const ReceiversScreen = () => {
   return (
     <View style={styles.screen}>
       <Header title={'Получатели'} isHideBackButton />
-      <FlatList data={receivers} renderItem={renderItem} />
+      <FlatList
+        data={receivers}
+        renderItem={renderItem}
+        contentContainerStyle={styles.contentStyle}
+        showsVerticalScrollIndicator={false}
+      />
     </View>
   );
 };

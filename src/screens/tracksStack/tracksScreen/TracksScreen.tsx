@@ -1,3 +1,4 @@
+import React from 'react';
 import {observer} from 'mobx-react-lite';
 import {useNavigation} from '@react-navigation/native';
 import {TouchableOpacity, FlatList, View, Text, Image} from 'react-native';
@@ -28,7 +29,10 @@ export const TracksScreen = observer(() => {
     };
   }) => {
     return (
-      <TouchableOpacity style={styles.card} onPress={goToTrackScreen}>
+      <TouchableOpacity
+        style={styles.card}
+        onPress={goToTrackScreen}
+        activeOpacity={0.5}>
         <View>
           <Text style={styles.title}>{item.title}</Text>
           <View style={styles.imageBox}>
@@ -53,8 +57,12 @@ export const TracksScreen = observer(() => {
   return (
     <>
       <Header title={'Маршруты'} />
-      {/* <TouchableOpacity style={styles.receiverCard} onPress={goToTrackScreen} /> */}
-      <FlatList data={currentReceiver.routes} renderItem={renderItem} />
+      <FlatList
+        data={currentReceiver.routes}
+        renderItem={renderItem}
+        contentContainerStyle={styles.contentStyle}
+        showsVerticalScrollIndicator={false}
+      />
     </>
   );
 });

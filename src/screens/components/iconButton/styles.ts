@@ -3,6 +3,6 @@ import {normalize} from '../../../../utils';
 
 export const styles = StyleSheet.create({
   button: {
-    padding: normalize(14),
+    padding: normalize(10),
   },
 });

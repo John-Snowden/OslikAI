@@ -1,4 +1,4 @@
-export const mockData = [
+const mockData = [
   {
     title: 'Склад-Кабан',
     gpsA: '1341.243456.786',
@@ -25,5 +25,26 @@ export const mockData = [
     img1: 'https://de-ussr.com/uploads/images/t1/t1_019.jpg',
     img2: 'https://i0.wp.com/s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/26004027049/original/5pOa4AH2jMebWiIGciFMO2smx5-Aqje56w.png',
     duration: '02.10',
+  },
+];
+
+export const mockReceivers = [
+  {
+    title: 'Кабан1',
+    gps: '1341.243456.786',
+    latestPackage: 'шоколад, чай',
+    routes: mockData,
+  },
+  {
+    title: 'Кабан2',
+    gps: '876.98.234',
+    latestPackage: 'бензин, инструмент',
+    routes: mockData,
+  },
+  {
+    title: 'Пухлый',
+    gps: '3456.87654.08',
+    latestPackage: 'пауэрбанк, БК',
+    routes: mockData,
   },
 ];

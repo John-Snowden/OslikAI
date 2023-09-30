@@ -1,3 +1,10 @@
+export type TReceiver = {
+  title: string;
+  gps: string;
+  latestPackage: string;
+  routes: TTrack[];
+};
+
 export type TTrack = {
   title: string;
   gpsA: string;

@@ -7,7 +7,8 @@ import {Header} from '../../components';
 import {stores} from '../../stores/storesHolder';
 
 export const TracksScreen = observer(() => {
-  const {tracks} = stores.trackStore;
+  const {currentReceiver} = stores.trackStore;
+
   const navigation = useNavigation();
   const goToTrackScreen = () => {
     navigation.navigate('TrackOverViewScreen' as never);
@@ -46,11 +47,14 @@ export const TracksScreen = observer(() => {
       </TouchableOpacity>
     );
   };
+
+  if (!currentReceiver) return null;
+
   return (
     <>
       <Header title={'Маршруты'} />
       {/* <TouchableOpacity style={styles.receiverCard} onPress={goToTrackScreen} /> */}
-      <FlatList data={tracks} renderItem={renderItem} />
+      <FlatList data={currentReceiver.routes} renderItem={renderItem} />
     </>
   );
 });

@@ -5,16 +5,22 @@ import {useNavigation} from '@react-navigation/native';
 import {Header} from '../../components';
 import {Edit} from '../../../../assets/svg/Edit';
 import {IconButton} from '../../components/iconButton';
+import {stores} from '../../stores/storesHolder';
+import {TReceiver} from '../../../types/tracks/tracksType';
 
 export const ReceiversScreen = () => {
+  const {receivers, setCurrentReceiver} = stores.trackStore;
+
   const navigation = useNavigation();
   const goToEditModal = () => {
     navigation.navigate('Modals', {screen: 'EditModal'});
   };
-  const goToTracksScreen = () => {
-    navigation.navigate('Tracks', {screen: 'TracksScreen'});
-  };
-  const renderItem = ({item}: {item: {title: string; gps: string}}) => {
+
+  const renderItem = ({item}: {item: TReceiver}) => {
+    const goToTracksScreen = () => {
+      setCurrentReceiver(item);
+      navigation.navigate('Tracks', {screen: 'TracksScreen'});
+    };
     return (
       <TouchableOpacity style={styles.receiverCard} onPress={goToTracksScreen}>
         <View style={[styles.row, styles.box]}>
@@ -35,14 +41,7 @@ export const ReceiversScreen = () => {
   return (
     <View style={styles.screen}>
       <Header title={'Получатели'} isHideBackButton />
-      <FlatList data={mockData} renderItem={renderItem} />
+      <FlatList data={receivers} renderItem={renderItem} />
     </View>
   );
 };
-
-// TODO
-const mockData = [
-  {title: 'Кабан1', gps: '1341.243456.786'},
-  {title: 'Кабан2', gps: '876.98.234'},
-  {title: 'Пухлый', gps: '3456.87654.08'},
-];

@@ -5,7 +5,7 @@ import {styles} from './styles';
 import {Themes} from '../../../../Theme';
 
 export const BackGround: React.FC = () => {
-  const colors = [Themes.blue23, Themes.blue23, Themes.blue23];
+  const colors = [Themes.asphalt, Themes.blue23, Themes.asphalt];
 
   return (
     <LinearGradient

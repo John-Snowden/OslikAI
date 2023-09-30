@@ -17,7 +17,6 @@ export const Themes = {
   mudBlueVague: '#383a4aA6',
   whiteVague: 'gray',
   grayedOut: '#373737',
-  // red: '#ff0000',
 
   text: '#f0f0f0',
   svg: '#f0f0f0',

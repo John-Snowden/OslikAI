@@ -1,14 +1,19 @@
-import {mockData} from './mock';
+import {mockReceivers} from './mock';
 import {StoresHolder} from '../storesHolder';
-import {TTrack} from '../../../types/tracks/tracksType';
+import {TReceiver} from '../../../types/tracks/tracksType';
 
 export class TrackStore {
   rootStore: StoresHolder;
 
   constructor(root: StoresHolder) {
     this.rootStore = root;
-    this.tracks = mockData;
+    this.receivers = mockReceivers;
   }
 
-  tracks: TTrack[];
+  receivers: TReceiver[];
+  currentReceiver: TReceiver | null = null;
+
+  setCurrentReceiver = (data: TReceiver) => {
+    this.currentReceiver = data;
+  };
 }

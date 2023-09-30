@@ -41,6 +41,9 @@ export const styles = StyleSheet.create({
   box: {
     alignItems: 'center',
     height: normalize(50),
+    backgroundColor: Themes.asphalt,
+    borderRadius: normalize(6),
+    elevation: 6,
   },
   buttonBox: {
     alignItems: 'center',
@@ -49,6 +52,10 @@ export const styles = StyleSheet.create({
   },
   gpsWrapper: {
     flexDirection: 'row',
-    height: normalize(80),
+    width: '60%',
+    marginVertical: normalize(12),
+    paddingVertical: normalize(12),
+    borderRadius: normalize(6),
+    backgroundColor: Themes.asphalt + '45',
   },
 });

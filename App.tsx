@@ -5,7 +5,7 @@ import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
 import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
 
 import {styles} from './styles';
-import {BackGround, TracksStack} from './src/screens';
+import {BackGround, MenuScreen, TracksStack} from './src/screens';
 import {ModalsStack} from './src/screens/modalsStack/ModalsStack';
 import {Themes} from './Theme';
 
@@ -29,7 +29,7 @@ const App = () => {
           <Stack.Navigator screenOptions={{headerShown: false}}>
             <Stack.Screen name="Tracks" component={TracksStack} />
             <Stack.Screen name="Modals" component={ModalsStack} />
-            {/* <Stack.Screen name="Settings" component={} /> */}
+            <Stack.Screen name="Menu" component={MenuScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaView>

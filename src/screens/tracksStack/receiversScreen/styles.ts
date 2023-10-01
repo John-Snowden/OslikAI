@@ -75,4 +75,13 @@ export const styles = StyleSheet.create({
     padding: normalize(14),
     backgroundColor: Themes.asphalt + '59',
   },
+  lastPackageBox: {
+    flexDirection: 'row',
+    marginHorizontal: normalize(4),
+    marginVertical: normalize(2),
+    paddingTop: normalize(4),
+  },
+  cardBox: {
+    height: normalize(56),
+  },
 });

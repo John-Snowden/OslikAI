@@ -3,6 +3,7 @@ export type TReceiver = {
   gps: string;
   latestPackage: string;
   routes: TTrack[];
+  date: string;
 };
 
 export type TTrack = {

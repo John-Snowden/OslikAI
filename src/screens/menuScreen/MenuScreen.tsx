@@ -18,7 +18,9 @@ export const MenuScreen = () => {
       <View style={styles.header}>
         <Text style={styles.title}>OslikAI</Text>
       </View>
-      <IconButton icon={<Add />} onPress={} />
+      <TouchableOpacity>
+        <Add />
+      </TouchableOpacity>
     </View>
   );
 };

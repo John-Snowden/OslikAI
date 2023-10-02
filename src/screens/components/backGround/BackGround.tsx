@@ -11,6 +11,8 @@ export const BackGround: React.FC = () => {
     <LinearGradient
       colors={colors}
       locations={[0, 0.25, 1]}
+      useAngle
+      angle={45}
       style={styles.screen}
     />
   );

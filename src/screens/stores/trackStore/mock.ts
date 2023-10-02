@@ -1,3 +1,5 @@
+import {TReceiver} from '../../../types/tracks/tracksType';
+
 const mockData = [
   {
     title: 'Склад-Кабан',
@@ -28,23 +30,27 @@ const mockData = [
   },
 ];
 
-export const mockReceivers = [
+export const mockReceivers: TReceiver[] = [
   {
     title: 'Кабан1',
     gps: '1341.243456.786',
     latestPackage: 'шоколад, чай',
     routes: mockData,
+    date: '20.02.22',
   },
   {
     title: 'Кабан2',
     gps: '876.98.234',
-    latestPackage: 'бензин, инструмент',
+    latestPackage:
+      'бензин, маск сеть, БК, шансовый инструмент, вода, аптечка, сух паек, рация, кабель, трос, скотч, шоколад, чай',
     routes: mockData,
+    date: '13.03.22',
   },
   {
     title: 'Пухлый',
     gps: '3456.87654.08',
-    latestPackage: 'пауэрбанк, БК',
+    latestPackage: '',
     routes: mockData,
+    date: '06.07.22',
   },
 ];

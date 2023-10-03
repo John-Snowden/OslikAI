@@ -36,13 +36,15 @@ export const ReceiversScreen = () => {
           <View style={styles.buttonBox}>
             <IconButton icon={<Edit />} onPress={goToEditModal} />
           </View>
-          <Text style={styles.title}>{item.title.toLocaleUpperCase()}</Text>
+          <View style={[styles.box, styles.margLeft]}>
+            <Text style={styles.title}>{item.title.toLocaleUpperCase()}</Text>
+          </View>
         </View>
         <View style={styles.footer}>
           <View style={styles.gpsWrapper}>
-            <View style={styles.gpsBox}>
-              <Text style={styles.gpsTitle}>gps:</Text>
-            </View>
+            <TouchableOpacity activeOpacity={0.5} style={styles.gpsBox}>
+              <Text style={styles.gpsTitle}>gps</Text>
+            </TouchableOpacity>
             <Text style={styles.gps}>{item.gps}</Text>
           </View>
           <IconButton
@@ -54,8 +56,8 @@ export const ReceiversScreen = () => {
 
         <View style={styles.cardBox}>
           <View style={styles.lastPackageBox}>
-            <Text style={styles.gpsTitle}>последняя посылка: </Text>
-            <Text style={styles.gpsTitle}>{item.date}</Text>
+            <Text style={styles.gpsTitle}>Последняя посылка </Text>
+            <Text style={styles.gpsTitle}>{item.date}:</Text>
           </View>
           <View style={styles.lastPackageBox}>
             <Text numberOfLines={2} style={styles.gpsTitle}>

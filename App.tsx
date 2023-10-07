@@ -8,6 +8,7 @@ import {styles} from './styles';
 import {BackGround, MenuScreen, SplashScreen, TracksStack} from './src/screens';
 import {ModalsStack} from './src/screens/modalsStack/ModalsStack';
 import {Themes} from './Theme';
+import {TModals} from './src/constants';
 
 const Stack = createNativeStackNavigator();
 
@@ -29,7 +30,11 @@ const App = () => {
           <Stack.Navigator screenOptions={{headerShown: false}}>
             <Stack.Screen name="Splash" component={SplashScreen} />
             <Stack.Screen name="Tracks" component={TracksStack} />
-            <Stack.Screen name="Modals" component={ModalsStack} />
+            <Stack.Screen
+              name="Modals"
+              component={ModalsStack}
+              options={{presentation: 'transparentModal', animation: 'fade'}}
+            />
             <Stack.Screen name="Menu" component={MenuScreen} />
           </Stack.Navigator>
         </NavigationContainer>

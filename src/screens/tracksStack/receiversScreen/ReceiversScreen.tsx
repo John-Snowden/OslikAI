@@ -9,14 +9,13 @@ import {IconButton} from '../../components/iconButton';
 import {stores} from '../../stores/storesHolder';
 import {TReceiver} from '../../../types/tracks/tracksType';
 import {Delete} from '../../../../assets/svg';
-import {TrackStore} from '../../stores/trackStore/trackStore';
 
 export const ReceiversScreen = () => {
   const {receivers, setCurrentReceiver} = stores.trackStore;
 
   const navigation = useNavigation();
   const goToEditModal = () => {
-    navigation.navigate('Modals', {screen: 'EditModal'});
+    navigation.push('Modals', {screen: 'EditModalReceiverModal'});
   };
 
   const deleteReceiver = () => {};

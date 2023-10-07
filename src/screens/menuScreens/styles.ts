@@ -6,16 +6,19 @@ export const styles = StyleSheet.create({
   screen: {
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: 'red',
+  },
+  buttonsWrapper: {
+    paddingHorizontal: normalize(8),
+    marginTop: normalize(20),
   },
   title: {
-    fontSize: normalize(20),
+    fontSize: normalize(12),
     color: Themes.white,
   },
-  button: {
-    marginHorizontal: normalize(4),
-    marginVertical: normalize(4),
-    padding: normalize(10),
+  optionWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginHorizontal: normalize(12),
+    marginVertical: normalize(6),
   },
-  header: {},
 });

@@ -1,4 +1,5 @@
 import {G, Path, Svg} from 'react-native-svg';
+import {Themes} from '../../Theme';
 
 export const Add = () => {
   return (
@@ -9,7 +10,7 @@ export const Add = () => {
       preserveAspectRatio="xMidYMid meet">
       <G
         transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
-        fill="#000000"
+        fill={Themes.white}
         stroke="none">
         <Path
           d="M887 5104 c-416 -75 -741 -375 -855 -789 l-27 -100 0 -1655 0 -1655

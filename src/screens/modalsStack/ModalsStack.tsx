@@ -4,6 +4,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {EditModalReceiverModal} from './editModal';
 import {AlertModal} from './alertModal';
 import {EModals} from '../../constants';
+import {CreateReceiverModal} from './createReceiverModal';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +17,10 @@ export const ModalsStack = () => {
         options={{animation: 'slide_from_bottom', presentation: 'modal'}}
       />
       <Stack.Screen name="AlertModal" component={AlertModal} />
+      <Stack.Screen
+        name={EModals.CreateReceinerModal}
+        component={CreateReceiverModal}
+      />
     </Stack.Navigator>
   );
 };

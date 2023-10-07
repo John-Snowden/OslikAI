@@ -8,7 +8,8 @@ import {styles} from './styles';
 import {BackGround, MenuScreen, SplashScreen, TracksStack} from './src/screens';
 import {ModalsStack} from './src/screens/modalsStack/ModalsStack';
 import {Themes} from './Theme';
-import {TModals} from './src/constants';
+import {EMenuScreens, TModals} from './src/constants';
+import {CreateRouteScreen} from './src/screens/menuScreens/createRouteScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -36,6 +37,10 @@ const App = () => {
               options={{presentation: 'transparentModal', animation: 'fade'}}
             />
             <Stack.Screen name="Menu" component={MenuScreen} />
+            <Stack.Screen
+              name={EMenuScreens.CreateRouteScreen}
+              component={CreateRouteScreen}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaView>

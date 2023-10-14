@@ -6,6 +6,7 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios --simulator 'iPhone 14 Pro'",
     "start": "react-native start",
+    "tsc": "tsc --noEmit --skipLibCheck",
     "lint": "eslint .",
     "android-release": "cd android && ./gradlew assembleRelease && ./gradlew installRelease && cd ..",
     "clean-ios": "rm -rf node_modules/ && npm cache clean --force && npm install && rm -rf ~/.rncache && rm -rf ./ios/build ",

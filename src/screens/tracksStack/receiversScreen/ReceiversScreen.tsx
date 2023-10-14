@@ -6,7 +6,7 @@ import {useNavigation} from '@react-navigation/native';
 import {Header} from '../../components';
 import {Edit} from '../../../../assets/svg/Edit';
 import {IconButton} from '../../components/iconButton';
-import {stores} from '../../stores/storesHolder';
+import {stores} from '../../../stores/storesHolder';
 import {TReceiver} from '../../../types/tracks/tracksType';
 import {Delete} from '../../../../assets/svg';
 
@@ -36,7 +36,9 @@ export const ReceiversScreen = () => {
             <IconButton icon={<Edit />} onPress={goToEditModal} />
           </View>
           <View style={[styles.box, styles.margLeft]}>
-            <Text style={styles.title}>{item.title.toLocaleUpperCase()}</Text>
+            <Text style={styles.title}>
+              {item.receiverName.toLocaleUpperCase()}
+            </Text>
           </View>
         </View>
         <View style={styles.footer}>
@@ -44,7 +46,7 @@ export const ReceiversScreen = () => {
             <TouchableOpacity activeOpacity={0.5} style={styles.gpsBox}>
               <Text style={styles.gpsTitle}>gps</Text>
             </TouchableOpacity>
-            <Text style={styles.gps}>{item.gps}</Text>
+            <Text style={styles.gps}>{item.receiverGps}</Text>
           </View>
           <IconButton
             icon={<Delete />}

@@ -1,17 +1,25 @@
 import React from 'react';
 import {FlatList, Text, TouchableOpacity, View} from 'react-native';
-import {CustomInput, Header} from '../../components';
+import {CustomInput, Header, MainButton} from '../../components';
 import {styles} from './styles';
-import {stores} from '../../stores/storesHolder';
+import {stores} from '../../../stores/storesHolder';
 import {TReceiver} from '../../../types/tracks/tracksType';
 import {Check} from '../../../../assets/svg/Check';
 import {Add} from '../../../../assets/svg/Add';
 import {IconButton} from '../../components/iconButton';
 import {useNavigation} from '@react-navigation/native';
 import {EModals} from '../../../constants';
+import {observer} from 'mobx-react-lite';
 
-export const CreateRouteScreen = () => {
-  const {receivers} = stores.trackStore;
+export const CreateRouteScreen = observer(() => {
+  const {
+    receivers,
+    newRoute,
+    setSenderName,
+    setSenderGps,
+    saveNewRoute,
+    setNewRouteReceiver,
+  } = stores.trackStore;
 
   const navigation = useNavigation();
 
@@ -20,11 +28,14 @@ export const CreateRouteScreen = () => {
   };
 
   const renderItem = ({item}: {item: TReceiver}) => {
+    const onPress = () => {
+      setNewRouteReceiver(item);
+    };
     return (
-      <TouchableOpacity style={styles.receiverBox}>
+      <TouchableOpacity style={styles.receiverBox} onPress={onPress}>
         <View>
-          <Text style={styles.title}>{item.title}</Text>
-          <Text style={styles.text}>{item.gps}</Text>
+          <Text style={styles.title}>{item.receiverName}</Text>
+          <Text style={styles.text}>{item.receiverGps}</Text>
         </View>
         <Check />
       </TouchableOpacity>
@@ -35,8 +46,16 @@ export const CreateRouteScreen = () => {
     <>
       <Header title="Новый маршрут" />
       <View style={styles.inputsWrapper}>
-        <CustomInput title="Имя отправитель" />
-        <CustomInput title="gps отправителя" />
+        <CustomInput
+          title="Имя отправителя"
+          value={newRoute?.senderName}
+          onChangeText={setSenderName}
+        />
+        <CustomInput
+          title="gps отправителя"
+          value={newRoute?.senderGps}
+          onChangeText={setSenderGps}
+        />
       </View>
 
       <View style={styles.box1}>
@@ -44,6 +63,12 @@ export const CreateRouteScreen = () => {
         <Text style={styles.title}>получатель:</Text>
       </View>
       <FlatList data={receivers} renderItem={renderItem} />
+      <MainButton
+        title={'Сохранить'}
+        onPress={saveNewRoute}
+        style={styles.btn}
+        textColor={styles.btnText}
+      />
     </>
   );
-};
+});

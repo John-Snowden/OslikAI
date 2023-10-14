@@ -34,4 +34,11 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+  btn: {
+    width: '94%',
+    alignSelf: 'center',
+    marginTop: normalize(16),
+    backgroundColor: Themes.white,
+  },
+  btnText: {color: Themes.black},
 });

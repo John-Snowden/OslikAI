@@ -1,15 +1,14 @@
 export type TReceiver = {
-  title: string;
-  gps: string;
+  receiverName: string;
+  receiverGps: string;
   latestPackage: string;
-  routes: TTrack[];
+  routes: TRoute[];
   date: string;
 };
 
-export type TTrack = {
-  title: string;
-  gpsA: string;
-  gpsB: string;
+export type TRoute = {
+  senderName: string;
+  senderGps: string;
   date: string;
   img1: string;
   img2: string;

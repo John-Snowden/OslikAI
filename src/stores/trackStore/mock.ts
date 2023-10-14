@@ -1,28 +1,25 @@
-import {TReceiver} from '../../../types/tracks/tracksType';
+import {TReceiver, TRoute} from '../../types/tracks/tracksType';
 
-const mockData = [
+const mockData: TRoute[] = [
   {
-    title: 'Склад-Кабан',
-    gpsA: '1341.243456.786',
-    gpsB: '3134.2435.256.23.6',
+    senderName: 'Склад',
+    senderGps: '1341.243456.786',
     date: '21.03.23',
     img1: 'https://static.tildacdn.com/tild3639-3835-4334-b764-306266326237/dem3.jpg',
     img2: 'https://topogis.ru/wp-content/uploads/2019/01/04.jpg',
     duration: '01.15',
   },
   {
-    title: 'База-Кабан',
-    gpsA: '876.98.234',
-    gpsB: '14.65.3456.7654.3',
+    senderName: 'База',
+    senderGps: '876.98.234',
     date: '12.02.23',
     img1: 'https://static.tildacdn.com/tild3639-3835-4334-b764-306266326237/dem3.jpg',
     img2: 'https://fsd.videouroki.net/products/conspekty/geo6/10-znachieniie-planov-miestnosti-i-ghieoghrafichieskikh-kart.files/image001.jpg',
     duration: '00.50',
   },
   {
-    title: 'Кабан',
-    gpsA: '3456.87654.08',
-    gpsB: '234.43.1345.677.8',
+    senderName: 'Точка',
+    senderGps: '3456.87654.08',
     date: '01.012.23',
     img1: 'https://de-ussr.com/uploads/images/t1/t1_019.jpg',
     img2: 'https://i0.wp.com/s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/26004027049/original/5pOa4AH2jMebWiIGciFMO2smx5-Aqje56w.png',
@@ -32,23 +29,23 @@ const mockData = [
 
 export const mockReceivers: TReceiver[] = [
   {
-    title: 'Кабан1',
-    gps: '1341.243456.786',
+    receiverName: 'Кабан1',
+    receiverGps: '1341.243456.786',
     latestPackage: 'шоколад, чай',
     routes: mockData,
     date: '20.02.22',
   },
   {
-    title: 'Кабан2',
-    gps: '876.98.234',
+    receiverName: 'Кабан2',
+    receiverGps: '876.98.234',
     latestPackage:
       'бензин, маск сеть, БК, шансовый инструмент, вода, аптечка, сух паек, рация, кабель, трос, скотч, шоколад, чай',
     routes: mockData,
     date: '13.03.22',
   },
   {
-    title: 'Пухлый',
-    gps: '3456.87654.08',
+    receiverName: 'Пухлый',
+    receiverGps: '3456.87654.08',
     latestPackage: '',
     routes: mockData,
     date: '06.07.22',

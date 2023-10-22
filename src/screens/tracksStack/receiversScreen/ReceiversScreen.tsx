@@ -1,4 +1,5 @@
 import React from 'react';
+import {observer} from 'mobx-react-lite';
 import {Text, View, TouchableOpacity, FlatList} from 'react-native';
 
 import {styles} from './styles';
@@ -10,17 +11,20 @@ import {stores} from '../../../stores/storesHolder';
 import {TReceiver} from '../../../types/tracks/tracksType';
 import {Delete} from '../../../../assets/svg';
 
-export const ReceiversScreen = () => {
+export const ReceiversScreen = observer(() => {
   const {receivers, setCurrentReceiver} = stores.trackStore;
+  console.log('render', receivers);
 
   const navigation = useNavigation();
-  const goToEditModal = () => {
-    navigation.push('Modals', {screen: 'EditModalReceiverModal'});
-  };
 
   const deleteReceiver = () => {};
 
   const renderItem = ({item}: {item: TReceiver}) => {
+    const goToEditModal = () => {
+      setCurrentReceiver(item);
+      navigation.push('Modals', {screen: 'EditModalReceiverModal'});
+    };
+
     const goToTracksScreen = () => {
       setCurrentReceiver(item);
       navigation.navigate('Tracks', {screen: 'TracksScreen'});
@@ -28,6 +32,7 @@ export const ReceiversScreen = () => {
 
     return (
       <TouchableOpacity
+        key={item.id}
         style={styles.receiverCard}
         onPress={goToTracksScreen}
         activeOpacity={0.5}>
@@ -36,9 +41,7 @@ export const ReceiversScreen = () => {
             <IconButton icon={<Edit />} onPress={goToEditModal} />
           </View>
           <View style={[styles.box, styles.margLeft]}>
-            <Text style={styles.title}>
-              {item.receiverName.toLocaleUpperCase()}
-            </Text>
+            <Text style={styles.title}>{item.receiverName.toUpperCase()}</Text>
           </View>
         </View>
         <View style={styles.footer}>
@@ -69,15 +72,16 @@ export const ReceiversScreen = () => {
       </TouchableOpacity>
     );
   };
+
   return (
     <View style={styles.screen}>
       <Header title={'Получатели'} isHideBackButton />
       <FlatList
-        data={receivers}
+        data={receivers.slice()}
         renderItem={renderItem}
         contentContainerStyle={styles.contentStyle}
         showsVerticalScrollIndicator={false}
       />
     </View>
   );
-};
+});

@@ -29,6 +29,7 @@ const mockData: TRoute[] = [
 
 export const mockReceivers: TReceiver[] = [
   {
+    id: '0',
     receiverName: 'Кабан1',
     receiverGps: '1341.243456.786',
     latestPackage: 'шоколад, чай',
@@ -36,6 +37,7 @@ export const mockReceivers: TReceiver[] = [
     date: '20.02.22',
   },
   {
+    id: '1',
     receiverName: 'Кабан2',
     receiverGps: '876.98.234',
     latestPackage:
@@ -44,6 +46,7 @@ export const mockReceivers: TReceiver[] = [
     date: '13.03.22',
   },
   {
+    id: '2',
     receiverName: 'Пухлый',
     receiverGps: '3456.87654.08',
     latestPackage: '',

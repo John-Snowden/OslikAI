@@ -1,4 +1,5 @@
 export type TReceiver = {
+  id: string;
   receiverName: string;
   receiverGps: string;
   latestPackage: string;

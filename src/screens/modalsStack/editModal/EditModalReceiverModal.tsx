@@ -3,11 +3,13 @@ import {View, Pressable} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
 import {styles} from './styles';
-import {CustomInput} from '../../components';
+import {CustomInput, MainButton} from '../../components';
 import {stores} from '../../../stores/storesHolder';
+import {observer} from 'mobx-react-lite';
 
-export const EditModalReceiverModal = () => {
-  const {currentReceiver, setReceiverName, setReceiverGps} = stores.trackStore;
+export const EditModalReceiverModal = observer(() => {
+  const {currentReceiver, setReceiverName, setReceiverGps, updateReceiver} =
+    stores.trackStore;
 
   const navigation = useNavigation();
 
@@ -29,7 +31,8 @@ export const EditModalReceiverModal = () => {
           value={currentReceiver?.receiverGps}
           onChangeText={setReceiverGps}
         />
+        <MainButton title="ok" onPress={updateReceiver} />
       </View>
     </View>
   );
-};
+});

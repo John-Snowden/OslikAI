@@ -1,5 +1,7 @@
 import React from 'react';
+import {observer} from 'mobx-react-lite';
 import {FlatList, Text, TouchableOpacity, View} from 'react-native';
+
 import {CustomInput, Header, MainButton} from '../../components';
 import {styles} from './styles';
 import {stores} from '../../../stores/storesHolder';
@@ -9,7 +11,6 @@ import {Add} from '../../../../assets/svg/Add';
 import {IconButton} from '../../components/iconButton';
 import {useNavigation} from '@react-navigation/native';
 import {EModals} from '../../../constants';
-import {observer} from 'mobx-react-lite';
 
 export const CreateRouteScreen = observer(() => {
   const {

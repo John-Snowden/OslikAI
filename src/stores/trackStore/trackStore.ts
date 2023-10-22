@@ -7,7 +7,7 @@ export class TrackStore {
 
   constructor(root: StoresHolder) {
     this.rootStore = root;
-    this.receivers = [...mockReceivers, ...mockReceivers];
+    this.receivers = mockReceivers;
   }
 
   receivers: TReceiver[];
@@ -24,7 +24,7 @@ export class TrackStore {
   newRouteReceiver: TReceiver | null = null;
 
   setCurrentReceiver = (data: TReceiver) => {
-    this.currentReceiver = data;
+    this.currentReceiver = {...data};
   };
 
   setReceiverName = (data: string) => {
@@ -60,5 +60,20 @@ export class TrackStore {
       this.newRouteReceiver?.routes.length,
       this.newRouteReceiver?.routes,
     );
+  };
+
+  updateReceiver = () => {
+    let i;
+
+    this.receivers.forEach((r, index) => {
+      if (r.id === this.currentReceiver?.id) {
+        i = index;
+        return;
+      }
+    });
+
+    if (i !== undefined && this.currentReceiver) {
+      this.receivers[i] = this.currentReceiver;
+    }
   };
 }

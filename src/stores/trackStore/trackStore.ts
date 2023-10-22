@@ -27,6 +27,16 @@ export class TrackStore {
     this.currentReceiver = data;
   };
 
+  setReceiverName = (data: string) => {
+    if (!this.currentReceiver) return;
+    this.currentReceiver.receiverName = data;
+  };
+
+  setReceiverGps = (data: string) => {
+    if (!this.currentReceiver) return;
+    this.currentReceiver.receiverGps = data;
+  };
+
   setSenderName = (data: string) => {
     this.newRoute.senderName = data;
     console.log('name', this.newRoute);

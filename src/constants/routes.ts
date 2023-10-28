@@ -1,5 +1,6 @@
 export enum EModals {
   EditReceiverModal = 'EditReceiverModal',
+  EditSenderModal = 'EditSenderModal',
   CreateReceinerModal = 'CreateReceinerModal',
 }
 

@@ -9,9 +9,10 @@ import {stores} from '../../../stores/storesHolder';
 import {TRoute} from '../../../types/tracks/tracksType';
 import {Add} from '../../../../assets/svg/Add';
 import {IconButton} from '../../components/iconButton';
+import {EModals} from '../../../constants';
 
 export const TracksScreen = observer(() => {
-  const {currentReceiver} = stores.trackStore;
+  const {currentReceiver, setCurrentSender} = stores.trackStore;
 
   const navigation = useNavigation();
   const goToTrackScreen = () => {
@@ -19,6 +20,11 @@ export const TracksScreen = observer(() => {
   };
 
   const renderItem = ({item}: {item: TRoute}) => {
+    const goToEditSenderModal = () => {
+      setCurrentSender(item);
+      navigation.push('Modals', {screen: 'EditSenderModal'});
+    };
+
     return (
       <TouchableOpacity
         style={styles.card}
@@ -27,7 +33,7 @@ export const TracksScreen = observer(() => {
         <View>
           <View style={styles.addButtom}>
             <Text style={styles.title}>{item.senderName}</Text>
-            <IconButton icon={<Add />} onPress={() => {}} />
+            <IconButton icon={<Add />} onPress={goToEditSenderModal} />
           </View>
           <View style={styles.imageBox}>
             <Image source={{uri: item.img1}} style={styles.image} />

@@ -5,6 +5,7 @@ import {EditReceiverModal} from './editReceiverModal';
 import {AlertModal} from './alertModal';
 import {EModals} from '../../constants';
 import {CreateReceiverModal} from './createReceiverModal';
+import {EditSenderModal} from './editSenderModal';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +17,7 @@ export const ModalsStack = () => {
         component={EditReceiverModal}
         options={{animation: 'slide_from_bottom', presentation: 'modal'}}
       />
+      <Stack.Screen name="EditSenderModal" component={EditSenderModal} />
       <Stack.Screen name="AlertModal" component={AlertModal} />
       <Stack.Screen
         name={EModals.CreateReceinerModal}

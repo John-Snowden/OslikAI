@@ -14,7 +14,7 @@ export const AlertModal = () => {
     <View style={styles.screen}>
       <Pressable style={styles.transperent} onPress={goBack} />
       <View style={styles.contentBox}>
-        <Text style={styles.title}>действительно перейти на дьило?</Text>
+        <Text style={styles.title}>действительно перейти на дьиdfcgло?</Text>
         <MainButton
           title="ok"
           onPress={() => {}}

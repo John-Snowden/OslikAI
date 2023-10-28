@@ -12,6 +12,7 @@ export class TrackStore {
 
   receivers: TReceiver[];
   currentReceiver: TReceiver | null = null;
+  currentSender: TRoute | null = null;
 
   newRoute: TRoute = {
     senderName: '',
@@ -22,6 +23,10 @@ export class TrackStore {
     duration: '',
   };
   newRouteReceiver: TReceiver | null = null;
+
+  setCurrentSender = (data: TRoute) => {
+    this.currentSender = data;
+  };
 
   setCurrentReceiver = (data: TReceiver) => {
     this.currentReceiver = {...data};

@@ -22,7 +22,7 @@ export const ReceiversScreen = observer(() => {
   const renderItem = ({item}: {item: TReceiver}) => {
     const goToEditModal = () => {
       setCurrentReceiver(item);
-      navigation.push('Modals', {screen: 'EditModalReceiverModal'});
+      navigation.push('Modals', {screen: 'EditReceiverModal'});
     };
 
     const goToTracksScreen = () => {

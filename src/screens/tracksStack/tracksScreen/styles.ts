@@ -40,4 +40,9 @@ export const styles = StyleSheet.create({
     marginBottom: normalize(8),
   },
   contentStyle: {paddingVertical: normalize(24)},
+  addButtom: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
 });

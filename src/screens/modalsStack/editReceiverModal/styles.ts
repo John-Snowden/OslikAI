@@ -24,4 +24,7 @@ export const styles = StyleSheet.create({
     borderRadius: normalize(8),
     paddingVertical: normalize(24),
   },
+  buttom: {
+    alignSelf: 'center',
+  },
 });

@@ -7,6 +7,8 @@ import {styles} from './styles';
 import {Header} from '../../components';
 import {stores} from '../../../stores/storesHolder';
 import {TRoute} from '../../../types/tracks/tracksType';
+import {Add} from '../../../../assets/svg/Add';
+import {IconButton} from '../../components/iconButton';
 
 export const TracksScreen = observer(() => {
   const {currentReceiver} = stores.trackStore;
@@ -23,7 +25,10 @@ export const TracksScreen = observer(() => {
         onPress={goToTrackScreen}
         activeOpacity={0.5}>
         <View>
-          <Text style={styles.title}>{item.senderName}</Text>
+          <View style={styles.addButtom}>
+            <Text style={styles.title}>{item.senderName}</Text>
+            <IconButton icon={<Add />} onPress={() => {}} />
+          </View>
           <View style={styles.imageBox}>
             <Image source={{uri: item.img1}} style={styles.image} />
             <Image source={{uri: item.img2}} style={styles.image} />

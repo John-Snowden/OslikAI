@@ -7,11 +7,16 @@ import {CustomInput, MainButton} from '../../components';
 import {stores} from '../../../stores/storesHolder';
 import {observer} from 'mobx-react-lite';
 
-export const EditModalReceiverModal = observer(() => {
+export const EditReceiverModal = observer(() => {
   const {currentReceiver, setReceiverName, setReceiverGps, updateReceiver} =
     stores.trackStore;
 
   const navigation = useNavigation();
+
+  const onPress = () => {
+    updateReceiver();
+    goBack();
+  };
 
   const goBack = () => {
     navigation.goBack();
@@ -31,7 +36,7 @@ export const EditModalReceiverModal = observer(() => {
           value={currentReceiver?.receiverGps}
           onChangeText={setReceiverGps}
         />
-        <MainButton title="ok" onPress={updateReceiver} />
+        <MainButton title="ok" onPress={onPress} style={styles.buttom} />
       </View>
     </View>
   );

@@ -18,8 +18,6 @@ export const Header: React.FC<IProps> = ({title, isHideBackButton}) => {
     navigation.goBack();
   };
   const goToSettings = () => {
-    console.log('PRESsED');
-
     navigation.navigate('Menu');
   };
 

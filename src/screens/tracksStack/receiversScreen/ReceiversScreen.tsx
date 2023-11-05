@@ -13,7 +13,7 @@ import {Delete} from '../../../../assets/svg';
 
 export const ReceiversScreen = observer(() => {
   const {receivers, setCurrentReceiver} = stores.trackStore;
-  console.log('render', receivers);
+  // console.log('render', receivers);
 
   const navigation = useNavigation();
 

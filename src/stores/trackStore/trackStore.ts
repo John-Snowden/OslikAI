@@ -15,6 +15,7 @@ export class TrackStore {
   currentSender: TRoute | null = null;
 
   newRoute: TRoute = {
+    id: '',
     senderName: '',
     senderGps: '',
     date: new Date().toLocaleDateString(),
@@ -43,13 +44,13 @@ export class TrackStore {
   };
 
   setSenderName = (data: string) => {
-    this.newRoute.senderName = data;
-    console.log('name', this.newRoute);
+    if (!this.currentSender) return;
+    this.currentSender.senderName = data;
   };
 
   setSenderGps = (data: string) => {
-    this.newRoute.senderGps = data;
-    console.log('gps', this.newRoute);
+    if (!this.currentSender) return;
+    this.currentSender.senderGps = data;
   };
 
   setNewRouteReceiver = (data: TReceiver) => {
@@ -79,6 +80,21 @@ export class TrackStore {
 
     if (i !== undefined && this.currentReceiver) {
       this.receivers[i] = this.currentReceiver;
+    }
+  };
+
+  updateSender = () => {
+    let i;
+
+    this.currentReceiver?.routes.forEach((s, index) => {
+      if (s.id === this.currentSender?.id) {
+        i = index;
+        return;
+      }
+    });
+
+    if (i !== undefined && this.currentReceiver) {
+      this.currentReceiver?.routes[i] = this.currentSender;
     }
   };
 }

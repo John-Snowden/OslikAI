@@ -8,6 +8,7 @@ export type TReceiver = {
 };
 
 export type TRoute = {
+  id: string;
   senderName: string;
   senderGps: string;
   date: string;

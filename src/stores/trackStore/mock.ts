@@ -2,6 +2,7 @@ import {TReceiver, TRoute} from '../../types/tracks/tracksType';
 
 const mockData: TRoute[] = [
   {
+    id: '0',
     senderName: 'Склад',
     senderGps: '1341.243456.786',
     date: '21.03.23',
@@ -10,6 +11,7 @@ const mockData: TRoute[] = [
     duration: '01.15',
   },
   {
+    id: '1',
     senderName: 'База',
     senderGps: '876.98.234',
     date: '12.02.23',
@@ -18,6 +20,7 @@ const mockData: TRoute[] = [
     duration: '00.50',
   },
   {
+    id: '2',
     senderName: 'Точка',
     senderGps: '3456.87654.08',
     date: '01.012.23',

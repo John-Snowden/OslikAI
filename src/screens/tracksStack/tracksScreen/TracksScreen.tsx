@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {observer} from 'mobx-react-lite';
 import {useNavigation} from '@react-navigation/native';
 import {TouchableOpacity, FlatList, View, Text, Image} from 'react-native';
@@ -9,7 +9,6 @@ import {stores} from '../../../stores/storesHolder';
 import {TRoute} from '../../../types/tracks/tracksType';
 import {Add} from '../../../../assets/svg/Add';
 import {IconButton} from '../../components/iconButton';
-import {EModals} from '../../../constants';
 
 export const TracksScreen = observer(() => {
   const {currentReceiver, setCurrentSender} = stores.trackStore;

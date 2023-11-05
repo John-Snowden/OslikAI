@@ -93,8 +93,9 @@ export class TrackStore {
       }
     });
 
-    if (i !== undefined && this.currentReceiver) {
-      this.currentReceiver?.routes[i] = this.currentSender;
+    if (i !== undefined && this.currentSender && this.currentReceiver) {
+      this.currentReceiver.routes[i] = this.currentSender;
+      this.currentReceiver = {...this.currentReceiver};
     }
   };
 }

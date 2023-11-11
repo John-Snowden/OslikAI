@@ -1,23 +1,30 @@
 import React, {useState} from 'react';
-import {View, Text, Image, TouchableOpacity, ScrollView} from 'react-native';
+import {View, Text, TouchableOpacity, ScrollView} from 'react-native';
 import {Header} from '../../components';
 import {styles} from './styles';
 import {useNavigation} from '@react-navigation/native';
+import FastImage from 'react-native-fast-image';
+import {observer} from 'mobx-react-lite';
+import {stores} from '../../../stores/storesHolder';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import ImageViewer from 'react-native-image-zoom-viewer';
 
-export const TrackOverViewScreen = () => {
-  const [image, setImage] = useState(mockData[0]);
+export const TrackOverViewScreen = observer(() => {
+  const {currentReceiver, currentSender} = stores.trackStore;
+
+  const [image, setImage] = useState(currentSender?.images[0]);
   const [backButtonIndex, setBackButtonIndex] = useState(-1);
   const navigation = useNavigation();
 
   const renderItems = () => {
-    return mockData.map((link, index) => {
-      const isLast = mockData.length === index;
+    return currentSender?.images.map((link, index) => {
+      const isLast = currentSender.images.length === index;
       const selectImage = () => {
         setImage(link);
       };
       return (
         <TouchableOpacity onPress={selectImage} key={index}>
-          <Image
+          <FastImage
             source={{uri: link}}
             style={[styles.imgButton, !isLast && styles.margRight]}
           />
@@ -26,12 +33,12 @@ export const TrackOverViewScreen = () => {
     });
   };
   const renderNumbs = () => {
-    return mockNumbs.map((numb, i) => {
+    return currentReceiver?.senders.map((sender, i) => {
       const selectBackTrack = () => {
         setBackButtonIndex(i);
         navigation.navigate('Modals', {screen: 'AlertModal'});
       };
-      const isLast = mockNumbs.length === i;
+      const isLast = currentReceiver.senders.length === i;
       const isSelected = i === backButtonIndex;
       return (
         <TouchableOpacity
@@ -41,8 +48,8 @@ export const TrackOverViewScreen = () => {
             isSelected && styles.selected,
           ]}
           onPress={selectBackTrack}
-          key={numb}>
-          <Text style={styles.text}>{numb}</Text>
+          key={sender.id}>
+          <Text style={styles.text}>{sender.senderName}</Text>
         </TouchableOpacity>
       );
     });
@@ -50,45 +57,35 @@ export const TrackOverViewScreen = () => {
 
   return (
     <>
-      <Header title={'Склад-Кабан'} />
+      <Header
+        title={
+          currentReceiver?.receiverName + ' - ' + currentSender?.senderName
+        }
+        isHideBackButton
+      />
 
-      <ScrollView style={styles.screen}>
-        <View>
-          <Image source={{uri: image}} style={styles.mainImage} />
-        </View>
+      <View style={styles.screen} showsVerticalScrollIndicator={false}>
+        {/* <GestureHandlerRootView style={styles.mainImage}>
+          <ImageViewer imageUrls={[{uri: image}]} resizeMode="contain" />
+        </GestureHandlerRootView> */}
         <ScrollView
           showsHorizontalScrollIndicator={false}
           style={styles.imgButtonWrapper}
           horizontal>
           {renderItems()}
         </ScrollView>
-        {mockComment && (
+        {currentSender?.comment && (
           <View style={styles.commBox}>
-            <Text style={styles.text}>{mockComment}</Text>
+            <Text style={styles.text}>{currentSender.comment}</Text>
           </View>
         )}
-      </ScrollView>
-
-      <View>
-        <ScrollView showsHorizontalScrollIndicator={false} horizontal>
+        <ScrollView
+          showsHorizontalScrollIndicator={false}
+          horizontal
+          style={styles.horScroll}>
           {renderNumbs()}
         </ScrollView>
       </View>
     </>
   );
-};
-
-const mockData = [
-  'https://topogis.ru/wp-content/uploads/2019/01/04.jpg',
-  'https://de-ussr.com/uploads/images/t1/t1_019.jpg',
-  'https://fsd.videouroki.net/products/conspekty/geo6/10-znachieniie-planov-miestnosti-i-ghieoghrafichieskikh-kart.files/image001.jpg',
-  'https://i0.wp.com/s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/26004027049/original/5pOa4AH2jMebWiIGciFMO2smx5-Aqje56w.png',
-  'https://topogis.ru/wp-content/uploads/2019/01/04.jpg',
-  'https://de-ussr.com/uploads/images/t1/t1_019.jpg',
-  'https://fsd.videouroki.net/products/conspekty/geo6/10-znachieniie-planov-miestnosti-i-ghieoghrafichieskikh-kart.files/image001.jpg',
-  'https://i0.wp.com/s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/26004027049/original/5pOa4AH2jMebWiIGciFMO2smx5-Aqje56w.png',
-];
-
-const mockComment = 'растяжки. взять сапера в проводники. позывной Ильич';
-
-const mockNumbs = [1, 2, 3, 4, 5, 6, 7, 8];
+});

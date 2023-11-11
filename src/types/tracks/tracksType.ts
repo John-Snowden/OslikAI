@@ -3,16 +3,17 @@ export type TReceiver = {
   receiverName: string;
   receiverGps: string;
   latestPackage: string;
-  routes: TRoute[];
+  senders: TSender[];
   date: string;
 };
 
-export type TRoute = {
+export type TSender = {
   id: string;
   senderName: string;
   senderGps: string;
   date: string;
-  img1: string;
-  img2: string;
+  images: string[];
+  comment: string;
   duration: string;
+  latestPackage: string;
 };

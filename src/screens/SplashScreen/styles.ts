@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
   },
   oslik: {flexDirection: 'row'},
   wheelBox: {
-    height: normalize(120),
+    height: normalize(140),
     justifyContent: 'space-between',
   },
   wheel: {
@@ -20,13 +20,14 @@ export const styles = StyleSheet.create({
     height: normalize(36),
     borderRadius: normalize(6),
     marginHorizontal: normalize(4),
-    backgroundColor: Themes.blue23,
+    backgroundColor: Themes.red,
   },
   oslikBody: {
     paddingBottom: normalize(12),
     width: normalize(90),
-    height: normalize(120),
     borderRadius: normalize(8),
+    borderWidth: 1,
+    borderColor: Themes.mudBlue,
     backgroundColor: Themes.blue3a,
   },
   iconWrapper: {

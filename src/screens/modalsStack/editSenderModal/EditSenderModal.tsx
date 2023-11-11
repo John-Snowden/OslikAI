@@ -1,17 +1,22 @@
 import React from 'react';
-import {Pressable, View} from 'react-native';
-import {CustomInput, MainButton} from '../../components';
-import {styles} from './styles';
+import {View, Pressable} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+
+import {styles} from './styles';
+import {CustomInput, MainButton} from '../../components';
 import {stores} from '../../../stores/storesHolder';
 import {observer} from 'mobx-react-lite';
-import {useEffect} from 'react';
 
 export const EditSenderModal = observer(() => {
+  const {currentSender, setSenderName, setSenderGps, updateSender} =
+    stores.trackStore;
+
   const navigation = useNavigation();
 
-  const {currentSender, updateSender, setSenderName, setSenderGps} =
-    stores.trackStore;
+  const onPress = () => {
+    updateSender();
+    goBack();
+  };
 
   const goBack = () => {
     navigation.goBack();
@@ -19,19 +24,19 @@ export const EditSenderModal = observer(() => {
 
   return (
     <View style={styles.wrapper}>
-      <Pressable onPress={goBack} style={styles.bg} />
+      <Pressable style={styles.bg} onPress={goBack} />
       <View style={styles.contentWrapper}>
         <CustomInput
-          title="имя отправителя:"
+          title={'Имя отправителя'}
           value={currentSender?.senderName}
           onChangeText={setSenderName}
         />
         <CustomInput
-          title="gps отправителя:"
+          title={'gps отправителя'}
           value={currentSender?.senderGps}
           onChangeText={setSenderGps}
         />
-        <MainButton title="Ok" onPress={updateSender} style={styles.buttom} />
+        <MainButton title="ok" onPress={onPress} style={styles.button} />
       </View>
     </View>
   );

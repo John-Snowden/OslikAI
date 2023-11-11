@@ -6,6 +6,8 @@ import {AlertModal} from './alertModal';
 import {EModals} from '../../constants';
 import {CreateReceiverModal} from './createReceiverModal';
 import {EditSenderModal} from './editSenderModal';
+import {DeleteReceiverModal} from './deleteReceiverModal';
+import {DeleteSenderModal} from './deleteSenderModal';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +25,11 @@ export const ModalsStack = () => {
         name={EModals.CreateReceinerModal}
         component={CreateReceiverModal}
       />
+      <Stack.Screen
+        name="DeleteReceiverModal"
+        component={DeleteReceiverModal}
+      />
+      <Stack.Screen name="DeleteSenderModal" component={DeleteSenderModal} />
     </Stack.Navigator>
   );
 };

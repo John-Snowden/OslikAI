@@ -21,11 +21,24 @@ export const styles = StyleSheet.create({
   contentWrapper: {
     backgroundColor: Themes.blue3b,
     width: '90%',
+    justifyContent: 'center',
     borderRadius: normalize(8),
     paddingVertical: normalize(18),
   },
-  button: {
+  cancelButton: {
     alignSelf: 'center',
-    marginTop: normalize(24),
+    marginTop: normalize(20),
+    backgroundColor: Themes.grayf4,
+  },
+  deleteButton: {
+    alignSelf: 'center',
+    backgroundColor: Themes.red,
+  },
+  text: {
+    textAlign: 'center',
+    paddingHorizontal: normalize(16),
+    marginBottom: normalize(4),
+    fontSize: normalize(12),
+    color: Themes.white,
   },
 });

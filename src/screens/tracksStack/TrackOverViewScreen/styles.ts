@@ -2,6 +2,7 @@ import {StyleSheet} from 'react-native';
 
 import {Themes} from '../../../../Theme';
 import {normalize} from '../../../../utils';
+import {headerHeight, SCREEN_HEIGHT, softBar} from '../../../constants/metrics';
 
 export const styles = StyleSheet.create({
   screen: {
@@ -15,8 +16,7 @@ export const styles = StyleSheet.create({
     width: normalize(50),
   },
   mainImage: {
-    height: normalize(150),
-    backgroundColor: 'red',
+    height: SCREEN_HEIGHT - headerHeight - normalize(80),
     borderRadius: normalize(8),
     marginBottom: normalize(8),
   },
@@ -40,13 +40,18 @@ export const styles = StyleSheet.create({
   },
   numbBox: {
     width: normalize(80),
-    height: normalize(60),
+    height: normalize(40),
     borderRadius: normalize(8),
-    backgroundColor: Themes.blue3a,
+    backgroundColor: Themes.blue3b,
+    borderWidth: 1,
+    borderColor: Themes.lightAsphalt,
     alignItems: 'center',
     justifyContent: 'center',
   },
   selected: {
     backgroundColor: 'red',
+  },
+  horScroll: {
+    marginBottom: softBar,
   },
 });

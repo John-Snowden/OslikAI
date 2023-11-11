@@ -1,12 +1,13 @@
-import {View, Text, TouchableOpacity} from 'react-native';
+import React from 'react';
+import {View, Text} from 'react-native';
 import {styles} from './styles';
-import {ArrowLeft} from '../../../assets/svg';
 import {IconButton} from '../components/iconButton';
 import {useNavigation} from '@react-navigation/native';
 import {Add} from '../../../assets/svg/Add';
 import {Header} from '../components';
 import {EMenuScreens} from '../../constants';
 
+// TODO delete screen?
 export const MenuScreen = () => {
   const navigation = useNavigation();
 

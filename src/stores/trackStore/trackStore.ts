@@ -1,6 +1,6 @@
 import {mockReceivers} from './mock';
 import {StoresHolder} from '../storesHolder';
-import {TReceiver, TRoute} from '../../types/tracks/tracksType';
+import {TReceiver, TSender} from '../../types/tracks/tracksType';
 
 export class TrackStore {
   rootStore: StoresHolder;
@@ -12,20 +12,21 @@ export class TrackStore {
 
   receivers: TReceiver[];
   currentReceiver: TReceiver | null = null;
-  currentSender: TRoute | null = null;
+  currentSender: TSender | null = null;
 
-  newRoute: TRoute = {
+  newRoute: TSender = {
     id: '',
     senderName: '',
     senderGps: '',
     date: new Date().toLocaleDateString(),
-    img1: '',
-    img2: '',
+    images: [],
+    comment: '',
     duration: '',
+    latestPackage: '',
   };
   newRouteReceiver: TReceiver | null = null;
 
-  setCurrentSender = (data: TRoute) => {
+  setCurrentSender = (data: TSender) => {
     this.currentSender = data;
   };
 
@@ -57,16 +58,7 @@ export class TrackStore {
     this.newRouteReceiver = data;
   };
 
-  saveNewRoute = () => {
-    console.log('BEFORE:', this.newRouteReceiver?.routes.length);
-    const route = {...this.newRoute};
-    this.newRouteReceiver?.routes.push(route);
-    console.log(
-      'AFTER:________',
-      this.newRouteReceiver?.routes.length,
-      this.newRouteReceiver?.routes,
-    );
-  };
+  saveNewRoute = () => {};
 
   updateReceiver = () => {
     let i;
@@ -86,7 +78,7 @@ export class TrackStore {
   updateSender = () => {
     let i;
 
-    this.currentReceiver?.routes.forEach((s, index) => {
+    this.currentReceiver?.senders.forEach((s, index) => {
       if (s.id === this.currentSender?.id) {
         i = index;
         return;
@@ -94,8 +86,23 @@ export class TrackStore {
     });
 
     if (i !== undefined && this.currentSender && this.currentReceiver) {
-      this.currentReceiver.routes[i] = this.currentSender;
+      this.currentReceiver.senders[i] = this.currentSender;
       this.currentReceiver = {...this.currentReceiver};
     }
+  };
+
+  deleteReceiver = () => {
+    this.receivers = this.receivers.filter(r => {
+      r.id !== this.currentReceiver?.id;
+    });
+  };
+
+  deleteSender = () => {
+    if (!this.currentReceiver) return;
+    const senders = this.currentReceiver?.senders.filter(s => {
+      return s.id !== this.currentSender?.id;
+    });
+
+    this.currentReceiver = {...this.currentReceiver, senders};
   };
 }

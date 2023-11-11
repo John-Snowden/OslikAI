@@ -54,16 +54,14 @@ export const SplashScreen: React.FC = () => {
   });
 
   useEffect(() => {
-    setTimeout(() => {
-      progressAllLogo.value = withTiming(1, {duration: 500}, () => {
-        progress.value = withDelay(500, withTiming(1, {duration: 500}));
-      });
-    }, 1000);
+    progressAllLogo.value = withTiming(1, {duration: 500}, () => {
+      progress.value = withDelay(500, withTiming(1, {duration: 500}));
+    });
   }, []);
 
   useEffect(() => {
     setTimeout(() => {
-      navigation.replace('Tracks');
+      // navigation.replace('Tracks');
     }, 2500);
   }, []);
 

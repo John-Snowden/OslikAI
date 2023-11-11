@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+
 import {Themes} from '../../../../Theme';
 import {normalize} from '../../../../utils';
 
@@ -18,12 +19,13 @@ export const styles = StyleSheet.create({
     opacity: 0.8,
   },
   contentWrapper: {
-    backgroundColor: Themes.gray4a,
-    width: '94%',
+    backgroundColor: Themes.blue3b,
+    width: '90%',
     borderRadius: normalize(8),
-    paddingVertical: normalize(24),
+    paddingVertical: normalize(18),
   },
-  buttom: {
+  button: {
     alignSelf: 'center',
+    marginTop: normalize(24),
   },
 });

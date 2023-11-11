@@ -36,7 +36,7 @@ export const EditReceiverModal = observer(() => {
           value={currentReceiver?.receiverGps}
           onChangeText={setReceiverGps}
         />
-        <MainButton title="ok" onPress={onPress} style={styles.buttom} />
+        <MainButton title="ok" onPress={onPress} style={styles.button} />
       </View>
     </View>
   );

@@ -23,7 +23,7 @@ export const styles = StyleSheet.create({
     backgroundColor: Themes.red,
   },
   oslikBody: {
-    paddingBottom: normalize(12),
+    justifyContent: 'center',
     width: normalize(90),
     borderRadius: normalize(8),
     borderWidth: 1,
@@ -35,13 +35,8 @@ export const styles = StyleSheet.create({
     alignItems: 'flex-end',
     justifyContent: 'center',
   },
-  text: {
-    fontSize: normalize(18),
-    fontWeight: '600',
-    color: Themes.white,
-  },
   title: {
-    fontSize: normalize(40),
+    fontSize: normalize(80),
     top: normalize(6),
     fontWeight: '600',
     color: Themes.white,

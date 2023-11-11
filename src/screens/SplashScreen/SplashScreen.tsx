@@ -7,7 +7,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import React, {useEffect} from 'react';
-import {Text, View} from 'react-native';
+import {View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
 import {Donkey} from '../../../assets/svg';
@@ -26,11 +26,6 @@ export const SplashScreen: React.FC = () => {
     return {opacity, transform: [{translateY}]};
   });
 
-  const aStyleLogo = useAnimatedStyle(() => {
-    const opacity = interpolate(progressAllLogo.value, [0, 1], [0, 1]);
-    return {opacity};
-  });
-
   const aStyleA = useAnimatedStyle(() => {
     const opacity = interpolate(progress.value, [0, 1], [1, 0]);
     const translateX = interpolate(
@@ -47,7 +42,7 @@ export const SplashScreen: React.FC = () => {
     const translateX = interpolate(
       progress.value,
       [0, 1],
-      [offsetX, 6],
+      [offsetX, 16],
       Extrapolate.CLAMP,
     );
     return {opacity, transform: [{translateX}]};
@@ -61,7 +56,7 @@ export const SplashScreen: React.FC = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      // navigation.replace('Tracks');
+      navigation.replace('Tracks');
     }, 2500);
   }, []);
 
@@ -72,24 +67,23 @@ export const SplashScreen: React.FC = () => {
           <View style={styles.wheel} />
           <View style={styles.wheel} />
         </View>
-        <View style={styles.oslikBody} />
+        <View style={styles.oslikBody}>
+          <View style={styles.iconWrapper}>
+            <Donkey />
+          </View>
+        </View>
         <View style={styles.wheelBox}>
           <View style={styles.wheel} />
           <View style={styles.wheel} />
         </View>
       </Animated.View>
-      <Animated.View style={aStyleLogo}>
-        <View style={styles.iconWrapper}>
-          <Text style={styles.text}>ослик</Text>
-          <Donkey />
-          <View>
-            <Animated.Text style={[styles.title, aStyleA]}>ИА</Animated.Text>
-            <Animated.Text style={[styles.title, styles.absolute, aStyleB]}>
-              AI
-            </Animated.Text>
-          </View>
-        </View>
-      </Animated.View>
+
+      <View>
+        <Animated.Text style={[styles.title, aStyleA]}>ИА</Animated.Text>
+        <Animated.Text style={[styles.title, styles.absolute, aStyleB]}>
+          AI
+        </Animated.Text>
+      </View>
     </View>
   );
 };

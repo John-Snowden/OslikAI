@@ -24,10 +24,12 @@ export const styles = StyleSheet.create({
     marginHorizontal: normalize(12),
   },
   receiverBox: {
+    height: normalize(60),
+    width: normalize(150),
     flexDirection: 'row',
     backgroundColor: Themes.gray4a,
     marginVertical: normalize(8),
-    marginHorizontal: normalize(12),
+    marginHorizontal: normalize(4),
     borderRadius: normalize(4),
     paddingHorizontal: normalize(8),
     paddingVertical: normalize(8),

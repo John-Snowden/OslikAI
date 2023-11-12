@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import {styles} from './styles';
 import {IconButton} from '../components/iconButton';
 import {useNavigation} from '@react-navigation/native';
@@ -11,31 +11,34 @@ import {EMenuScreens} from '../../constants';
 export const MenuScreen = () => {
   const navigation = useNavigation();
 
-  const goBack = () => {
-    navigation.goBack();
-  };
   const goToCreateRoute = () => {
     navigation.navigate(EMenuScreens.CreateRouteScreen);
   };
 
   return (
     <>
-      <Header title="меню" />
+      <Header title="меню" isBackButton={true} />
 
       <View style={styles.screen}>
         <View style={styles.buttonsWrapper}>
-          <View style={styles.optionWrapper}>
-            <IconButton onPress={goToCreateRoute} icon={<Add />} />
+          <TouchableOpacity
+            style={styles.optionWrapper}
+            onPress={goToCreateRoute}>
+            <Add />
             <Text style={styles.title}>Добавить маршрут</Text>
-          </View>
-          <View style={styles.optionWrapper}>
-            <IconButton onPress={goToCreateRoute} icon={<Add />} />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.optionWrapper}
+            onPress={goToCreateRoute}>
+            <Add />
             <Text style={styles.title}>Добавить маршрут</Text>
-          </View>
-          <View style={styles.optionWrapper}>
-            <IconButton onPress={goToCreateRoute} icon={<Add />} />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.optionWrapper}
+            onPress={goToCreateRoute}>
+            <Add />
             <Text style={styles.title}>Добавить маршрут</Text>
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
     </>

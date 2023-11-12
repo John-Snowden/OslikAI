@@ -10,10 +10,10 @@ import {Themes} from '../../../../Theme';
 
 interface IProps {
   title: string;
-  isHideBackButton?: boolean;
+  isBackButton?: boolean;
 }
 
-export const Header: React.FC<IProps> = ({title, isHideBackButton}) => {
+export const Header: React.FC<IProps> = ({title, isBackButton}) => {
   const navigation = useNavigation();
 
   const goBack = () => {
@@ -28,7 +28,7 @@ export const Header: React.FC<IProps> = ({title, isHideBackButton}) => {
 
   return (
     <View style={[styles.header, styles.row]}>
-      {isHideBackButton && (
+      {isBackButton && (
         <View style={styles.backButton}>
           <IconButton icon={<ArrowLeft />} onPress={goBack} />
         </View>

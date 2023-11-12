@@ -14,6 +14,7 @@ export const styles = StyleSheet.create({
   title: {
     fontSize: normalize(12),
     color: Themes.white,
+    marginLeft: normalize(6),
   },
   optionWrapper: {
     flexDirection: 'row',

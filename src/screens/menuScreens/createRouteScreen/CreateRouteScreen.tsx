@@ -38,14 +38,14 @@ export const CreateRouteScreen = observer(() => {
           <Text style={styles.title}>{item.receiverName}</Text>
           <Text style={styles.text}>{item.receiverGps}</Text>
         </View>
-        <Check />
+        {/* <Check /> */}
       </TouchableOpacity>
     );
   };
 
   return (
     <>
-      <Header title="Новый маршрут" />
+      <Header title="Новый маршрут" isBackButton />
       <View style={styles.inputsWrapper}>
         <CustomInput
           title="Имя отправителя"
@@ -63,7 +63,12 @@ export const CreateRouteScreen = observer(() => {
         <IconButton icon={<Add />} onPress={goToCreateReceiverModal} />
         <Text style={styles.title}>получатель:</Text>
       </View>
-      <FlatList data={receivers} renderItem={renderItem} />
+      <FlatList
+        data={receivers}
+        renderItem={renderItem}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+      />
       <MainButton
         title={'Сохранить'}
         onPress={saveNewRoute}

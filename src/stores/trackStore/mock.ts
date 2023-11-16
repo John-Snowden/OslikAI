@@ -1,5 +1,13 @@
 import {TReceiver, TSender} from '../../types/tracks/tracksType';
 
+const mockTask1 = {
+  id: '0',
+  distance: 1000,
+  degree: 45,
+  speed: 1,
+  timeout: 0,
+};
+
 const mockData: TSender[] = [
   {
     id: '0',
@@ -12,8 +20,8 @@ const mockData: TSender[] = [
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROwxCBe6rHmiITuIGbaxDrazAFCRxokKFV_Ng05itbdnMQbgXcScwP-xhhtPz5hwFysJs&usqp=CAU',
     ],
     latestPackage: 'шоколад, чай',
-    comment: 'растяжки. взять сапера в проводники. позывной Ильич',
     duration: '01.15',
+    route: [mockTask1],
   },
   {
     id: '1',
@@ -27,8 +35,8 @@ const mockData: TSender[] = [
     ],
     latestPackage:
       'бк, банки х30, дш 12м, окопники 4шт, бензин 12л, мелицина, мини-бензопила, запалы',
-    comment: 'растяжки. взять сапера в проводники. позывной Ильич',
     duration: '00.50',
+    route: [mockTask1],
   },
   {
     id: '2',
@@ -41,8 +49,8 @@ const mockData: TSender[] = [
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROwxCBe6rHmiITuIGbaxDrazAFCRxokKFV_Ng05itbdnMQbgXcScwP-xhhtPz5hwFysJs&usqp=CAU',
     ],
     latestPackage: '',
-    comment: 'растяжки. взять сапера в проводники. позывной Ильич',
     duration: '02.10',
+    route: [mockTask1],
   },
 ];
 

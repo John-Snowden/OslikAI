@@ -2,7 +2,7 @@ import React from 'react';
 
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {EditReceiverModal} from './editReceiverModal';
-import {AlertModal} from './alertModal';
+import {ConfirmModal} from './alertModal';
 import {EModals} from '../../constants';
 import {CreateReceiverModal} from './createReceiverModal';
 import {EditSenderModal} from './editSenderModal';
@@ -20,7 +20,7 @@ export const ModalsStack = () => {
         options={{animation: 'slide_from_bottom', presentation: 'modal'}}
       />
       <Stack.Screen name="EditSenderModal" component={EditSenderModal} />
-      <Stack.Screen name="AlertModal" component={AlertModal} />
+      <Stack.Screen name="ConfirmModal" component={ConfirmModal} />
       <Stack.Screen
         name={EModals.CreateReceinerModal}
         component={CreateReceiverModal}

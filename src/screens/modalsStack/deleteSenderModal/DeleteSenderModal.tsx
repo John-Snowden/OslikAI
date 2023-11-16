@@ -31,7 +31,11 @@ export const DeleteSenderModal = observer(() => {
           onPress={goBack}
           style={styles.cancelButton}
         />
-        <MainButton title="ok" onPress={onPress} style={styles.deleteButton} />
+        <MainButton
+          title="удалить"
+          onPress={onPress}
+          style={styles.deleteButton}
+        />
       </View>
     </View>
   );

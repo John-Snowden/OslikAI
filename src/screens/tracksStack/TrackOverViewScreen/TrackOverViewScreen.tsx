@@ -1,23 +1,24 @@
 import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, ScrollView} from 'react-native';
-import {Header} from '../../components';
-import {styles} from './styles';
-import {useNavigation} from '@react-navigation/native';
-import FastImage from 'react-native-fast-image';
 import {observer} from 'mobx-react-lite';
+import FastImage from 'react-native-fast-image';
+import {useNavigation} from '@react-navigation/native';
+import {View, Text, TouchableOpacity, ScrollView} from 'react-native';
+
+import {styles} from './styles';
+import {Header} from '../../components';
 import {stores} from '../../../stores/storesHolder';
-import {GestureHandlerRootView} from 'react-native-gesture-handler';
-import ImageViewer from 'react-native-image-zoom-viewer';
 
 export const TrackOverViewScreen = observer(() => {
-  const {currentReceiver, currentSender} = stores.trackStore;
+  const {currentReceiver, currentSender, addPendingRoutes} = stores.trackStore;
 
-  const [image, setImage] = useState(currentSender?.images[0]);
+  const [image, setImage] = useState(currentSender.images[0]);
   const [backButtonIndex, setBackButtonIndex] = useState(-1);
   const navigation = useNavigation();
 
-  const renderItems = () => {
-    return currentSender?.images.map((link, index) => {
+  const title = currentSender.senderName + ' - ' + currentReceiver.receiverName;
+
+  const renderImages = () => {
+    return currentSender.images.map((link, index) => {
       const isLast = currentSender.images.length === index;
       const selectImage = () => {
         setImage(link);
@@ -32,14 +33,17 @@ export const TrackOverViewScreen = observer(() => {
       );
     });
   };
-  const renderNumbs = () => {
-    return currentReceiver?.senders.map((sender, i) => {
+
+  const renderButtons = () => {
+    return currentReceiver.senders.map((sender, i) => {
       const selectBackTrack = () => {
         setBackButtonIndex(i);
-        navigation.navigate('Modals', {screen: 'AlertModal'});
+        addPendingRoutes(i);
+        navigation.navigate('Modals', {screen: 'ConfirmModal'});
       };
       const isLast = currentReceiver.senders.length === i;
       const isSelected = i === backButtonIndex;
+
       return (
         <TouchableOpacity
           style={[
@@ -57,35 +61,28 @@ export const TrackOverViewScreen = observer(() => {
 
   return (
     <>
-      <Header
-        title={
-          currentReceiver?.receiverName + ' - ' + currentSender?.senderName
-        }
-        isHideBackButton
-      />
-
-      <View style={styles.screen} showsVerticalScrollIndicator={false}>
-        {/* <GestureHandlerRootView style={styles.mainImage}>
-          <ImageViewer imageUrls={[{uri: image}]} resizeMode="contain" />
-        </GestureHandlerRootView> */}
-        <ScrollView
-          showsHorizontalScrollIndicator={false}
-          style={styles.imgButtonWrapper}
-          horizontal>
-          {renderItems()}
-        </ScrollView>
-        {currentSender?.comment && (
-          <View style={styles.commBox}>
-            <Text style={styles.text}>{currentSender.comment}</Text>
+      <Header title={title} isBackButton />
+      <ScrollView
+        contentContainerStyle={styles.screen}
+        showsVerticalScrollIndicator={false}>
+        <FastImage source={{uri: image}} style={[styles.mainImage]} />
+        <View>
+          <ScrollView
+            showsHorizontalScrollIndicator={false}
+            style={styles.imgButtonWrapper}
+            horizontal>
+            {renderImages()}
+          </ScrollView>
+        </View>
+        <View>
+          <View style={styles.backTrackBox}>
+            <Text style={styles.text}>Обратный путь</Text>
           </View>
-        )}
-        <ScrollView
-          showsHorizontalScrollIndicator={false}
-          horizontal
-          style={styles.horScroll}>
-          {renderNumbs()}
-        </ScrollView>
-      </View>
+          <ScrollView showsHorizontalScrollIndicator={false} horizontal>
+            {renderButtons()}
+          </ScrollView>
+        </View>
+      </ScrollView>
     </>
   );
 });

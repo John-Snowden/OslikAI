@@ -76,11 +76,9 @@ export const TracksScreen = observer(() => {
     );
   };
 
-  if (!currentReceiver) return null;
-
   return (
     <>
-      <Header title={'Маршруты'} isHideBackButton />
+      <Header title={'Отправители'} isBackButton />
       <FlatList
         data={currentReceiver.senders.slice()}
         renderItem={renderItem}

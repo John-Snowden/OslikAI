@@ -28,12 +28,12 @@ export const EditReceiverModal = observer(() => {
       <View style={styles.contentWrapper}>
         <CustomInput
           title={'Имя получателя'}
-          value={currentReceiver?.receiverName}
+          value={currentReceiver.receiverName}
           onChangeText={setReceiverName}
         />
         <CustomInput
           title={'gps получателя'}
-          value={currentReceiver?.receiverGps}
+          value={currentReceiver.receiverGps}
           onChangeText={setReceiverGps}
         />
         <MainButton title="ok" onPress={onPress} style={styles.button} />

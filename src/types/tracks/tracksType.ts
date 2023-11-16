@@ -13,7 +13,15 @@ export type TSender = {
   senderGps: string;
   date: string;
   images: string[];
-  comment: string;
   duration: string;
   latestPackage: string;
+  route: TTask[];
+};
+
+export type TTask = {
+  id: string;
+  distance: number;
+  degree: number;
+  speed: number;
+  timeout: number;
 };

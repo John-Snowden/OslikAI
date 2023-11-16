@@ -2,27 +2,26 @@ import {StyleSheet} from 'react-native';
 
 import {Themes} from '../../../../Theme';
 import {normalize} from '../../../../utils';
-import {headerHeight, SCREEN_HEIGHT, softBar} from '../../../constants/metrics';
 
 export const styles = StyleSheet.create({
   screen: {
     flex: 1,
     padding: normalize(16),
   },
-
   receiverCard: {
     backgroundColor: Themes.red,
     height: normalize(50),
     width: normalize(50),
   },
   mainImage: {
-    height: SCREEN_HEIGHT - headerHeight - normalize(80),
+    flex: 1,
     borderRadius: normalize(8),
-    marginBottom: normalize(8),
   },
   imgButton: {
     width: normalize(60),
     height: normalize(60),
+    marginTop: normalize(6),
+    marginBottom: normalize(20),
     borderRadius: normalize(8),
   },
   imgButtonWrapper: {
@@ -51,7 +50,7 @@ export const styles = StyleSheet.create({
   selected: {
     backgroundColor: 'red',
   },
-  horScroll: {
-    marginBottom: softBar,
+  backTrackBox: {
+    marginBottom: normalize(6),
   },
 });

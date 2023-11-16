@@ -1,46 +1,59 @@
 import Animated, {
   Extrapolate,
   interpolate,
+  interpolateColor,
   useAnimatedStyle,
   useSharedValue,
   withDelay,
   withTiming,
 } from 'react-native-reanimated';
 import React, {useEffect} from 'react';
-import {View} from 'react-native';
+import {Easing, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
 import {Donkey} from '../../../assets/svg';
 
 import {offsetX, styles} from './styles';
+import {Themes} from '../../../Theme';
 
 export const SplashScreen: React.FC = () => {
   const navigation = useNavigation();
 
-  const progressAllLogo = useSharedValue(0);
-  const progress = useSharedValue(0);
+  const carProgress = useSharedValue(0);
+  const titleProgress = useSharedValue(0);
 
   const aStyleOslik = useAnimatedStyle(() => {
-    const opacity = interpolate(progressAllLogo.value, [0, 1], [0, 1]);
-    const translateY = interpolate(progressAllLogo.value, [0, 1], [100, 0]);
+    const opacity = interpolate(carProgress.value, [0, 1], [0, 1]);
+    const translateY = interpolate(carProgress.value, [0, 1], [100, 0]);
+
     return {opacity, transform: [{translateY}]};
   });
 
+  const aStyleWheel = useAnimatedStyle(() => {
+    const backgroundColor = interpolateColor(
+      carProgress.value,
+      [0, 0.4, 1],
+      [Themes.red, 'coral', Themes.white],
+    );
+    return {backgroundColor};
+  });
+
   const aStyleA = useAnimatedStyle(() => {
-    const opacity = interpolate(progress.value, [0, 1], [1, 0]);
+    const opacity = interpolate(titleProgress.value, [0, 1], [1, 0]);
     const translateX = interpolate(
-      progress.value,
+      titleProgress.value,
       [0, 1],
       [0, offsetX],
       Extrapolate.CLAMP,
     );
+
     return {opacity, transform: [{translateX}]};
   });
 
   const aStyleB = useAnimatedStyle(() => {
-    const opacity = interpolate(progress.value, [0, 1], [0, 1]);
+    const opacity = interpolate(titleProgress.value, [0, 1], [0, 1]);
     const translateX = interpolate(
-      progress.value,
+      titleProgress.value,
       [0, 1],
       [offsetX, 16],
       Extrapolate.CLAMP,
@@ -49,23 +62,26 @@ export const SplashScreen: React.FC = () => {
   });
 
   useEffect(() => {
-    progressAllLogo.value = withTiming(1, {duration: 500}, () => {
-      progress.value = withDelay(500, withTiming(1, {duration: 500}));
-    });
+    carProgress.value = withDelay(
+      200,
+      withTiming(1, {duration: 600}, () => {
+        titleProgress.value = withDelay(100, withTiming(1, {duration: 400}));
+      }),
+    );
   }, []);
 
   useEffect(() => {
     setTimeout(() => {
       navigation.replace('Tracks');
-    }, 2500);
+    }, 2300);
   }, []);
 
   return (
     <View style={styles.screen}>
       <Animated.View style={[styles.oslik, aStyleOslik]}>
         <View style={styles.wheelBox}>
-          <View style={styles.wheel} />
-          <View style={styles.wheel} />
+          <Animated.View style={[styles.wheel, aStyleWheel]} />
+          <Animated.View style={[styles.wheel, aStyleWheel]} />
         </View>
         <View style={styles.oslikBody}>
           <View style={styles.iconWrapper}>
@@ -73,8 +89,8 @@ export const SplashScreen: React.FC = () => {
           </View>
         </View>
         <View style={styles.wheelBox}>
-          <View style={styles.wheel} />
-          <View style={styles.wheel} />
+          <Animated.View style={[styles.wheel, aStyleWheel]} />
+          <Animated.View style={[styles.wheel, aStyleWheel]} />
         </View>
       </Animated.View>
 

@@ -1,31 +1,47 @@
 import {StyleSheet} from 'react-native';
+
 import {Themes} from '../../../../Theme';
 import {normalize} from '../../../../utils';
 
 export const styles = StyleSheet.create({
-  screen: {
+  wrapper: {
     flex: 1,
-    backgroundColor: 'transparent',
-  },
-  transperent: {
-    flex: 1,
-    backgroundColor: Themes.black,
-    opacity: 0.1,
-  },
-  contentBox: {
-    backgroundColor: Themes.blue23,
+    justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: normalize(12),
   },
-  title: {
-    fontSize: normalize(16),
+  bg: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: Themes.black,
+    opacity: 0.8,
+  },
+  contentWrapper: {
+    backgroundColor: Themes.blue3b,
+    width: '90%',
+    justifyContent: 'center',
+    borderRadius: normalize(8),
+    paddingVertical: normalize(18),
+  },
+  cancelButton: {
+    alignSelf: 'center',
+    marginTop: normalize(20),
+    backgroundColor: Themes.gray4a,
+  },
+  confirmButton: {
+    alignSelf: 'center',
+    backgroundColor: Themes.lightBlue,
+  },
+  saveRouteBox: {
+    marginBottom: normalize(12),
+  },
+  text: {
+    textAlign: 'center',
+    paddingHorizontal: normalize(16),
+    marginBottom: normalize(4),
+    fontSize: normalize(12),
     color: Themes.white,
-    paddingBottom: normalize(16),
-  },
-  whiteButton: {
-    backgroundColor: Themes.white,
-  },
-  blueText: {
-    color: Themes.blue23,
   },
 });

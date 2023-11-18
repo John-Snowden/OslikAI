@@ -35,8 +35,8 @@ export const CreateRouteScreen = observer(() => {
     return (
       <TouchableOpacity style={styles.receiverBox} onPress={onPress}>
         <View>
-          <Text style={styles.title}>{item.receiverName}</Text>
-          <Text style={styles.text}>{item.receiverGps}</Text>
+          <Text style={styles.title}>{item.name}</Text>
+          <Text style={styles.text}>{item.gps}</Text>
         </View>
         {/* <Check /> */}
       </TouchableOpacity>
@@ -49,12 +49,12 @@ export const CreateRouteScreen = observer(() => {
       <View style={styles.inputsWrapper}>
         <CustomInput
           title="Имя отправителя"
-          value={newRoute?.senderName}
+          value={newRoute?.name}
           onChangeText={setSenderName}
         />
         <CustomInput
           title="gps отправителя"
-          value={newRoute?.senderGps}
+          value={newRoute?.gps}
           onChangeText={setSenderGps}
         />
       </View>

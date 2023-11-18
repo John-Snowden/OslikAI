@@ -11,8 +11,8 @@ const mockTask1 = {
 const mockData: TSender[] = [
   {
     id: '0',
-    senderName: 'Склад',
-    senderGps: '1341.243456.786',
+    name: 'Склад',
+    gps: '1341.243456.786',
     date: '21.03.23',
     images: [
       'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/15/11175/18595',
@@ -25,8 +25,8 @@ const mockData: TSender[] = [
   },
   {
     id: '1',
-    senderName: 'База',
-    senderGps: '876.98.234',
+    name: 'База',
+    gps: '876.98.234',
     date: '12.02.23',
     images: [
       'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/15/11175/18595',
@@ -40,8 +40,8 @@ const mockData: TSender[] = [
   },
   {
     id: '2',
-    senderName: 'Точка',
-    senderGps: '3456.87654.08',
+    name: 'Точка',
+    gps: '3456.87654.08',
     date: '01.012.23',
     images: [
       'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/15/11175/18595',
@@ -57,16 +57,16 @@ const mockData: TSender[] = [
 export const mockReceivers: TReceiver[] = [
   {
     id: '0',
-    receiverName: 'Кабан1',
-    receiverGps: '1341.243456.786',
+    name: 'Кабан1',
+    gps: '1341.243456.786',
     latestPackage: 'шоколад, чай',
     senders: mockData,
     date: '20.02.2022',
   },
   {
     id: '1',
-    receiverName: 'Кабан2',
-    receiverGps: '876.98.234',
+    name: 'Кабан2',
+    gps: '876.98.234',
     latestPackage:
       'бензин, маск сеть, БК, шансовый инструмент, вода, аптечка, сух паек, рация, кабель, трос, скотч, шоколад, чай',
     senders: mockData,
@@ -74,8 +74,8 @@ export const mockReceivers: TReceiver[] = [
   },
   {
     id: '2',
-    receiverName: 'Пухлый',
-    receiverGps: '3456.87654.08',
+    name: 'Пухлый',
+    gps: '3456.87654.08',
     latestPackage: '',
     senders: mockData,
     date: '06.07.2022',

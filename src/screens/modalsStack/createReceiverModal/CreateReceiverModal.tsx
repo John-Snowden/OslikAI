@@ -21,12 +21,12 @@ export const CreateReceiverModal = () => {
       <View style={styles.contentWrapper}>
         <CustomInput
           title={'Имя получателя'}
-          value={newRoute?.senderName}
+          value={newRoute?.name}
           onChangeText={setSenderName}
         />
         <CustomInput
           title={'gps получателя'}
-          value={newRoute?.senderGps}
+          value={newRoute?.gps}
           onChangeText={setSenderGps}
         />
       </View>

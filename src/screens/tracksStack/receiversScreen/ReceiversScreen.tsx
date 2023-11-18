@@ -1,15 +1,13 @@
 import React, {useMemo} from 'react';
 import {observer} from 'mobx-react-lite';
-import {Text, View, TouchableOpacity, FlatList} from 'react-native';
+import {Text, View, FlatList} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 import {styles} from './styles';
-import {useNavigation} from '@react-navigation/native';
+import {Card} from '../components';
 import {Header} from '../../components';
-import {Edit} from '../../../../assets/svg/Edit';
-import {IconButton} from '../../components/iconButton';
 import {stores} from '../../../stores/storesHolder';
 import {TReceiver} from '../../../types/tracks/tracksType';
-import {Delete} from '../../../../assets/svg';
 
 export const ReceiversScreen = observer(() => {
   const {receivers, setCurrentReceiver} = stores.trackStore;
@@ -59,44 +57,12 @@ export const ReceiversScreen = observer(() => {
     };
 
     return (
-      <TouchableOpacity
-        key={item.id}
-        style={styles.receiverCard}
+      <Card
+        data={item}
         onPress={goToTracksScreen}
-        activeOpacity={0.5}>
-        <View style={styles.row}>
-          <IconButton
-            icon={<Edit />}
-            onPress={goToEditModal}
-            style={styles.buttonBox}
-          />
-
-          <View style={styles.content}>
-            <Text style={styles.title} numberOfLines={1}>
-              {item.receiverName}
-            </Text>
-            <Text style={styles.gps} numberOfLines={1}>
-              {item.receiverGps}
-            </Text>
-          </View>
-          <IconButton
-            icon={<Delete />}
-            style={styles.deleteButton}
-            onPress={goToDeleteModal}
-          />
-        </View>
-
-        <View style={styles.lastPackageBox}>
-          <Text style={styles.gpsTitle}>Последняя посылка </Text>
-          <Text style={styles.gpsTitle}>{item.date}:</Text>
-        </View>
-        <View style={styles.cardBox}>
-          <Text numberOfLines={3} style={styles.gpsTitle}>
-            {item.latestPackage}
-          </Text>
-        </View>
-        <Text style={styles.createdAt}>Создано 10.02.2023</Text>
-      </TouchableOpacity>
+        onEdit={goToEditModal}
+        onDelete={goToDeleteModal}
+      />
     );
   };
 

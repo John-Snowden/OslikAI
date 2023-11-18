@@ -9,13 +9,14 @@ import {Header} from '../../components';
 import {stores} from '../../../stores/storesHolder';
 
 export const TrackOverViewScreen = observer(() => {
-  const {currentReceiver, currentSender, addPendingRoutes} = stores.trackStore;
+  const {currentReceiver, currentSender, updatePendingRoutes} =
+    stores.trackStore;
 
   const [image, setImage] = useState(currentSender.images[0]);
   const [backButtonIndex, setBackButtonIndex] = useState(-1);
   const navigation = useNavigation();
 
-  const title = currentSender.senderName + ' - ' + currentReceiver.receiverName;
+  const title = currentSender.name + ' - ' + currentReceiver.name;
 
   const renderImages = () => {
     return currentSender.images.map((link, index) => {
@@ -38,7 +39,7 @@ export const TrackOverViewScreen = observer(() => {
     return currentReceiver.senders.map((sender, i) => {
       const selectBackTrack = () => {
         setBackButtonIndex(i);
-        addPendingRoutes(i);
+        updatePendingRoutes(i);
         navigation.navigate('Modals', {screen: 'ConfirmModal'});
       };
       const isLast = currentReceiver.senders.length === i;
@@ -53,7 +54,7 @@ export const TrackOverViewScreen = observer(() => {
           ]}
           onPress={selectBackTrack}
           key={sender.id}>
-          <Text style={styles.text}>{sender.senderName}</Text>
+          <Text style={styles.text}>{sender.name}</Text>
         </TouchableOpacity>
       );
     });

@@ -44,4 +44,19 @@ export const styles = StyleSheet.create({
     fontSize: normalize(12),
     color: Themes.white,
   },
+  inputsBox: {
+    marginBottom: normalize(20),
+  },
+  input: {
+    width: normalize(80),
+  },
+  row: {
+    width: '86%',
+    alignSelf: 'center',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  minsText: {
+    marginTop: normalize(20),
+  },
 });

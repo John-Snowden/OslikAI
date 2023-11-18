@@ -28,12 +28,12 @@ export const EditSenderModal = observer(() => {
       <View style={styles.contentWrapper}>
         <CustomInput
           title={'Имя отправителя'}
-          value={currentSender.senderName}
+          value={currentSender.name}
           onChangeText={setSenderName}
         />
         <CustomInput
           title={'gps отправителя'}
-          value={currentSender.senderGps}
+          value={currentSender.gps}
           onChangeText={setSenderGps}
         />
         <MainButton title="ok" onPress={onPress} style={styles.button} />

@@ -5,8 +5,6 @@ import {normalize} from '../../../../utils';
 
 export const styles = StyleSheet.create({
   inputWrapper: {
-    width: '100%',
-    height: normalize(70),
     alignItems: 'center',
   },
   text: {
@@ -20,7 +18,6 @@ export const styles = StyleSheet.create({
     color: Themes.white,
     paddingLeft: normalize(12),
     width: '80%',
-    height: normalize(40),
     borderRadius: normalize(6),
     backgroundColor: Themes.grayf4,
   },

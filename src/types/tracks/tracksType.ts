@@ -1,7 +1,7 @@
 export type TReceiver = {
   id: string;
-  receiverName: string;
-  receiverGps: string;
+  name: string;
+  gps: string;
   latestPackage: string;
   senders: TSender[];
   date: string;
@@ -9,8 +9,8 @@ export type TReceiver = {
 
 export type TSender = {
   id: string;
-  senderName: string;
-  senderGps: string;
+  name: string;
+  gps: string;
   date: string;
   images: string[];
   duration: string;

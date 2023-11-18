@@ -13,12 +13,12 @@ export class TrackStore {
   receivers: TReceiver[];
   currentReceiver!: TReceiver;
   currentSender!: TSender;
-  backSender: TSender | null;
+  backReceiver: TSender | null;
 
   // newRoute: TSender = {
   //   id: '',
-  //   senderName: '',
-  //   senderGps: '',
+  //   name: '',
+  //   gps: '',
   //   date: new Date().toLocaleDateString(),
   //   images: [],
   //   comment: '',
@@ -39,19 +39,19 @@ export class TrackStore {
   };
 
   setReceiverName = (data: string) => {
-    this.currentReceiver.receiverName = data;
+    this.currentReceiver.name = data;
   };
 
   setReceiverGps = (data: string) => {
-    this.currentReceiver.receiverGps = data;
+    this.currentReceiver.name = data;
   };
 
   setSenderName = (data: string) => {
-    this.currentSender.senderName = data;
+    this.currentSender.name = data;
   };
 
   setSenderGps = (data: string) => {
-    this.currentSender.senderGps = data;
+    this.currentSender.gps = data;
   };
 
   setNewRouteReceiver = (data: TReceiver) => {
@@ -105,15 +105,23 @@ export class TrackStore {
     this.currentReceiver = {...this.currentReceiver, senders};
   };
 
-  addPendingRoutes = (i: number) => {
+  updatePendingRoutes = (i: number) => {
     this.pendingRoutes = [];
     const pendingRoutes = [this.currentSender.route];
     if (i) {
-      this.backSender = null;
-      this.backSender = this.currentReceiver.senders[i];
+      this.backReceiver = null;
+      this.backReceiver = this.currentReceiver.senders[i];
       pendingRoutes.push(this.currentReceiver.senders[i].route);
-      console.log('sss', this.backSender.senderName);
     }
+
     this.pendingRoutes = pendingRoutes;
+  };
+
+  savePendingRoutes = (timeouts: number[]) => {
+    if (timeouts.length !== 0) {
+      this.pendingRoutes.forEach((r, i) => {
+        r.timeout = timeouts[i];
+      });
+    }
   };
 }

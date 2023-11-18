@@ -46,10 +46,10 @@ export const TracksScreen = observer(() => {
 
           <View style={styles.content}>
             <Text style={styles.title} numberOfLines={1}>
-              {item.senderName}
+              {item.name}
             </Text>
             <Text style={styles.gps} numberOfLines={1}>
-              {item.senderGps}
+              {item.gps}
             </Text>
           </View>
           <IconButton

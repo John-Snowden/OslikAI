@@ -1,6 +1,6 @@
 import React, {useMemo} from 'react';
 import {observer} from 'mobx-react-lite';
-import {Text, View, TouchableOpacity, FlatList} from 'react-native';
+import {Text, View, TouchableOpacity, FlatList, Pressable} from 'react-native';
 
 import {styles} from './styles';
 import {useNavigation} from '@react-navigation/native';
@@ -100,9 +100,15 @@ export const ReceiversScreen = observer(() => {
     );
   };
 
+  const goToNewModal = () => {
+    navigation.push('Modals', {screen: 'NewModal'});
+  };
+
   return (
     <View style={styles.screen}>
       <Header title={'Получатели'} />
+      <Pressable style={styles.newButton} onLongPress={goToNewModal} />
+
       <FlatList
         data={receivers.slice(0, 1)}
         renderItem={renderItem}

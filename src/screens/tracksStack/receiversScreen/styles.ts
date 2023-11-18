@@ -94,4 +94,10 @@ export const styles = StyleSheet.create({
     marginTop: normalize(6),
     color: Themes.lightAsphalt,
   },
+  newButton: {
+    width: normalize(80),
+    height: normalize(48),
+    position: 'absolute',
+    left: 0,
+  },
 });

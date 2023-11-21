@@ -1,13 +1,16 @@
 import {StyleSheet} from 'react-native';
-
-import {Themes} from '../../../../Theme';
 import {normalize} from '../../../../utils';
+import {Themes} from '../../../../Theme';
 
 export const styles = StyleSheet.create({
-  wrapper: {
+  screen: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
+    justifyContent: 'center',
+  },
+  title: {
+    color: Themes.white,
+    fontSize: normalize(14),
   },
   bg: {
     position: 'absolute',
@@ -24,23 +27,8 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: normalize(8),
     paddingVertical: normalize(18),
+    alignItems: 'center',
     borderWidth: 1,
     borderColor: Themes.lightAsphalt,
-  },
-  cancelButton: {
-    alignSelf: 'center',
-    marginTop: normalize(20),
-    backgroundColor: Themes.grayf4,
-  },
-  deleteButton: {
-    alignSelf: 'center',
-    backgroundColor: Themes.red,
-  },
-  text: {
-    textAlign: 'center',
-    paddingHorizontal: normalize(16),
-    marginBottom: normalize(4),
-    fontSize: normalize(12),
-    color: Themes.white,
   },
 });

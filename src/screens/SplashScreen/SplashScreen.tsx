@@ -7,8 +7,8 @@ import Animated, {
   withDelay,
   withTiming,
 } from 'react-native-reanimated';
+import {View} from 'react-native';
 import React, {useEffect} from 'react';
-import {Easing, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
 import {Donkey} from '../../../assets/svg';
@@ -24,7 +24,7 @@ export const SplashScreen: React.FC = () => {
 
   const aStyleOslik = useAnimatedStyle(() => {
     const opacity = interpolate(carProgress.value, [0, 1], [0, 1]);
-    const translateY = interpolate(carProgress.value, [0, 1], [100, 0]);
+    const translateY = interpolate(carProgress.value, [0, 1], [60, 0]);
 
     return {opacity, transform: [{translateY}]};
   });
@@ -85,7 +85,7 @@ export const SplashScreen: React.FC = () => {
         </View>
         <View style={styles.oslikBody}>
           <View style={styles.iconWrapper}>
-            <Donkey />
+            <Donkey size={70} />
           </View>
         </View>
         <View style={styles.wheelBox}>

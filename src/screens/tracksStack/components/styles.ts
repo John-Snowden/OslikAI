@@ -17,6 +17,7 @@ export const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   buttonBox: {
     height: normalize(50),
@@ -50,6 +51,11 @@ export const styles = StyleSheet.create({
     marginTop: normalize(6),
     color: Themes.lightAsphalt,
   },
+  duration: {
+    textAlign: 'left',
+    marginTop: normalize(6),
+    color: Themes.lightAsphalt,
+  },
   gps: {
     fontSize: normalize(12),
     marginHorizontal: normalize(8),
@@ -74,7 +80,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
-    fontSize: normalize(16),
+    fontSize: normalize(14),
     color: Themes.white,
     marginHorizontal: normalize(8),
   },

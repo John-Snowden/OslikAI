@@ -21,8 +21,11 @@ export const Card: React.FC<IProps> = ({data, onPress, onEdit, onDelete}) => {
       onPress={onPress}
       activeOpacity={0.5}>
       <View style={styles.row}>
-        <IconButton icon={<Edit />} onPress={onEdit} style={styles.buttonBox} />
-
+        <IconButton
+          icon={<Delete />}
+          style={styles.deleteButton}
+          onPress={onDelete}
+        />
         <View style={styles.content}>
           <Text style={styles.title} numberOfLines={1}>
             {data.name}
@@ -31,23 +34,18 @@ export const Card: React.FC<IProps> = ({data, onPress, onEdit, onDelete}) => {
             {data.gps}
           </Text>
         </View>
-        <IconButton
-          icon={<Delete />}
-          style={styles.deleteButton}
-          onPress={onDelete}
-        />
+
+        <IconButton icon={<Edit />} onPress={onEdit} style={styles.buttonBox} />
       </View>
 
-      <View style={styles.lastPackageBox}>
-        <Text style={styles.gpsTitle}>Последняя посылка </Text>
-        <Text style={styles.gpsTitle}>{data.date}:</Text>
+      <View style={styles.row}>
+        <Text style={styles.createdAt}>Создано 10.02.2023</Text>
+        {(data as TSender).duration && (
+          <Text style={styles.duration}>
+            Длительность: {(data as TSender).duration} ч
+          </Text>
+        )}
       </View>
-      <View style={styles.cardBox}>
-        <Text numberOfLines={3} style={styles.gpsTitle}>
-          {data.latestPackage}
-        </Text>
-      </View>
-      <Text style={styles.createdAt}>Создано 10.02.2023</Text>
     </TouchableOpacity>
   );
 };

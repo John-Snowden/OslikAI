@@ -4,10 +4,20 @@ import {Themes} from '../../../../Theme';
 import {normalize} from '../../../../utils';
 
 export const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-    justifyContent: 'center',
+  screen: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
     alignItems: 'center',
+    justifyContent: 'center',
+  },
+  title: {
+    textAlign: 'center',
+    color: Themes.white,
+    fontSize: normalize(14),
+    marginBottom: normalize(12),
   },
   bg: {
     position: 'absolute',
@@ -24,23 +34,12 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: normalize(8),
     paddingVertical: normalize(18),
+    alignItems: 'center',
     borderWidth: 1,
     borderColor: Themes.lightAsphalt,
   },
-  cancelButton: {
-    alignSelf: 'center',
-    marginTop: normalize(20),
-    backgroundColor: Themes.grayf4,
-  },
-  deleteButton: {
-    alignSelf: 'center',
-    backgroundColor: Themes.red,
-  },
-  text: {
-    textAlign: 'center',
-    paddingHorizontal: normalize(16),
-    marginBottom: normalize(4),
-    fontSize: normalize(12),
-    color: Themes.white,
+  cancel: {
+    marginTop: normalize(14),
+    backgroundColor: Themes.gray4a,
   },
 });

@@ -26,7 +26,6 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     shadowColor: Themes.red,
     elevation: 20,
-    backgroundColor: Themes.white,
   },
   oslikBody: {
     justifyContent: 'center',

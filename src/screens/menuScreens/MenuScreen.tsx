@@ -1,7 +1,6 @@
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {styles} from './styles';
-import {IconButton} from '../components/iconButton';
 import {useNavigation} from '@react-navigation/native';
 import {Add} from '../../../assets/svg/Add';
 import {Header} from '../components';
@@ -17,7 +16,7 @@ export const MenuScreen = () => {
 
   return (
     <>
-      <Header title="меню" isBackButton={true} />
+      <Header title="меню" isBackButton isMenuDisabled />
 
       <View style={styles.screen}>
         <View style={styles.buttonsWrapper}>

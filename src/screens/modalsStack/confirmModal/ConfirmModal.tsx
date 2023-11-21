@@ -8,8 +8,15 @@ import {CustomInput, MainButton} from '../../components';
 import {stores} from '../../../stores/storesHolder';
 
 export const ConfirmModal = observer(() => {
-  const {currentSender, currentReceiver, backReceiver, savePendingRoutes} =
-    stores.trackStore;
+  const {
+    trackStore: {
+      currentSender,
+      currentReceiver,
+      backReceiver,
+      savePendingRoutes,
+    },
+    crossAppStore: {showNotification},
+  } = stores;
 
   const navigation = useNavigation();
 
@@ -21,6 +28,9 @@ export const ConfirmModal = observer(() => {
 
   const save = () => {
     savePendingRoutes(timeouts);
+    showNotification(
+      'Маршрут сохранен.\n\nЧтобы передать маршрут на Ослика,\n подключись к нему по usb и дождись,\nкогда Ослик скачает маршрут.',
+    );
     navigation.navigate('Tracks', {screen: 'ReceiversScreen'});
   };
 

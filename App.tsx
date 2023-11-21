@@ -8,8 +8,9 @@ import {styles} from './styles';
 import {BackGround, MenuScreen, SplashScreen, TracksStack} from './src/screens';
 import {ModalsStack} from './src/screens/modalsStack/ModalsStack';
 import {Themes} from './Theme';
-import {EMenuScreens, TModals} from './src/constants';
+import {EMenuScreens} from './src/constants';
 import {CreateRouteScreen} from './src/screens/menuScreens/createRouteScreen';
+import {NotificationModal} from './src/screens/components/notificationModal';
 
 const Stack = createNativeStackNavigator();
 
@@ -43,6 +44,7 @@ const App = () => {
             />
           </Stack.Navigator>
         </NavigationContainer>
+        <NotificationModal />
       </SafeAreaView>
     </SafeAreaProvider>
   );

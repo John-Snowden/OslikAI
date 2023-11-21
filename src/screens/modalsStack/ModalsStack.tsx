@@ -1,13 +1,14 @@
 import React from 'react';
-
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {EditReceiverModal} from './editReceiverModal';
-import {ConfirmModal} from './alertModal';
+
+import {NewModal} from './newModal';
 import {EModals} from '../../constants';
-import {CreateReceiverModal} from './createReceiverModal';
+import {ConfirmModal} from './confirmModal';
 import {EditSenderModal} from './editSenderModal';
-import {DeleteReceiverModal} from './deleteReceiverModal';
 import {DeleteSenderModal} from './deleteSenderModal';
+import {EditReceiverModal} from './editReceiverModal';
+import {CreateReceiverModal} from './createReceiverModal';
+import {DeleteReceiverModal} from './deleteReceiverModal';
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +31,7 @@ export const ModalsStack = () => {
         component={DeleteReceiverModal}
       />
       <Stack.Screen name="DeleteSenderModal" component={DeleteSenderModal} />
+      <Stack.Screen name="NewModal" component={NewModal} />
     </Stack.Navigator>
   );
 };

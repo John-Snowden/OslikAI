@@ -24,6 +24,8 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: normalize(8),
     paddingVertical: normalize(18),
+    borderWidth: 1,
+    borderColor: Themes.lightAsphalt,
   },
   cancelButton: {
     alignSelf: 'center',

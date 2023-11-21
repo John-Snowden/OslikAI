@@ -23,6 +23,8 @@ export const styles = StyleSheet.create({
     width: '90%',
     borderRadius: normalize(8),
     paddingVertical: normalize(18),
+    borderWidth: 1,
+    borderColor: Themes.lightAsphalt,
   },
   button: {
     alignSelf: 'center',

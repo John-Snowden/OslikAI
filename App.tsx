@@ -5,7 +5,7 @@ import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
 import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
 
 import {styles} from './styles';
-import {BackGround, MenuScreen, SplashScreen, TracksStack} from './src/screens';
+import {BackGround, MenuScreen, BootScreen, TracksStack} from './src/screens';
 import {ModalsStack} from './src/screens/modalsStack/ModalsStack';
 import {Themes} from './Theme';
 import {EMenuScreens} from './src/constants';
@@ -30,7 +30,7 @@ const App = () => {
       <SafeAreaView style={styles.flex}>
         <NavigationContainer theme={MyTheme}>
           <Stack.Navigator screenOptions={{headerShown: false}}>
-            <Stack.Screen name="Splash" component={SplashScreen} />
+            <Stack.Screen name="Splash" component={BootScreen} />
             <Stack.Screen name="Tracks" component={TracksStack} />
             <Stack.Screen
               name="Modals"

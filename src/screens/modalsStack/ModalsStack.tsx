@@ -9,6 +9,7 @@ import {DeleteSenderModal} from './deleteSenderModal';
 import {EditReceiverModal} from './editReceiverModal';
 import {CreateReceiverModal} from './createReceiverModal';
 import {DeleteReceiverModal} from './deleteReceiverModal';
+import {SaveNewRouteModal} from './saveNewRouteModal';
 
 const Stack = createNativeStackNavigator();
 
@@ -32,6 +33,7 @@ export const ModalsStack = () => {
       />
       <Stack.Screen name="DeleteSenderModal" component={DeleteSenderModal} />
       <Stack.Screen name="NewModal" component={NewModal} />
+      <Stack.Screen name="SaveNewRouteModal" component={SaveNewRouteModal} />
     </Stack.Navigator>
   );
 };

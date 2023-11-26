@@ -4,19 +4,18 @@ import {View, Text, TouchableOpacity} from 'react-native';
 
 import {styles} from './styles';
 import {IconButton} from '../iconButton';
-import {ArrowLeft, Donkey} from '../../../../assets/svg';
+import {ArrowLeft, Disconnected, Donkey} from '../../../../assets/svg';
+import {observer} from 'mobx-react-lite';
+import {stores} from '../../../stores/storesHolder';
 
 interface IProps {
   title: string;
   isBackButton?: boolean;
-  isMenuDisabled?: boolean;
 }
 
-export const Header: React.FC<IProps> = ({
-  title,
-  isBackButton,
-  isMenuDisabled,
-}) => {
+export const Header: React.FC<IProps> = observer(({title, isBackButton}) => {
+  const {isConnected} = stores.trackStore;
+
   const navigation = useNavigation();
 
   const goBack = () => {
@@ -39,7 +38,7 @@ export const Header: React.FC<IProps> = ({
       <View style={styles.titleBox}>
         <Text style={styles.title}>{title}</Text>
       </View>
-      {!isMenuDisabled && (
+      {isConnected ? (
         <TouchableOpacity
           onPress={goToSettings}
           disabled={recordedRoutes.length === 0}
@@ -52,7 +51,12 @@ export const Header: React.FC<IProps> = ({
           </View>
           <Donkey size={22} />
         </TouchableOpacity>
+      ) : (
+        <View style={styles.disconnected}>
+          <View style={styles.line} />
+          <Disconnected />
+        </View>
       )}
     </View>
   );
-};
+});

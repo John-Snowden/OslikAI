@@ -8,8 +8,12 @@ import {stores} from '../../../stores/storesHolder';
 import {observer} from 'mobx-react-lite';
 
 export const EditSenderModal = observer(() => {
-  const {currentSender, setSenderName, setSenderGps, updateSender} =
-    stores.trackStore;
+  const {
+    currentSender,
+    setCurrentSenderName,
+    setCurrentSenderGps,
+    updateSender,
+  } = stores.trackStore;
 
   const navigation = useNavigation();
 
@@ -29,12 +33,12 @@ export const EditSenderModal = observer(() => {
         <CustomInput
           title={'Имя отправителя'}
           value={currentSender.name}
-          onChangeText={setSenderName}
+          onChangeText={setCurrentSenderName}
         />
         <CustomInput
           title={'gps отправителя'}
           value={currentSender.gps}
-          onChangeText={setSenderGps}
+          onChangeText={setCurrentSenderGps}
         />
         <MainButton title="ok" onPress={onPress} style={styles.button} />
       </View>

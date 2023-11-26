@@ -2,23 +2,21 @@ import React from 'react';
 import {observer} from 'mobx-react-lite';
 import {FlatList, Text, TouchableOpacity, View} from 'react-native';
 
-import {CustomInput, Header, MainButton} from '../../components';
 import {styles} from './styles';
-import {stores} from '../../../stores/storesHolder';
-import {TReceiver} from '../../../types/tracks/tracksType';
-import {Add} from '../../../../assets/svg/Add';
-import {IconButton} from '../../components/iconButton';
-import {useNavigation} from '@react-navigation/native';
 import {EModals} from '../../../constants';
+import {stores} from '../../../stores/storesHolder';
+import {CustomInput, Header} from '../../components';
+import {useNavigation} from '@react-navigation/native';
+import {TReceiver} from '../../../types/tracks/tracksType';
 
 export const CreateRouteScreen = observer(() => {
   const {
     receivers,
-    newRoute,
-    setSenderName,
-    setSenderGps,
-    saveNewRoute,
-    setNewRouteReceiver,
+    newSender,
+    setNewSenderName,
+    setNewSenderGps,
+    setNewReceiverName,
+    setNewReceiverGps,
   } = stores.trackStore;
 
   const navigation = useNavigation();
@@ -29,7 +27,8 @@ export const CreateRouteScreen = observer(() => {
 
   const renderItem = ({item}: {item: TReceiver}) => {
     const onPress = () => {
-      setNewRouteReceiver(item);
+      setNewReceiverName(item.name);
+      setNewReceiverGps(item.gps);
     };
     return (
       <TouchableOpacity style={styles.receiverBox} onPress={onPress}>
@@ -37,7 +36,6 @@ export const CreateRouteScreen = observer(() => {
           <Text style={styles.title}>{item.name}</Text>
           <Text style={styles.text}>{item.gps}</Text>
         </View>
-        {/* <Check /> */}
       </TouchableOpacity>
     );
   };
@@ -45,29 +43,41 @@ export const CreateRouteScreen = observer(() => {
   return (
     <>
       <Header title="Новый маршрут" isBackButton />
+      <View style={styles.box}>
+        <Text style={styles.title}>Добавь отправителя</Text>
+      </View>
       <View style={styles.inputsWrapper}>
         <CustomInput
           title="Имя отправителя"
-          value={newRoute?.name}
-          onChangeText={setSenderName}
+          value={newSender.name}
+          onChangeText={setNewSenderName}
         />
         <CustomInput
           title="gps отправителя"
-          value={newRoute?.gps}
-          onChangeText={setSenderGps}
+          value={newSender.gps}
+          onChangeText={setNewSenderGps}
         />
       </View>
-      <View style={styles.box1}>
-        <IconButton icon={<Add />} onPress={goToCreateReceiverModal} />
-        <Text style={styles.title}>получатель:</Text>
+      <View style={styles.box}>
+        <Text style={styles.title}>Добавь получателя</Text>
       </View>
-      <FlatList
-        data={receivers}
-        renderItem={renderItem}
-        contentContainerStyle={styles.content}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-      />
+      <View>
+        <FlatList
+          data={receivers}
+          ListHeaderComponent={
+            <TouchableOpacity
+              style={styles.newBttn}
+              onPress={goToCreateReceiverModal}>
+              <Text style={styles.title}>Новый получатель</Text>
+              <Text style={styles.text}>***.***.***</Text>
+            </TouchableOpacity>
+          }
+          renderItem={renderItem}
+          contentContainerStyle={styles.content}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+        />
+      </View>
     </>
   );
 });

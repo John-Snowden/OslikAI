@@ -1,11 +1,11 @@
 import React from 'react';
+import {Text, View} from 'react-native';
 import {observer} from 'mobx-react-lite';
-import {Text, View, ActivityIndicator} from 'react-native';
 
 import {styles} from './styles';
-import {stores} from '../../../stores/storesHolder';
-import {Themes} from '../../../../Theme';
 import {MainButton} from '../mainButton';
+import {stores} from '../../../stores/storesHolder';
+import {Disconnected} from '../../../../assets/svg';
 
 export const NotificationModal = observer(() => {
   const {notification, closeNotification} = stores.crossAppStore;
@@ -17,7 +17,7 @@ export const NotificationModal = observer(() => {
       <View style={styles.bg} />
       <View style={styles.contentWrapper}>
         <Text style={styles.title}>{notification}</Text>
-        <ActivityIndicator color={Themes.white} />
+        <Disconnected />
         <MainButton
           title="Отмена"
           style={styles.cancel}

@@ -19,9 +19,16 @@ export const styles = StyleSheet.create({
     opacity: 0.8,
   },
   contentWrapper: {
-    backgroundColor: Themes.gray4a,
-    width: '94%',
+    width: '90%',
     borderRadius: normalize(8),
     paddingVertical: normalize(24),
+    borderWidth: 1,
+    backgroundColor: Themes.blue3b,
+    borderColor: Themes.lightAsphalt,
+  },
+  confirmButton: {
+    alignSelf: 'center',
+    marginTop: normalize(24),
+    backgroundColor: Themes.lightBlue,
   },
 });

@@ -3,11 +3,11 @@ import {View, Pressable} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
 import {styles} from './styles';
-import {CustomInput} from '../../components';
+import {CustomInput, MainButton} from '../../components';
 import {stores} from '../../../stores/storesHolder';
 
 export const CreateReceiverModal = () => {
-  const {setSenderName, setSenderGps, newRoute} = stores.trackStore;
+  const {setNewReceiverName, setNewReceiverGps, newRoute} = stores.trackStore;
 
   const navigation = useNavigation();
 
@@ -22,13 +22,14 @@ export const CreateReceiverModal = () => {
         <CustomInput
           title={'Имя получателя'}
           value={newRoute?.name}
-          onChangeText={setSenderName}
+          onChangeText={setNewReceiverName}
         />
         <CustomInput
           title={'gps получателя'}
           value={newRoute?.gps}
-          onChangeText={setSenderGps}
+          onChangeText={setNewReceiverGps}
         />
+        <MainButton title="ok" onPress={goBack} style={styles.confirmButton} />
       </View>
     </View>
   );

@@ -2,7 +2,6 @@ export type TReceiver = {
   id: string;
   name: string;
   gps: string;
-  latestPackage: string;
   senders: TSender[];
   date: string;
 };
@@ -14,7 +13,6 @@ export type TSender = {
   date: string;
   images: string[];
   duration: string;
-  latestPackage: string;
   route: TTask[];
 };
 

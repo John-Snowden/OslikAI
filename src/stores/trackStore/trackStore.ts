@@ -15,20 +15,37 @@ export class TrackStore {
   currentSender!: TSender;
   backReceiver: TSender | null;
 
+  isConnected = true;
+
+  newReceiver: TReceiver = {
+    id: '',
+    name: '',
+    gps: '',
+    senders: [],
+    date: '',
+  };
+  newSender: TSender = {
+    id: '',
+    name: '',
+    gps: '',
+    date: '',
+    images: [],
+    duration: '',
+    route: [],
+  };
+
   // newRoute: TSender = {
   //   id: '',
   //   name: '',
   //   gps: '',
   //   date: new Date().toLocaleDateString(),
   //   images: [],
-  //   comment: '',
   //   duration: '',
-  //   latestPackage: '',
   //   route: 'mock',
   // };
-  newRouteReceiver: TReceiver | null = null;
 
   pendingRoutes: TTask[][] = [];
+  recordedRoutes: TTask[][] = [];
 
   setCurrentSender = (data: TSender) => {
     this.currentSender = data;
@@ -46,16 +63,12 @@ export class TrackStore {
     this.currentReceiver.name = data;
   };
 
-  setSenderName = (data: string) => {
+  setCurrentSenderName = (data: string) => {
     this.currentSender.name = data;
   };
 
-  setSenderGps = (data: string) => {
+  setCurrentSenderGps = (data: string) => {
     this.currentSender.gps = data;
-  };
-
-  setNewRouteReceiver = (data: TReceiver) => {
-    this.newRouteReceiver = data;
   };
 
   saveNewRoute = () => {};
@@ -124,4 +137,36 @@ export class TrackStore {
       });
     }
   };
+
+  setNewSenderName = (data: string): void => {
+    this.newSender.name = data;
+  };
+
+  setNewReceiverName = (data: string): void => {
+    this.newReceiver.name = data;
+  };
+
+  setNewSenderGps = (data: string): void => {
+    this.newSender.gps = data;
+  };
+
+  setNewReceiverGps = (data: string): void => {
+    this.newReceiver.gps = data;
+  };
+
+  get senderName(): string {
+    return this.newSender.name;
+  }
+
+  get receiverName(): string {
+    return this.newReceiver.name;
+  }
+
+  get receiverGps(): string {
+    return this.newReceiver.gps ? this.newReceiver.gps : 'gps';
+  }
+
+  get senderGps(): string {
+    return this.newSender.gps ? this.newSender.gps : 'gps';
+  }
 }

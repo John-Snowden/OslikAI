@@ -16,7 +16,7 @@ export const MenuScreen = () => {
 
   return (
     <>
-      <Header title="меню" isBackButton isMenuDisabled />
+      <Header title="меню" isBackButton />
 
       <View style={styles.screen}>
         <View style={styles.buttonsWrapper}>

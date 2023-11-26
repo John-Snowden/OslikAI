@@ -13,7 +13,7 @@ import {Themes} from '../../../../Theme';
 import {styles} from './styles';
 
 interface IProps {
-  title: string | undefined;
+  title?: string | undefined;
   value: string | undefined;
   style?: StyleProp<ViewStyle>;
   placeholder?: string;

@@ -51,4 +51,14 @@ export const styles = StyleSheet.create({
   },
   active: {backgroundColor: Themes.lightBlue},
   routesBox: {flex: 1},
+  line: {
+    position: 'absolute',
+    top: normalize(-6),
+    left: normalize(6),
+    height: normalize(28),
+    width: normalize(2),
+    transform: [{rotate: '45deg'}],
+    backgroundColor: Themes.white,
+  },
+  disconnected: {position: 'absolute', right: normalize(18)},
 });

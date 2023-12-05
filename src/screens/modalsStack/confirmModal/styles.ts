@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
     borderRadius: normalize(8),
     paddingVertical: normalize(18),
     borderWidth: 1,
-    borderColor: Themes.lightAsphalt,
+    borderColor: Themes.grayf4,
   },
   cancelButton: {
     alignSelf: 'center',
@@ -46,6 +46,9 @@ export const styles = StyleSheet.create({
     fontSize: normalize(12),
     color: Themes.white,
   },
+  inputGroup: {
+    marginVertical: normalize(8),
+  },
   inputsBox: {
     marginBottom: normalize(20),
   },
@@ -54,11 +57,9 @@ export const styles = StyleSheet.create({
   },
   row: {
     width: '86%',
+    marginVertical: normalize(8),
     alignSelf: 'center',
     flexDirection: 'row',
     alignItems: 'center',
-  },
-  minsText: {
-    marginTop: normalize(20),
   },
 });

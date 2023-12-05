@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+
 import {normalize} from '../../../utils';
 import {Themes} from '../../../Theme';
 

@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
     borderRadius: normalize(8),
     paddingVertical: normalize(18),
     borderWidth: 1,
-    borderColor: Themes.lightAsphalt,
+    borderColor: Themes.grayf4,
   },
   button: {
     alignSelf: 'center',

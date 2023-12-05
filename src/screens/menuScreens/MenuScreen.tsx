@@ -1,17 +1,16 @@
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
+
 import {styles} from './styles';
-import {useNavigation} from '@react-navigation/native';
-import {Add} from '../../../assets/svg/Add';
 import {Header} from '../components';
+import {Add} from '../../../assets/svg/Add';
 import {EMenuScreens} from '../../constants';
+import {NavigationService} from '../../services';
 
 // TODO delete screen?
 export const MenuScreen = () => {
-  const navigation = useNavigation();
-
   const goToCreateRoute = () => {
-    navigation.navigate(EMenuScreens.CreateRouteScreen);
+    NavigationService.navigate(EMenuScreens.CreateRouteScreen);
   };
 
   return (

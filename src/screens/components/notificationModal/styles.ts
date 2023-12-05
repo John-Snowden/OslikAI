@@ -36,10 +36,19 @@ export const styles = StyleSheet.create({
     paddingVertical: normalize(18),
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: Themes.lightAsphalt,
+    borderColor: Themes.grayf4,
   },
-  cancel: {
-    marginTop: normalize(14),
-    backgroundColor: Themes.gray4a,
+  line: {
+    position: 'absolute',
+    top: normalize(-6),
+    left: normalize(6),
+    height: normalize(28),
+    width: normalize(2),
+    transform: [{rotate: '45deg'}],
+    backgroundColor: Themes.grayf4,
+  },
+  disconnected: {
+    position: 'absolute',
+    right: normalize(18),
   },
 });

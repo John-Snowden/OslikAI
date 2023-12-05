@@ -1,16 +1,18 @@
-import React from 'react';
 import {StatusBar} from 'react-native';
+import React, {useEffect} from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
 import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
 
-import {styles} from './styles';
-import {BackGround, MenuScreen, BootScreen, TracksStack} from './src/screens';
-import {ModalsStack} from './src/screens/modalsStack/ModalsStack';
 import {Themes} from './Theme';
+import {styles} from './styles';
+import {navigationRef} from './src/services';
 import {EMenuScreens} from './src/constants';
-import {CreateRouteScreen} from './src/screens/menuScreens/createRouteScreen';
+import {stores} from './src/stores/storesHolder';
+import {ModalsStack} from './src/screens/modalsStack/ModalsStack';
 import {NotificationModal} from './src/screens/components/notificationModal';
+import {CreateRouteScreen} from './src/screens/menuScreens/createRouteScreen';
+import {BackGround, MenuScreen, BootScreen, RoutesStack} from './src/screens';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,15 +25,21 @@ const MyTheme = {
 };
 
 const App = () => {
+  const {loadApp} = stores.crossAppStore;
+
+  useEffect(() => {
+    loadApp();
+  }, []);
+
   return (
     <SafeAreaProvider>
       <BackGround />
       <StatusBar barStyle={'light-content'} backgroundColor={Themes.blue23} />
       <SafeAreaView style={styles.flex}>
-        <NavigationContainer theme={MyTheme}>
+        <NavigationContainer theme={MyTheme} ref={navigationRef}>
           <Stack.Navigator screenOptions={{headerShown: false}}>
             <Stack.Screen name="Splash" component={BootScreen} />
-            <Stack.Screen name="Tracks" component={TracksStack} />
+            <Stack.Screen name="RoutesStack" component={RoutesStack} />
             <Stack.Screen
               name="Modals"
               component={ModalsStack}

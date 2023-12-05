@@ -10,16 +10,14 @@ import Animated, {
 import {View} from 'react-native';
 import React, {useEffect} from 'react';
 import SplashScreen from 'react-native-splash-screen';
-import {useNavigation} from '@react-navigation/native';
 
 import {Donkey} from '../../../assets/svg';
 
-import {offsetX, styles} from './styles';
 import {Themes} from '../../../Theme';
+import {offsetX, styles} from './styles';
+import {NavigationService} from '../../services';
 
 export const BootScreen: React.FC = () => {
-  const navigation = useNavigation();
-
   const carProgress = useSharedValue(0);
   const titleProgress = useSharedValue(0);
 
@@ -74,7 +72,7 @@ export const BootScreen: React.FC = () => {
   useEffect(() => {
     SplashScreen.hide();
     setTimeout(() => {
-      navigation.replace('Tracks');
+      NavigationService.replace('RoutesStack', {screen: 'ReceiversScreen'});
     }, 2300);
   }, []);
 

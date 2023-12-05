@@ -3,11 +3,15 @@ import {Path, Svg} from 'react-native-svg';
 
 import {Themes} from '../../Theme';
 
-export const Disconnected = () => {
+interface IProps {
+  fill: string;
+}
+
+export const Disconnected: React.FC<IProps> = ({fill}) => {
   return (
-    <Svg height="18" width="18" viewBox="0 0 285.269 285.269">
+    <Svg height="16" width="16" viewBox="0 0 285.269 285.269">
       <Path
-        fill={Themes.white}
+        fill={fill}
         d="M272.867,198.634h-38.246c-0.333,0-0.659,0.083-0.986,0.108c-1.298-5.808-6.486-10.108-12.679-10.108
 	h-68.369c-7.168,0-13.318,5.589-13.318,12.757v19.243H61.553C44.154,220.634,30,206.66,30,189.262
 	c0-17.398,14.154-31.464,31.545-31.464l130.218,0.112c33.941,0,61.554-27.697,61.554-61.637s-27.613-61.638-61.554-61.638h-44.494

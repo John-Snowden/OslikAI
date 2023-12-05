@@ -1,24 +1,22 @@
 import React from 'react';
+import {observer} from 'mobx-react-lite';
 import {View, Pressable, Text} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
 
 import {styles} from './styles';
 import {MainButton} from '../../components';
 import {stores} from '../../../stores/storesHolder';
-import {observer} from 'mobx-react-lite';
+import {NavigationService} from '../../../services';
 
 export const DeleteSenderModal = observer(() => {
-  const {deleteReceiver} = stores.trackStore;
-
-  const navigation = useNavigation();
+  const {deleteSender} = stores.routeStore;
 
   const onPress = () => {
-    deleteReceiver();
+    deleteSender();
     goBack();
   };
 
   const goBack = () => {
-    navigation.goBack();
+    NavigationService.goBack();
   };
 
   return (

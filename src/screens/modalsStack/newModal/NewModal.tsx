@@ -1,13 +1,12 @@
 import React from 'react';
 import {Text, View, Pressable} from 'react-native';
+
 import {styles} from './styles';
-import {useNavigation} from '@react-navigation/native';
+import {NavigationService} from '../../../services';
 
 export const NewModal = () => {
-  const navigation = useNavigation();
-
   const goBack = () => {
-    navigation.goBack();
+    NavigationService.goBack();
   };
 
   return (

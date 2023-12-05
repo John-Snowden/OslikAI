@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   KeyboardTypeOptions,
   StyleProp,
@@ -7,10 +6,10 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-
-import {Themes} from '../../../../Theme';
+import React from 'react';
 
 import {styles} from './styles';
+import {Themes} from '../../../../Theme';
 
 interface IProps {
   title?: string | undefined;
@@ -31,7 +30,7 @@ export const CustomInput: React.FC<IProps> = ({
 }) => {
   return (
     <View style={[styles.inputWrapper, style]}>
-      <Text style={styles.text}>{title}</Text>
+      {title && <Text style={styles.text}>{title}</Text>}
       <TextInput
         value={value}
         onChangeText={onChangeText}

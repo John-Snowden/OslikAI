@@ -7,9 +7,7 @@ import {ConfirmModal} from './confirmModal';
 import {EditSenderModal} from './editSenderModal';
 import {DeleteSenderModal} from './deleteSenderModal';
 import {EditReceiverModal} from './editReceiverModal';
-import {CreateReceiverModal} from './createReceiverModal';
 import {DeleteReceiverModal} from './deleteReceiverModal';
-import {SaveNewRouteModal} from './saveNewRouteModal';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,16 +22,11 @@ export const ModalsStack = () => {
       <Stack.Screen name="EditSenderModal" component={EditSenderModal} />
       <Stack.Screen name="ConfirmModal" component={ConfirmModal} />
       <Stack.Screen
-        name={EModals.CreateReceinerModal}
-        component={CreateReceiverModal}
-      />
-      <Stack.Screen
         name="DeleteReceiverModal"
         component={DeleteReceiverModal}
       />
       <Stack.Screen name="DeleteSenderModal" component={DeleteSenderModal} />
       <Stack.Screen name="NewModal" component={NewModal} />
-      <Stack.Screen name="SaveNewRouteModal" component={SaveNewRouteModal} />
     </Stack.Navigator>
   );
 };

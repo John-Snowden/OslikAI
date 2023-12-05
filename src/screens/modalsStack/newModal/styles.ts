@@ -29,6 +29,6 @@ export const styles = StyleSheet.create({
     paddingVertical: normalize(18),
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: Themes.lightAsphalt,
+    borderColor: Themes.grayf4,
   },
 });

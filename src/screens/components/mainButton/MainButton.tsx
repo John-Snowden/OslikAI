@@ -12,6 +12,7 @@ interface IProps {
   style?: StyleProp<ViewStyle>;
   textColor?: StyleProp<TextStyle>;
   title: string;
+  disabled?: boolean;
   onPress: () => void;
 }
 
@@ -20,9 +21,13 @@ export const MainButton: React.FC<IProps> = ({
   onPress,
   style,
   textColor,
+  disabled,
 }) => {
   return (
-    <TouchableOpacity onPress={onPress} style={[styles.button, style]}>
+    <TouchableOpacity
+      onPress={onPress}
+      style={[styles.button, style, disabled && styles.disabled]}
+      disabled={disabled}>
       <Text style={[styles.title, textColor]}>{title}</Text>
     </TouchableOpacity>
   );

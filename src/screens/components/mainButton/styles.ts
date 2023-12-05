@@ -1,6 +1,7 @@
 import {StyleSheet} from 'react-native';
-import {normalize} from '../../../../utils';
+
 import {Themes} from '../../../../Theme';
+import {normalize} from '../../../../utils';
 
 export const styles = StyleSheet.create({
   button: {
@@ -13,7 +14,8 @@ export const styles = StyleSheet.create({
     marginBottom: normalize(12),
   },
   title: {
-    fontSize: normalize(16),
+    fontSize: normalize(14),
     color: Themes.white,
   },
+  disabled: {backgroundColor: Themes.grayf4},
 });

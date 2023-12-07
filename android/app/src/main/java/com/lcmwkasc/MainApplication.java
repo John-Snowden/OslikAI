@@ -1,4 +1,4 @@
-package com.lcmwkasc;
+package com.OslikAI;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

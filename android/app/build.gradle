@@ -73,9 +73,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.lcmwkasc"
+    namespace "com.OslikAI"
     defaultConfig {
-        applicationId "com.lcmwkasc"
+        applicationId "com.OslikAI"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

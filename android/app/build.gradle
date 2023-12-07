@@ -73,9 +73,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.OslikAI"
+    namespace "com.Oslik_AI"
     defaultConfig {
-        applicationId "com.OslikAI"
+        applicationId "com.Oslik_AI"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

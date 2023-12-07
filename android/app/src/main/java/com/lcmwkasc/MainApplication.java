@@ -1,4 +1,4 @@
-package com.OslikAI;
+package com.Oslik_AI;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

@@ -1,4 +1,4 @@
-package com.OslikAI;
+package com.Oslik_AI;
 
 import android.os.Bundle; // here
 import com.facebook.react.ReactActivity;
@@ -22,7 +22,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "OslikAI";
+    return "Oslik AI";
   }
 
   /**

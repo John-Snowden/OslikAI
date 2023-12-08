@@ -1,4 +1,7 @@
 import {runInAction} from 'mobx';
+import SplashScreen from 'react-native-splash-screen';
+
+import {NavigationService} from '../../services';
 
 import {StoresHolder} from '../storesHolder';
 
@@ -40,6 +43,11 @@ export class CrossAppStore {
         this.root.routeStore.updateRecordedRoutes(recordedRoutes);
       }
     }, 1000);
+
+    SplashScreen.hide();
+    setTimeout(() => {
+      NavigationService.replace('RoutesStack', {screen: 'ReceiversScreen'});
+    }, 2300);
   };
 
   showNotification = (text: string): void => {

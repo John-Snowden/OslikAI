@@ -25,12 +25,6 @@ const MyTheme = {
 };
 
 const App = () => {
-  const {loadApp} = stores.crossAppStore;
-
-  useEffect(() => {
-    loadApp();
-  }, []);
-
   return (
     <SafeAreaProvider>
       <BackGround />

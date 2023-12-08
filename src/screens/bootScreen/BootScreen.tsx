@@ -15,9 +15,11 @@ import {Donkey} from '../../../assets/svg';
 
 import {Themes} from '../../../Theme';
 import {offsetX, styles} from './styles';
-import {NavigationService} from '../../services';
+import {stores} from '../../stores';
 
 export const BootScreen: React.FC = () => {
+  const {loadApp} = stores.crossAppStore;
+
   const carProgress = useSharedValue(0);
   const titleProgress = useSharedValue(0);
 
@@ -61,19 +63,13 @@ export const BootScreen: React.FC = () => {
   });
 
   useEffect(() => {
+    loadApp();
     carProgress.value = withDelay(
       200,
       withTiming(1, {duration: 600}, () => {
         titleProgress.value = withDelay(100, withTiming(1, {duration: 400}));
       }),
     );
-  }, []);
-
-  useEffect(() => {
-    SplashScreen.hide();
-    setTimeout(() => {
-      NavigationService.replace('RoutesStack', {screen: 'ReceiversScreen'});
-    }, 2300);
   }, []);
 
   return (

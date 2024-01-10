@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 
 import {styles} from './styles';
-import {Header} from '../components';
+import {BackGround, Header} from '../components';
 import {Add} from '../../../assets/svg/Add';
 import {EMenuScreens} from '../../constants';
 import {NavigationService} from '../../services';
@@ -15,6 +15,7 @@ export const MenuScreen = () => {
 
   return (
     <>
+      <BackGround />
       <Header title="меню" isBackButton />
 
       <View style={styles.screen}>

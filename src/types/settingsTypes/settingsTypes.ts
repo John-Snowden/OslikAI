@@ -1,8 +1,17 @@
 import {TTask} from '../routeTypes';
 
-export type TSettings = {
-  isConnected: boolean;
-  isSafeRemove: boolean;
-  recordedRoutes: TTask[][];
-  pendingRoutes: TTask[][];
+export type TClient = {
+  pending: {
+    routes: TTask[][];
+    modified: number;
+  };
+  recorded: {modified: number};
+};
+
+export type TServer = {
+  pending: {modified: number};
+  recorded: {
+    routes: TTask[][];
+    modified: number;
+  };
 };

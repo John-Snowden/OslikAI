@@ -49,12 +49,13 @@ export const styles = StyleSheet.create({
   createdAt: {
     fontSize: normalize(12),
     textAlign: 'right',
-    marginTop: normalize(6),
+    marginTop: normalize(8),
     color: Themes.white,
   },
   duration: {
     fontSize: normalize(12),
-    marginTop: normalize(6),
+    marginTop: normalize(8),
+    marginBottom: normalize(4),
     color: Themes.white,
   },
   gps: {
@@ -84,5 +85,12 @@ export const styles = StyleSheet.create({
     fontSize: normalize(14),
     color: Themes.white,
     marginHorizontal: normalize(8),
+  },
+  commentBox: {
+    marginTop: normalize(12),
+    borderRadius: normalize(4),
+    paddingVertical: normalize(12),
+    paddingRight: normalize(12),
+    backgroundColor: Themes.grayf4,
   },
 });

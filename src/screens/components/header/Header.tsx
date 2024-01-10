@@ -17,17 +17,14 @@ interface IProps {
 
 export const Header: React.FC<IProps> = observer(
   ({title, isBackButton, isMenuButton = true}) => {
-    const {isConnected, recordedRoutes, setIsSafeRemove} = stores.routeStore;
+    const {serverFile} = stores.fsStore;
+    const {recordedRoutes} = stores.fsStore;
 
     const goBack = () => {
       NavigationService.goBack();
     };
     const goToSettings = () => {
       NavigationService.navigate('CreateRouteScreen');
-    };
-
-    const safeRemove = () => {
-      setIsSafeRemove(true);
     };
 
     return (
@@ -40,24 +37,27 @@ export const Header: React.FC<IProps> = observer(
         <View style={styles.titleBox}>
           <Text style={styles.title}>{title}</Text>
         </View>
-        <TouchableOpacity
+        {/* TODO */}
+        {/* <IconButton
+          icon={
+            <View>
+              <Disconnected fill={isConnected ? Themes.white : Themes.red} />
+              {!isConnected && <View style={styles.line} />}
+            </View>
+          }
+          style={[styles.connectionButton, isConnected && styles.active]}
+          isDisabled={!isConnected}
           onPress={safeRemove}
-          disabled={!isConnected}
-          style={styles.disconnected}>
-          <Disconnected fill={isConnected ? Themes.lightBlue : Themes.white} />
-          {!isConnected && <View style={styles.line} />}
-        </TouchableOpacity>
+        /> */}
         <TouchableOpacity
           onPress={goToSettings}
           disabled={recordedRoutes.length === 0}
           style={[
             styles.newRouteBox,
-            recordedRoutes.length > 0 && styles.active,
+            recordedRoutes.length !== 0 && styles.active,
           ]}>
-          <View style={styles.routesBox}>
-            <Text style={styles.text}>{recordedRoutes.length}</Text>
-          </View>
-          <Donkey size={22} />
+          <Text style={styles.text}>{recordedRoutes.length}</Text>
+          <Donkey size={16} />
         </TouchableOpacity>
       </View>
     );

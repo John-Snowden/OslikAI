@@ -14,6 +14,7 @@ export type TSender = {
   images: string[];
   duration: number;
   route: TTask[];
+  comment: string;
 };
 
 export type TTask = {

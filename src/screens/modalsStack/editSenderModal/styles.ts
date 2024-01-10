@@ -30,4 +30,7 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: normalize(24),
   },
+  comment: {
+    paddingRight: normalize(13),
+  },
 });

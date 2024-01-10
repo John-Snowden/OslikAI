@@ -14,14 +14,14 @@ export const ConfirmModal = observer(() => {
       currentReceiver,
       backReceiverIndex,
       updatePendingRoutes,
-      savePendingRoutes,
+      writePendingRoutes,
       setBackReceiverIndex,
     },
     crossAppStore: {showNotification},
   } = stores;
 
-  const [timeouts, setTimeouts] = useState([0, 0]);
-  const [speeds, setSpeeds] = useState([2, 2]);
+  const [timeouts, setTimeouts] = useState<number[]>([0, 0]);
+  const [speeds, setSpeeds] = useState<number[]>([2, 2]);
 
   const goBack = () => {
     setBackReceiverIndex(-1);
@@ -30,47 +30,73 @@ export const ConfirmModal = observer(() => {
   };
 
   const save = () => {
-    savePendingRoutes(timeouts, speeds);
+    writePendingRoutes(timeouts, speeds);
     showNotification(
       'Маршрут сохранен.\n\nЧтобы передать маршрут на Ослика,\n подключись к нему по usb и дождись,\nкогда Ослик скачает маршрут.',
     );
     NavigationService.navigate('RoutesStack', {screen: 'ReceiversScreen'});
   };
 
-  const renderTimeoutInputs = useCallback(() => {
-    return [1, 2].map((_, i) => {
-      const changeTimeouts = (t: string) =>
-        setTimeouts(timeouts.splice(i, 1, Number(t)));
+  const renderInputs = () => {
+    const changeTimeoutA = (timeout: string) => {
+      setTimeouts([Number(timeout), timeouts[1]]);
+    };
+    const changeTimeoutB = (timeout: string) => {
+      setTimeouts([timeouts[0], Number(timeout)]);
+    };
 
-      const changeSpeeds = (s: string) =>
-        setTimeouts(speeds.splice(i, 1, Number(s)));
+    const changeSpeedA = (speed: string) => {
+      setSpeeds([Number(speed), speeds[1]]);
+    };
+    const changeSpeedB = (speed: string) => {
+      setSpeeds([speeds[0], Number(speed)]);
+    };
 
-      return (
-        <View key={i} style={styles.inputGroup}>
-          <View style={styles.row}>
-            <CustomInput
-              value={String(timeouts[i])}
-              style={styles.input}
-              keyboardType={'number-pad'}
-              onChangeText={changeTimeouts}
-            />
-            <Text style={styles.text}>{` минут с точки ${
-              i === 0 ? currentSender.name : currentReceiver?.name
-            }`}</Text>
-          </View>
-          <View key={i} style={styles.row}>
-            <CustomInput
-              value={String(speeds[i])}
-              style={styles.input}
-              keyboardType={'number-pad'}
-              onChangeText={changeSpeeds}
-            />
-            <Text style={styles.text}>{` км/ч`}</Text>
-          </View>
+    return (
+      <View style={styles.inputGroup}>
+        <View style={styles.row}>
+          <CustomInput
+            value={String(timeouts[0])}
+            style={styles.input}
+            keyboardType={'number-pad'}
+            onChangeText={changeTimeoutA}
+          />
+          <Text
+            style={styles.text}>{` минут с точки ${currentSender.name}`}</Text>
         </View>
-      );
-    });
-  }, []);
+        <View style={styles.row}>
+          <CustomInput
+            value={String(speeds[0])}
+            style={styles.input}
+            keyboardType={'number-pad'}
+            onChangeText={changeSpeedA}
+          />
+          <Text style={styles.text}>{` км/ч`}</Text>
+        </View>
+        <View style={styles.row}>
+          <CustomInput
+            value={String(timeouts[1])}
+            style={styles.input}
+            keyboardType={'number-pad'}
+            onChangeText={changeTimeoutB}
+          />
+          <Text
+            style={
+              styles.text
+            }>{` минут с точки ${currentReceiver?.name}`}</Text>
+        </View>
+        <View style={styles.row}>
+          <CustomInput
+            value={String(speeds[1])}
+            style={styles.input}
+            keyboardType={'number-pad'}
+            onChangeText={changeSpeedB}
+          />
+          <Text style={styles.text}>{` км/ч`}</Text>
+        </View>
+      </View>
+    );
+  };
 
   return (
     <View style={styles.wrapper}>
@@ -87,7 +113,7 @@ export const ConfirmModal = observer(() => {
             {`Если нужно, добавь таймер и среднюю скорость для каждого маршрута. Перед выдвижением Ослик простоит указанное количество времени.`}
           </Text>
         </View>
-        <View style={styles.inputsBox}>{renderTimeoutInputs()}</View>
+        <View style={styles.inputsBox}>{renderInputs()}</View>
         <MainButton
           title="отмена"
           onPress={goBack}

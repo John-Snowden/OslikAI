@@ -16,6 +16,7 @@ import {Donkey} from '../../../assets/svg';
 import {Themes} from '../../../Theme';
 import {offsetX, styles} from './styles';
 import {stores} from '../../stores';
+import {BackGround} from '../components';
 
 export const BootScreen: React.FC = () => {
   const {loadApp} = stores.crossAppStore;
@@ -73,29 +74,32 @@ export const BootScreen: React.FC = () => {
   }, []);
 
   return (
-    <View style={styles.screen}>
-      <Animated.View style={[styles.oslik, aStyleOslik]}>
-        <View style={styles.wheelBox}>
-          <Animated.View style={[styles.wheel, aStyleWheel]} />
-          <Animated.View style={[styles.wheel, aStyleWheel]} />
-        </View>
-        <View style={styles.oslikBody}>
-          <View style={styles.iconWrapper}>
-            <Donkey size={70} />
+    <>
+      <BackGround />
+      <View style={styles.screen}>
+        <Animated.View style={[styles.oslik, aStyleOslik]}>
+          <View style={styles.wheelBox}>
+            <Animated.View style={[styles.wheel, aStyleWheel]} />
+            <Animated.View style={[styles.wheel, aStyleWheel]} />
           </View>
-        </View>
-        <View style={styles.wheelBox}>
-          <Animated.View style={[styles.wheel, aStyleWheel]} />
-          <Animated.View style={[styles.wheel, aStyleWheel]} />
-        </View>
-      </Animated.View>
+          <View style={styles.oslikBody}>
+            <View style={styles.iconWrapper}>
+              <Donkey size={70} />
+            </View>
+          </View>
+          <View style={styles.wheelBox}>
+            <Animated.View style={[styles.wheel, aStyleWheel]} />
+            <Animated.View style={[styles.wheel, aStyleWheel]} />
+          </View>
+        </Animated.View>
 
-      <View>
-        <Animated.Text style={[styles.title, aStyleA]}>ИА</Animated.Text>
-        <Animated.Text style={[styles.title, styles.absolute, aStyleB]}>
-          AI
-        </Animated.Text>
+        <View>
+          <Animated.Text style={[styles.title, aStyleA]}>ИА</Animated.Text>
+          <Animated.Text style={[styles.title, styles.absolute, aStyleB]}>
+            AI
+          </Animated.Text>
+        </View>
       </View>
-    </View>
+    </>
   );
 };

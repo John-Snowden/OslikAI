@@ -1,8 +1,11 @@
 import RNFetchBlob from 'rn-fetch-blob';
-import {PermissionsAndroid} from 'react-native';
+import {PermissionsAndroid, Platform} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import ManageExternalStorage from 'react-native-manage-external-storage';
 
 import {StoresHolder} from '../storesHolder';
-import {TReceiver, TSettings, TTask} from '../../types';
+import {TClient, TReceiver, TServer, TTask} from '../../types';
+import {runInAction} from 'mobx';
 
 export class FsStore {
   root: StoresHolder;
@@ -11,102 +14,125 @@ export class FsStore {
     this.root = root;
   }
 
-  settingsOslik!: TSettings;
+  clientFile!: TClient;
+  serverFile!: TServer;
+  recordedRoutes: TTask[][] = [];
 
-  basePath = RNFetchBlob.fs.dirs.DownloadDir;
-  serverPathOslik = this.basePath + '/OslikHodovaya.json';
-  clientPathOslik = this.basePath + '/OslikTelephone.json';
+  basePath = RNFetchBlob.fs.dirs.DownloadDir + '/OSLIK';
+  clientFilePath = this.basePath + '/ClientFile.json';
+  readonly serverFilePath = this.basePath + '/ServerFile.json';
+  clientOslikPath = this.basePath + '/Oslik.json';
+
+  serverTimer: NodeJS.Timeout | undefined = undefined;
 
   init = async (): Promise<void> => {
-    const isHodovayaExist = await RNFetchBlob.fs.exists(this.serverPathOslik);
-    if (!isHodovayaExist) {
-      const defaultSettings = {
-        isConnected: false,
-        isSafeRemove: false,
-        pendingRoutes: [],
-        recordedRoutes: [],
+    const isClientFileExist = await RNFetchBlob.fs.exists(this.clientFilePath);
+    console.log('isClientFileExist', isClientFileExist);
+    if (!isClientFileExist) {
+      this.clientFile = {
+        pending: {
+          routes: [],
+          modified: 0,
+        },
+        recorded: {modified: 0},
       };
 
-      this.settingsOslik = defaultSettings;
       await RNFetchBlob.fs.writeFile(
-        this.serverPathOslik,
-        JSON.stringify(defaultSettings),
+        this.clientFilePath,
+        JSON.stringify(this.clientFile),
+        'utf8',
+      );
+    } else {
+      const json = await RNFetchBlob.fs.readFile(this.clientFilePath, 'utf8');
+      runInAction(() => (this.clientFile = JSON.parse(json)));
+    }
+    console.log('clientFile_____', this.clientFile);
+
+    const isServerFileExist = await RNFetchBlob.fs.exists(this.serverFilePath);
+    console.log('isServerFileExist', isServerFileExist);
+
+    if (!isServerFileExist) {
+      this.serverFile = {
+        pending: {modified: 0},
+        recorded: {
+          routes: [],
+          modified: 0,
+        },
+      };
+      await RNFetchBlob.fs.writeFile(
+        this.serverFilePath,
+        JSON.stringify(this.serverFile),
         'utf8',
       );
     }
 
-    const isTelephoneExist = await RNFetchBlob.fs.exists(this.clientPathOslik);
+    const isTelephoneExist = await RNFetchBlob.fs.exists(this.clientOslikPath);
+    console.log('isTelephoneExist', isTelephoneExist);
     if (!isTelephoneExist) {
       await RNFetchBlob.fs.writeFile(
-        this.clientPathOslik,
+        this.clientOslikPath,
         JSON.stringify([]),
         'utf8',
       );
-    }
-  };
-
-  readSettingsOslik = async (): Promise<TSettings> => {
-    const json = await RNFetchBlob.fs.readFile(this.serverPathOslik, 'utf8');
-    const settings = JSON.parse(json);
-    return settings;
-  };
-
-  readReceivers = async (): Promise<TReceiver[]> => {
-    const isRoutesExist = await RNFetchBlob.fs.exists(this.clientPathOslik);
-    if (!isRoutesExist) return [];
-    else {
+    } else {
       const routes = await RNFetchBlob.fs.readFile(
-        this.clientPathOslik,
+        this.clientOslikPath,
         'utf8',
       );
-      return JSON.parse(routes);
+      runInAction(() => (this.root.routeStore.receivers = JSON.parse(routes)));
     }
+  };
+
+  watchServerFile = () => {
+    this.serverTimer = setInterval(async () => {
+      const json = await RNFetchBlob.fs.readFile(this.serverFilePath, 'utf8');
+      this.serverFile = JSON.parse(json);
+      console.log('serverFile:', JSON.parse(json));
+
+      if (this.serverFile.pending.modified > this.clientFile.pending.modified) {
+        this.clientFile.pending.routes = [];
+        await RNFetchBlob.fs.writeFile(
+          this.clientFilePath,
+          JSON.stringify(this.clientFile),
+        );
+      }
+      if (
+        this.serverFile.recorded.modified > this.clientFile.recorded.modified
+      ) {
+        this.clientFile.recorded.modified = new Date().getTime();
+        await RNFetchBlob.fs.writeFile(
+          this.clientFilePath,
+          JSON.stringify(this.clientFile),
+        );
+        this.recordedRoutes.push(...this.serverFile.recorded.routes);
+        this.root.crossAppStore.showNotification(
+          this.serverFile.recorded.routes.length > 0
+            ? 'Скачаны новые маршруты'
+            : 'Скачан новый маршрут',
+        );
+      }
+    }, 1000);
   };
 
   writeReceivers = async (): Promise<void> => {
     await RNFetchBlob.fs.writeFile(
-      this.clientPathOslik,
-      JSON.stringify(this.root.routeStore.receivers),
+      this.clientOslikPath,
+      JSON.stringify(this.root.routeStore.receivers as TReceiver[]),
     );
-  };
-
-  writePendingRoutes = async (): Promise<void> => {
-    const settings = await this.readSettingsOslik();
-    settings.pendingRoutes = this.root.routeStore.pendingRoutes;
-    await this.writeToServer(settings);
-  };
-
-  writeRecordedRoutes = async () => {
-    const settings = await this.readSettingsOslik();
-    settings.recordedRoutes = this.root.routeStore.recordedRoutes;
-    await this.writeToServer(settings);
-  };
-
-  resetConnectionStatus = async () => {
-    const settings = await this.readSettingsOslik();
-    settings.isConnected = false;
-    await this.writeToServer(settings);
-  };
-
-  writeIsSafeRemove = async () => {
-    const settings = await this.readSettingsOslik();
-    settings.isSafeRemove = this.root.routeStore.isSafeRemove;
-    await RNFetchBlob.fs.writeFile(
-      this.serverPathOslik,
-      JSON.stringify(settings),
-    );
-  };
-
-  writeToServer = async (data: TSettings) => {
-    await RNFetchBlob.fs.writeFile(this.serverPathOslik, JSON.stringify(data));
   };
 
   getPermissions = async () => {
-    await PermissionsAndroid.request(
-      PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
-    );
-    await PermissionsAndroid.request(
-      PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
-    );
+    if (Platform.OS === 'android' && Platform.Version <= 29) {
+      await PermissionsAndroid.requestMultiple([
+        PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+        PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+      ]);
+    } else {
+      const isPermissionAsked = await AsyncStorage.getItem('isPermissionAsked');
+
+      if (isPermissionAsked !== null) return;
+      await AsyncStorage.setItem('isPermissionAsked', 'true');
+      await (ManageExternalStorage as any).checkAndGrantPermission();
+    }
   };
 }

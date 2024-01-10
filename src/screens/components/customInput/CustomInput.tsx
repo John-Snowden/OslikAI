@@ -15,6 +15,7 @@ interface IProps {
   title?: string | undefined;
   value: string | undefined;
   style?: StyleProp<ViewStyle>;
+  inputStyle?: StyleProp<ViewStyle>;
   placeholder?: string;
   keyboardType?: KeyboardTypeOptions;
   onChangeText: (text: string) => void;
@@ -24,6 +25,7 @@ export const CustomInput: React.FC<IProps> = ({
   title,
   value,
   style,
+  inputStyle,
   placeholder,
   keyboardType,
   onChangeText,
@@ -34,11 +36,12 @@ export const CustomInput: React.FC<IProps> = ({
       <TextInput
         value={value}
         onChangeText={onChangeText}
-        style={styles.input}
+        style={[styles.input, inputStyle]}
         selectionColor={Themes.white}
         placeholder={placeholder}
         keyboardType={keyboardType}
         placeholderTextColor={Themes.white}
+        multiline
       />
     </View>
   );

@@ -9,15 +9,16 @@ import {NavigationService} from '../../../services';
 
 export const EditSenderModal = observer(() => {
   const {
-    currentSender: {name, gps},
+    currentSender: {name, gps, comment},
     editSender,
   } = stores.routeStore;
 
   const [nameValue, setName] = useState(name);
   const [gpsValue, setGps] = useState(gps);
+  const [commentText, setComment] = useState(comment);
 
   const onPress = () => {
-    editSender(nameValue, gpsValue);
+    editSender(nameValue, gpsValue, commentText);
     goBack();
   };
 
@@ -39,6 +40,12 @@ export const EditSenderModal = observer(() => {
           value={gpsValue}
           keyboardType={'number-pad'}
           onChangeText={setGps}
+        />
+        <CustomInput
+          title="Комментарий"
+          value={commentText}
+          onChangeText={setComment}
+          inputStyle={styles.comment}
         />
         <MainButton title="Сохранить" onPress={onPress} style={styles.button} />
       </View>

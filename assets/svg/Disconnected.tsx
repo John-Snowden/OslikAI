@@ -9,7 +9,7 @@ interface IProps {
 
 export const Disconnected: React.FC<IProps> = ({fill}) => {
   return (
-    <Svg height="16" width="16" viewBox="0 0 285.269 285.269">
+    <Svg height="12" width="12" viewBox="0 0 285.269 285.269">
       <Path
         fill={fill}
         d="M272.867,198.634h-38.246c-0.333,0-0.659,0.083-0.986,0.108c-1.298-5.808-6.486-10.108-12.679-10.108

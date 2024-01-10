@@ -6,7 +6,7 @@ import {TSender} from '$src/types';
 
 import {styles} from './styles';
 import {Card} from '../components';
-import {Header} from '../../components';
+import {BackGround, Header} from '../../components';
 import {noSendersText} from '../../../constants';
 import {stores} from '../../../stores/storesHolder';
 import {NavigationService} from '../../../services';
@@ -50,7 +50,8 @@ export const SendersScreen = observer(() => {
 
   return (
     <>
-      <Header title={'Отправители'} isBackButton />
+      <BackGround />
+      <Header title={'Точка отправления'} isBackButton />
       <FlatList
         data={senders.slice()}
         renderItem={renderItem}

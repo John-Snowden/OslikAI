@@ -1,6 +1,8 @@
+import {toJS} from 'mobx';
+
 import {StoresHolder} from '../storesHolder';
-import {TReceiver, TSender, TTask} from '../../types';
-import {runInAction} from 'mobx';
+import {TReceiver, TSender, TClient} from '../../types';
+import RNFetchBlob from 'rn-fetch-blob';
 
 export class RouteStore {
   root: StoresHolder;
@@ -14,11 +16,6 @@ export class RouteStore {
   currentReceiver!: TReceiver;
   currentSender!: TSender;
   backReceiverIndex: number = -1;
-
-  isConnected = false;
-  isSafeRemove = false;
-  pendingRoutes: TTask[][] = [];
-  recordedRoutes: TTask[][] = [];
 
   setCurrentSender = (data: TSender) => {
     this.currentSender = data;
@@ -36,7 +33,7 @@ export class RouteStore {
     rGps: string,
     rId: string,
   ) => {
-    const route = this.recordedRoutes.shift();
+    const route = this.root.fsStore.recordedRoutes.shift();
 
     if (!route) return;
 
@@ -50,6 +47,7 @@ export class RouteStore {
         return sum + (current.distance / current.speed) * 60 + current.timeout;
       }, 0),
       route,
+      comment: '',
     };
 
     const existingReceiver = this.receivers.find(r => r.id === rId);
@@ -66,7 +64,6 @@ export class RouteStore {
     }
 
     await this.root.fsStore.writeReceivers();
-    await this.root.fsStore.writeRecordedRoutes();
   };
 
   editReceiver = (name: string, gps: string) => {
@@ -77,9 +74,10 @@ export class RouteStore {
     this.root.fsStore.writeReceivers();
   };
 
-  editSender = (name: string, gps: string) => {
+  editSender = (name: string, gps: string, comment: string) => {
     this.currentSender.name = name;
     this.currentSender.gps = gps;
+    this.currentSender.comment = comment;
     this.currentReceiver.senders = [...this.currentReceiver.senders];
 
     this.root.fsStore.writeReceivers();
@@ -101,50 +99,45 @@ export class RouteStore {
     await this.root.fsStore.writeReceivers();
   };
 
-  updatePendingRoutes = () => {
-    if (this.backReceiverIndex === -1) this.pendingRoutes = [];
-    else {
-      this.pendingRoutes = [this.currentSender.route];
-      const reversedRoute = [
-        ...this.currentReceiver.senders[this.backReceiverIndex].route,
-      ].reverse();
-      this.pendingRoutes.push(reversedRoute);
-    }
-  };
-
-  updateRecordedRoutes = (data: TTask[][]) => {
-    if (JSON.stringify(data) === JSON.stringify(this.recordedRoutes)) return;
-    this.recordedRoutes.push(...data);
-  };
-
   setBackReceiverIndex = (i: number): void => {
     this.backReceiverIndex = i;
   };
 
-  savePendingRoutes = async (timeouts: number[], speeds: number[]) => {
-    this.pendingRoutes.forEach((r, i) => {
-      r[0].timeout = timeouts[i];
+  updatePendingRoutes = () => {
+    if (this.backReceiverIndex === -1)
+      this.root.fsStore.clientFile.pending.routes = [];
+    else {
+      const routeA = toJS(this.currentSender.route);
+      const routeB = toJS(
+        this.currentReceiver.senders[this.backReceiverIndex].route.reverse(),
+      );
+
+      this.root.fsStore.clientFile.pending.routes = [routeA, routeB];
+    }
+  };
+
+  writePendingRoutes = async (timeouts: number[], speeds: number[]) => {
+    this.root.fsStore.clientFile.pending.routes[0][0].timeout = timeouts[0];
+    this.root.fsStore.clientFile.pending.routes[1][0].timeout = timeouts[1];
+
+    this.root.fsStore.clientFile.pending.routes.forEach((r, i) => {
+      r.forEach(task => {
+        task.speed = speeds[i];
+      });
     });
 
-    this.pendingRoutes.forEach((r, i) => {
-      r[0].speed = speeds[i];
-    });
     this.setBackReceiverIndex(-1);
 
-    await this.root.fsStore.writePendingRoutes();
-  };
-
-  setConnectionStatus = async (data: boolean) => {
-    this.isConnected = data;
-    await this.root.fsStore.resetConnectionStatus();
-  };
-
-  setIsSafeRemove = async (data: boolean) => {
-    runInAction(() => (this.isSafeRemove = data));
-    await this.root.fsStore.writeIsSafeRemove();
-    setTimeout(async () => {
-      runInAction(() => (this.isSafeRemove = false));
-      await this.root.fsStore.writeIsSafeRemove();
-    }, 3000);
+    await RNFetchBlob.fs.writeFile(
+      this.root.fsStore.clientFilePath,
+      JSON.stringify({
+        ...this.root.fsStore.clientFile,
+        pending: {
+          routes: this.root.fsStore.clientFile.pending.routes,
+          modified: new Date().getTime(),
+        },
+      } as TClient),
+      'utf8',
+    );
   };
 }

@@ -16,17 +16,11 @@ interface IProps {
   onDelete: () => void;
 }
 
-export const Card: React.FC<IProps> = ({
-  data,
-  isShowDuration,
-  onPress,
-  onEdit,
-  onDelete,
-}) => {
+export const Card: React.FC<IProps> = ({data, onPress, onEdit, onDelete}) => {
   const gps = data.gps ? data.gps : 'gps не указан';
   const createdAt = `Создано ${format(new Date(data.date), 'dd-MM-yyyy')}`;
-  const duration = isShowDuration
-    ? `Длительность ${((data as TSender).duration / 1000 / 60).toFixed()} мин`
+  const duration = (data as TSender).duration
+    ? `Длительность ${(data as TSender).duration.toFixed()} мин`
     : '';
 
   return (
@@ -53,9 +47,15 @@ export const Card: React.FC<IProps> = ({
         <IconButton icon={<Edit />} onPress={onEdit} style={styles.buttonBox} />
       </View>
 
+      {(data as TSender).comment && (
+        <View style={styles.commentBox}>
+          <Text style={styles.title}>{(data as TSender).comment}</Text>
+        </View>
+      )}
+
       <View style={styles.row}>
         <Text style={styles.createdAt}>{createdAt}</Text>
-        {isShowDuration && <Text style={styles.duration}>{duration}</Text>}
+        {duration && <Text style={styles.duration}>{duration}</Text>}
       </View>
     </TouchableOpacity>
   );

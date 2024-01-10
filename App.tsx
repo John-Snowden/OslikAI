@@ -1,5 +1,5 @@
 import {StatusBar} from 'react-native';
-import React, {useEffect} from 'react';
+import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
 import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
@@ -8,7 +8,6 @@ import {Themes} from './Theme';
 import {styles} from './styles';
 import {navigationRef} from './src/services';
 import {EMenuScreens} from './src/constants';
-import {stores} from './src/stores/storesHolder';
 import {ModalsStack} from './src/screens/modalsStack/ModalsStack';
 import {NotificationModal} from './src/screens/components/notificationModal';
 import {CreateRouteScreen} from './src/screens/menuScreens/createRouteScreen';

@@ -6,6 +6,7 @@ import {normalize} from '../../../../utils';
 export const styles = StyleSheet.create({
   inputWrapper: {
     alignItems: 'center',
+    marginVertical: normalize(4),
   },
   text: {
     alignSelf: 'flex-start',

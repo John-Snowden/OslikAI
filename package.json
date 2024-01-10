@@ -16,6 +16,7 @@
     "clean-bundler": "rm -rf $TMPDIR/react-native-packager-cache-* && rm -rf $TMPDIR/metro-bundler-cache-* && npm cache verify && npm start -- --reset-cache"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.21.0",
     "@react-navigation/native": "^6.1.7",
     "@react-navigation/native-stack": "^6.9.13",
     "date-fns": "^2.30.0",
@@ -28,6 +29,7 @@
     "react-native-image-picker": "^7.0.3",
     "react-native-image-zoom-viewer": "^3.0.1",
     "react-native-linear-gradient": "^2.8.2",
+    "react-native-manage-external-storage": "^0.1.8",
     "react-native-reanimated": "^3.5.4",
     "react-native-safe-area-context": "^4.7.1",
     "react-native-screens": "^3.24.0",

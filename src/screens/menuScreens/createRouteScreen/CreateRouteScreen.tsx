@@ -20,7 +20,7 @@ import {stores} from '../../../stores';
 import {AddPhoto} from '../../../../assets/svg';
 import {IconButton} from '../../components/iconButton';
 import {SCREEN_HEIGHT, statusBar} from '../../../constants';
-import {CustomInput, Header, MainButton} from '../../components';
+import {BackGround, CustomInput, Header, MainButton} from '../../components';
 
 export const CreateRouteScreen = observer(() => {
   const {receivers, saveRecordedRoute} = stores.routeStore;
@@ -101,6 +101,7 @@ export const CreateRouteScreen = observer(() => {
 
   return (
     <>
+      <BackGround />
       <ScrollView
         ref={ref}
         showsVerticalScrollIndicator={false}

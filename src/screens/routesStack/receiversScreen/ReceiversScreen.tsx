@@ -6,7 +6,7 @@ import {TReceiver} from '$src/types';
 
 import {styles} from './styles';
 import {Card} from '../components';
-import {Header} from '../../components';
+import {BackGround, Header} from '../../components';
 import {noReceiversText} from '../../../constants';
 import {stores} from '../../../stores/storesHolder';
 import {NavigationService} from '../../../services';
@@ -57,16 +57,21 @@ export const ReceiversScreen = observer(() => {
   };
 
   return (
-    <View style={styles.screen}>
-      <Header title={receivers.length === 0 ? 'Инструкция' : 'Получатели'} />
-      <Pressable style={styles.newButton} onLongPress={goToNewModal} />
-      <FlatList
-        data={receivers.slice()}
-        renderItem={renderItem}
-        contentContainerStyle={styles.contentStyle}
-        showsVerticalScrollIndicator={false}
-        ListEmptyComponent={noData}
-      />
-    </View>
+    <>
+      <BackGround />
+      <View style={styles.screen}>
+        <Header
+          title={receivers.length === 0 ? 'Инструкция' : 'Точка получения'}
+        />
+        <Pressable style={styles.newButton} onLongPress={goToNewModal} />
+        <FlatList
+          data={receivers.slice()}
+          renderItem={renderItem}
+          contentContainerStyle={styles.contentStyle}
+          showsVerticalScrollIndicator={false}
+          ListEmptyComponent={noData}
+        />
+      </View>
+    </>
   );
 });

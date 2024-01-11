@@ -44,8 +44,8 @@ const App = () => {
               component={CreateRouteScreen}
             />
           </Stack.Navigator>
+          <NotificationModal />
         </NavigationContainer>
-        <NotificationModal />
       </SafeAreaView>
     </SafeAreaProvider>
   );

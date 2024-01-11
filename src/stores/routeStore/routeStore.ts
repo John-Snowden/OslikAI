@@ -128,15 +128,10 @@ export class RouteStore {
 
     this.setBackReceiverIndex(-1);
 
+    this.root.fsStore.clientFile.pending.modified = new Date().getTime();
     await RNFetchBlob.fs.writeFile(
       this.root.fsStore.clientFilePath,
-      JSON.stringify({
-        ...this.root.fsStore.clientFile,
-        pending: {
-          routes: this.root.fsStore.clientFile.pending.routes,
-          modified: new Date().getTime(),
-        },
-      } as TClient),
+      JSON.stringify(this.root.fsStore.clientFile),
       'utf8',
     );
   };

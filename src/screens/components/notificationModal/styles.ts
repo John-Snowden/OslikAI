@@ -17,7 +17,6 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     color: Themes.white,
     fontSize: normalize(14),
-    marginBottom: normalize(12),
   },
   bg: {
     position: 'absolute',
@@ -31,6 +30,7 @@ export const styles = StyleSheet.create({
   contentWrapper: {
     backgroundColor: Themes.blue3b,
     width: '90%',
+    height: normalize(260),
     justifyContent: 'center',
     borderRadius: normalize(8),
     paddingVertical: normalize(18),
@@ -50,5 +50,12 @@ export const styles = StyleSheet.create({
   disconnected: {
     position: 'absolute',
     right: normalize(18),
+  },
+  button: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: normalize(44),
+    paddingHorizontal: normalize(12),
+    backgroundColor: Themes.lightBlue,
   },
 });

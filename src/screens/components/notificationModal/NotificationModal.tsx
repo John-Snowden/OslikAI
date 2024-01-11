@@ -3,6 +3,7 @@ import {observer} from 'mobx-react-lite';
 import {Pressable, Text, View} from 'react-native';
 
 import {styles} from './styles';
+import {MainButton} from '../mainButton';
 import {stores} from '../../../stores/storesHolder';
 
 export const NotificationModal = observer(() => {
@@ -15,6 +16,11 @@ export const NotificationModal = observer(() => {
       <Pressable style={styles.bg} onPress={closeNotification} />
       <View style={styles.contentWrapper}>
         <Text style={styles.title}>{notification}</Text>
+        <MainButton
+          title="Понятно"
+          style={styles.button}
+          onPress={closeNotification}
+        />
       </View>
     </View>
   );

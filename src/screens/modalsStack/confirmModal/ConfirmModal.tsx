@@ -24,7 +24,6 @@ export const ConfirmModal = observer(() => {
   const [speeds, setSpeeds] = useState<number[]>([2, 2]);
 
   const goBack = () => {
-    setBackReceiverIndex(-1);
     updatePendingRoutes();
     NavigationService.goBack();
   };
@@ -32,9 +31,9 @@ export const ConfirmModal = observer(() => {
   const save = () => {
     writePendingRoutes(timeouts, speeds);
     showNotification(
-      'Маршрут сохранен.\n\nЧтобы передать маршрут на Ослика,\n подключись к нему по usb и дождись,\nкогда Ослик скачает маршрут.',
+      'Маршрут сохранен.\nПодключись к Ослику и дождись сообщения, что Ослик получил маршрут.',
     );
-    NavigationService.navigate('RoutesStack', {screen: 'ReceiversScreen'});
+    NavigationService.reset('RoutesStack');
   };
 
   const renderInputs = () => {

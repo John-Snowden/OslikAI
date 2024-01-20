@@ -86,51 +86,56 @@ export class FsStore {
   watchServerFile = async () => {
     clearTimeout(this.serverTimer);
 
-    const json = await RNFetchBlob.fs.readFile(this.serverFilePath, 'utf8');
-    this.serverFile = JSON.parse(json);
-    console.log('serverFile:', JSON.parse(json));
+    const jsonServer = await RNFetchBlob.fs.readFile(
+      this.serverFilePath,
+      'utf8',
+    );
+    this.serverFile = JSON.parse(jsonServer);
+    const jsonClient = await RNFetchBlob.fs.readFile(
+      this.clientFilePath,
+      'utf8',
+    );
+    const clientFile = JSON.parse(jsonClient) as TClient;
 
-    if (this.serverFile.pending.modified > this.clientFile.pending.modified) {
-      this.clientFile.pending.routes = [];
+    if (
+      this.serverFile.pending.modified > clientFile.pending.modified &&
+      clientFile.pending.routes.length !== 0
+    ) {
+      clientFile.pending.routes = [];
       await RNFetchBlob.fs.writeFile(
         this.clientFilePath,
-        JSON.stringify(this.clientFile),
+        JSON.stringify(clientFile),
         'utf8',
       );
+      this.root.crossAppStore.showNotification(
+        'Походное задание загружено в Ослика,\nможно отключиться',
+      );
     }
-    if (this.serverFile.recorded.modified > this.clientFile.recorded.modified) {
+    if (this.serverFile.recorded.modified > clientFile.recorded.modified) {
       if (
-        this.recordedRoutes
+        !this.recordedRoutes
           .toString()
           .includes(this.serverFile.recorded.routes.toString())
       ) {
-        return;
+        this.recordedRoutes.push(...this.serverFile.recorded.routes);
+        this.clientFile.recorded.modified = new Date().getTime();
+        await RNFetchBlob.fs.writeFile(
+          this.clientFilePath,
+          JSON.stringify(this.clientFile),
+          'utf8',
+        );
+        // TODO
+        this.root.crossAppStore.showNotification(
+          this.serverFile.recorded.routes.length > 0
+            ? 'Скачаны новые маршруты'
+            : 'Скачан новый маршрут',
+        );
       }
-      this.recordedRoutes.push(...this.serverFile.recorded.routes);
-      this.clientFile.recorded.modified = new Date().getTime();
-      await RNFetchBlob.fs.writeFile(
-        this.clientFilePath,
-        JSON.stringify(this.clientFile),
-        'utf8',
-      );
-      // TODO
-      const x = await RNFetchBlob.fs.readFile(this.clientFilePath, 'utf8');
-      this.root.crossAppStore.showNotification(
-        this.serverFile.recorded.routes.length > 0
-          ? 'Скачаны новые маршруты' +
-              JSON.stringify(this.clientFile) +
-              '---' +
-              x
-          : 'Скачан новый маршрут' +
-              JSON.stringify(this.clientFile) +
-              '---' +
-              x,
-      );
     }
 
     this.serverTimer = setTimeout(() => {
       this.watchServerFile();
-    }, 3000);
+    }, 1000);
   };
 
   writeReceivers = async (): Promise<void> => {

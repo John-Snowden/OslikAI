@@ -3,6 +3,7 @@ import {toJS} from 'mobx';
 import {StoresHolder} from '../storesHolder';
 import {TReceiver, TSender, TClient} from '../../types';
 import RNFetchBlob from 'rn-fetch-blob';
+import {Alert} from 'react-native';
 
 export class RouteStore {
   root: StoresHolder;
@@ -126,13 +127,14 @@ export class RouteStore {
       });
     });
 
-    this.setBackReceiverIndex(-1);
-
     this.root.fsStore.clientFile.pending.modified = new Date().getTime();
-    await RNFetchBlob.fs.writeFile(
-      this.root.fsStore.clientFilePath,
-      JSON.stringify(this.root.fsStore.clientFile),
-      'utf8',
-    );
+    this.setBackReceiverIndex(-1);
+    try {
+      await RNFetchBlob.fs.writeFile(
+        this.root.fsStore.clientFilePath,
+        JSON.stringify(this.root.fsStore.clientFile),
+        'utf8',
+      );
+    } catch (e) {}
   };
 }

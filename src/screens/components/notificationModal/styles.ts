@@ -31,6 +31,7 @@ export const styles = StyleSheet.create({
     backgroundColor: Themes.blue3b,
     width: '90%',
     height: normalize(260),
+    paddingHorizontal: normalize(16),
     justifyContent: 'center',
     borderRadius: normalize(8),
     paddingVertical: normalize(18),

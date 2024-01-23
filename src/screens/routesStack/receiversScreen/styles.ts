@@ -50,4 +50,15 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
   },
+  addRouteBox: {
+    position: 'absolute',
+    right: normalize(18),
+    bottom: normalize(30),
+    width: normalize(40),
+    height: normalize(40),
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: normalize(8),
+    backgroundColor: Themes.lightBlue,
+  },
 });

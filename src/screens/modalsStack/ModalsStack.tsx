@@ -8,6 +8,9 @@ import {EditSenderModal} from './editSenderModal';
 import {DeleteSenderModal} from './deleteSenderModal';
 import {EditReceiverModal} from './editReceiverModal';
 import {DeleteReceiverModal} from './deleteReceiverModal';
+import {AddCustomTaskModal} from './addCustomTaskModal';
+import {DeleteCustomTaskModal} from './deleteCustomTaskModal';
+import {EditCustomTaskModal} from './editCustomTaskModal';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +29,15 @@ export const ModalsStack = () => {
         component={DeleteReceiverModal}
       />
       <Stack.Screen name="DeleteSenderModal" component={DeleteSenderModal} />
+      <Stack.Screen name="AddCustomTaskModal" component={AddCustomTaskModal} />
+      <Stack.Screen
+        name="DeleteCustomTaskModal"
+        component={DeleteCustomTaskModal}
+      />
+      <Stack.Screen
+        name="EditCustomTaskModal"
+        component={EditCustomTaskModal}
+      />
       <Stack.Screen name="NewModal" component={NewModal} />
     </Stack.Navigator>
   );

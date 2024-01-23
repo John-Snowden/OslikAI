@@ -18,7 +18,8 @@ export class CrossAppStore {
   loadApp = async () => {
     await this.root.fsStore.getPermissions();
     await this.root.fsStore.init();
-    this.root.fsStore.watchServerFile();
+    this.root.fsStore.watchPendingStatus();
+    this.root.fsStore.watchRecordedStatus();
     SplashScreen.hide();
     setTimeout(() => {
       NavigationService.replace('RoutesStack', {screen: 'ReceiversScreen'});

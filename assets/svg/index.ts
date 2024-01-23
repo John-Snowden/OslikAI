@@ -6,3 +6,4 @@ export * from './Donkey';
 export * from './Disconnected';
 export * from './AddPhoto';
 export * from './NoPhoto';
+export * from './Add1';

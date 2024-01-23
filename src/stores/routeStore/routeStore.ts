@@ -1,22 +1,50 @@
 import {toJS} from 'mobx';
+import {Alert} from 'react-native';
+import RNFetchBlob from 'rn-fetch-blob';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {StoresHolder} from '../storesHolder';
-import {TReceiver, TSender, TClient} from '../../types';
-import RNFetchBlob from 'rn-fetch-blob';
-import {Alert} from 'react-native';
+import {TReceiver, TSender, TTask} from '../../types';
 
 export class RouteStore {
   root: StoresHolder;
 
   constructor(root: StoresHolder) {
     this.root = root;
-    this.receivers = [];
   }
 
-  receivers: TReceiver[];
+  receivers: TReceiver[] = [];
   currentReceiver!: TReceiver;
   currentSender!: TSender;
   backReceiverIndex: number = -1;
+
+  customRoute: TTask[] = [];
+  currentCustomTask: TTask | null = null;
+  isManualRouteSave = false;
+
+  setManualRouteSave = (bool: boolean) => {
+    this.isManualRouteSave = bool;
+  };
+
+  setCurrentCustomTask = (data: TTask) => {
+    this.currentCustomTask = data;
+  };
+
+  pushCustomTask = (data: TTask) => {
+    this.customRoute = [...this.customRoute, data];
+  };
+
+  editCustomTask = (data: TTask) => {
+    this.customRoute = this.customRoute.map(task => {
+      return task.id === this.currentCustomTask?.id ? data : task;
+    });
+  };
+
+  deleteCustomTask = () => {
+    this.customRoute = this.customRoute.filter(
+      task => task.id !== this.currentCustomTask?.id,
+    );
+  };
 
   setCurrentSender = (data: TSender) => {
     this.currentSender = data;
@@ -34,9 +62,9 @@ export class RouteStore {
     rGps: string,
     rId: string,
   ) => {
-    const route = this.root.fsStore.recordedRoutes.shift();
-
-    if (!route) return;
+    const savedRoute = this.isManualRouteSave
+      ? this.customRoute
+      : (this.root.fsStore.serverFile.routes.shift() as TTask[]);
 
     const sender: TSender = {
       id: String(sName + new Date().getTime()),
@@ -44,10 +72,10 @@ export class RouteStore {
       gps: sGps,
       date: new Date(),
       images: sPhotos,
-      duration: route.reduce((sum, current) => {
+      duration: savedRoute.reduce((sum, current) => {
         return sum + (current.distance / current.speed) * 60 + current.timeout;
       }, 0),
-      route,
+      route: savedRoute,
       comment: '',
     };
 
@@ -65,6 +93,10 @@ export class RouteStore {
     }
 
     await this.root.fsStore.writeReceivers();
+    await RNFetchBlob.fs.writeFile(
+      this.root.fsStore.serverFilePath,
+      JSON.stringify(this.root.fsStore.serverFile),
+    );
   };
 
   editReceiver = (name: string, gps: string) => {
@@ -105,29 +137,27 @@ export class RouteStore {
   };
 
   updatePendingRoutes = () => {
-    if (this.backReceiverIndex === -1)
-      this.root.fsStore.clientFile.pending.routes = [];
+    if (this.backReceiverIndex === -1) this.root.fsStore.clientFile.routes = [];
     else {
       const routeA = toJS(this.currentSender.route);
       const routeB = toJS(
         this.currentReceiver.senders[this.backReceiverIndex].route.reverse(),
       );
 
-      this.root.fsStore.clientFile.pending.routes = [routeA, routeB];
+      this.root.fsStore.clientFile.routes = [routeA, routeB];
     }
   };
 
   writePendingRoutes = async (timeouts: number[], speeds: number[]) => {
-    this.root.fsStore.clientFile.pending.routes[0][0].timeout = timeouts[0];
-    this.root.fsStore.clientFile.pending.routes[1][0].timeout = timeouts[1];
+    this.root.fsStore.clientFile.routes[0][0].timeout = timeouts[0];
+    this.root.fsStore.clientFile.routes[1][0].timeout = timeouts[1];
 
-    this.root.fsStore.clientFile.pending.routes.forEach((r, i) => {
+    this.root.fsStore.clientFile.routes.forEach((r, i) => {
       r.forEach(task => {
         task.speed = speeds[i];
       });
     });
 
-    this.root.fsStore.clientFile.pending.modified = new Date().getTime();
     this.setBackReceiverIndex(-1);
     try {
       await RNFetchBlob.fs.writeFile(
@@ -136,5 +166,11 @@ export class RouteStore {
         'utf8',
       );
     } catch (e) {}
+    try {
+      await RNFetchBlob.fs.writeFile(this.root.fsStore.clientUpdatedPath, '');
+      await AsyncStorage.setItem('clientUpdated', 'true');
+    } catch (e) {
+      Alert.alert('Ошибка записи clientUpdatedPath');
+    }
   };
 }

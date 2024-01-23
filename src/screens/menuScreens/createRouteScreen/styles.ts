@@ -1,100 +1,91 @@
 import {StyleSheet} from 'react-native';
-import {normalize} from '../../../../utils';
+
 import {Themes} from '../../../../Theme';
-import {SCREEN_HEIGHT, statusBar} from '../../../constants';
+import {normalize} from '../../../../utils';
 
 export const styles = StyleSheet.create({
-  screen1: {
-    height: SCREEN_HEIGHT - statusBar,
+  screen: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  screen2: {
-    height: SCREEN_HEIGHT - statusBar,
+  fullWidth: {
+    width: '100%',
   },
-  flex: {flex: 1},
-  inputsWrapper: {
-    marginTop: normalize(6),
+  containerStyle: {
+    alignItems: 'center',
+    paddingTop: normalize(24),
+    paddingBottom: normalize(40),
+  },
+  taskWrapper: {
+    width: '90%',
+    backgroundColor: Themes.blue3b,
+    padding: normalize(8),
+    marginBottom: normalize(18),
     marginHorizontal: normalize(18),
-    paddingVertical: normalize(20),
     borderRadius: normalize(8),
     borderWidth: 1,
     borderColor: Themes.grayf4,
-    backgroundColor: Themes.blue3b,
+    elevation: 4,
   },
+  row: {
+    alignSelf: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  buttonBox: {
+    height: normalize(50),
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: normalize(6),
+    backgroundColor: Themes.grayf4,
+    padding: normalize(12),
+  },
+  deleteButton: {
+    borderRadius: normalize(6),
+    padding: normalize(14),
+    justifyContent: 'center',
+    backgroundColor: Themes.grayf4,
+  },
+
+  createdAt: {
+    fontSize: normalize(12),
+    marginTop: normalize(8),
+    color: Themes.white,
+  },
+
   text: {
     fontSize: normalize(12),
+    marginHorizontal: normalize(8),
     color: Themes.white,
   },
-  title: {
-    fontSize: normalize(14),
-    color: Themes.white,
-  },
-  box: {
-    marginTop: normalize(26),
-    marginLeft: normalize(20),
-    marginHorizontal: normalize(12),
-  },
-  receiverBox: {
-    height: normalize(54),
-    flexDirection: 'row',
-    backgroundColor: Themes.gray4a,
-    marginRight: normalize(4),
-    borderRadius: normalize(8),
-    padding: normalize(8),
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: Themes.gray60,
-  },
+
   content: {
-    marginTop: normalize(6),
-    paddingBottom: normalize(20),
-    alignItems: 'center',
-  },
-  imageWrapper: {
     flex: 1,
+    alignSelf: 'center',
     flexDirection: 'row',
-    marginHorizontal: normalize(18),
-    marginTop: normalize(6),
+    justifyContent: 'space-around',
+    paddingVertical: normalize(16),
+    borderRadius: normalize(6),
+    marginHorizontal: normalize(12),
+    backgroundColor: Themes.grayf4,
   },
-  bttn: {
+
+  addButton: {
     width: normalize(40),
     height: normalize(40),
     borderRadius: normalize(8),
-    alignItems: 'center',
-    backgroundColor: Themes.gray4a,
-  },
-  newBttn: {
-    flexDirection: 'row',
-    padding: normalize(12),
-    borderRadius: normalize(8),
-    borderWidth: 1,
-    backgroundColor: Themes.gray4a,
-    borderColor: Themes.gray60,
-  },
-  receiverWrapper: {
-    marginTop: normalize(24),
-    paddingHorizontal: normalize(18),
-  },
-  footer: {
-    position: 'absolute',
-    width: '100%',
-    justifyContent: 'center',
-    height: normalize(80),
-    bottom: 0,
-    borderTopLeftRadius: normalize(8),
-    borderTopRightRadius: normalize(8),
-    backgroundColor: Themes.blue3b,
-  },
-  confirmButton: {
-    alignSelf: 'center',
-    width: '90%',
-    marginBottom: 0,
+    marginRight: normalize(8),
     backgroundColor: Themes.lightBlue,
   },
-  photo: {
-    height: normalize(40),
-    width: normalize(40),
-    borderRadius: normalize(6),
-    marginHorizontal: normalize(8),
+
+  footer: {
+    width: '90%',
+  },
+
+  addWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
 });

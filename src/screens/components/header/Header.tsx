@@ -17,14 +17,19 @@ interface IProps {
 
 export const Header: React.FC<IProps> = observer(
   ({title, isBackButton, isMenuButton = true}) => {
-    const {serverFile} = stores.fsStore;
-    const {recordedRoutes} = stores.fsStore;
+    const {
+      fsStore: {
+        serverFile: {routes},
+      },
+      routeStore: {setManualRouteSave},
+    } = stores;
 
     const goBack = () => {
       NavigationService.goBack();
     };
     const goToSettings = () => {
-      NavigationService.navigate('CreateRouteScreen');
+      setManualRouteSave(false);
+      NavigationService.navigate('RegisterRouteScreen');
     };
 
     return (
@@ -51,12 +56,9 @@ export const Header: React.FC<IProps> = observer(
         /> */}
         <TouchableOpacity
           onPress={goToSettings}
-          disabled={recordedRoutes.length === 0}
-          style={[
-            styles.newRouteBox,
-            recordedRoutes.length !== 0 && styles.active,
-          ]}>
-          <Text style={styles.text}>{recordedRoutes.length}</Text>
+          disabled={routes.length === 0}
+          style={[styles.newRouteBox, routes.length !== 0 && styles.active]}>
+          <Text style={styles.text}>{routes.length}</Text>
           <Donkey size={16} />
         </TouchableOpacity>
       </View>

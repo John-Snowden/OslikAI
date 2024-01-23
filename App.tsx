@@ -10,6 +10,7 @@ import {navigationRef} from './src/services';
 import {EMenuScreens} from './src/constants';
 import {ModalsStack} from './src/screens/modalsStack/ModalsStack';
 import {NotificationModal} from './src/screens/components/notificationModal';
+import {RegisterRouteScreen} from './src/screens/menuScreens/registerRouteScreen';
 import {CreateRouteScreen} from './src/screens/menuScreens/createRouteScreen';
 import {BackGround, MenuScreen, BootScreen, RoutesStack} from './src/screens';
 
@@ -39,6 +40,10 @@ const App = () => {
               options={{presentation: 'transparentModal', animation: 'fade'}}
             />
             <Stack.Screen name="Menu" component={MenuScreen} />
+            <Stack.Screen
+              name={EMenuScreens.RegisterRouteScreen}
+              component={RegisterRouteScreen}
+            />
             <Stack.Screen
               name={EMenuScreens.CreateRouteScreen}
               component={CreateRouteScreen}

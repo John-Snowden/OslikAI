@@ -10,7 +10,7 @@ import {NavigationService} from '../../services';
 // TODO delete screen?
 export const MenuScreen = () => {
   const goToCreateRoute = () => {
-    NavigationService.navigate(EMenuScreens.CreateRouteScreen);
+    NavigationService.navigate(EMenuScreens.RegisterRouteScreen);
   };
 
   return (

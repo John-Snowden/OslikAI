@@ -1,10 +1,10 @@
 import RNFetchBlob from 'rn-fetch-blob';
-import {PermissionsAndroid, Platform} from 'react-native';
+import {Alert, PermissionsAndroid, Platform} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import ManageExternalStorage from 'react-native-manage-external-storage';
 
 import {StoresHolder} from '../storesHolder';
-import {TClient, TReceiver, TServer, TTask} from '../../types';
+import {TReceiver, TRoutes, TTask} from '../../types';
 import {runInAction} from 'mobx';
 
 export class FsStore {
@@ -14,28 +14,28 @@ export class FsStore {
     this.root = root;
   }
 
-  clientFile!: TClient;
-  serverFile!: TServer;
-  recordedRoutes: TTask[][] = [];
+  clientFile!: TRoutes;
+  serverFile!: TRoutes;
 
   basePath = RNFetchBlob.fs.dirs.DownloadDir + '/OSLIK';
   clientFilePath = this.basePath + '/ClientFile.json';
-  readonly serverFilePath = this.basePath + '/ServerFile.json';
-  clientOslikPath = this.basePath + '/Oslik.json';
+  serverFilePath = this.basePath + '/ServerFile.json';
+  clientUpdatedPath = this.basePath + '/ClientUpdated.txt';
+  serverUpdatedPath = this.basePath + '/ServerUpdated.txt';
+  oslikFilePath = this.basePath + '/Oslik.json';
 
   serverTimer: NodeJS.Timeout | undefined = undefined;
 
   init = async (): Promise<void> => {
     const isClientFileExist = await RNFetchBlob.fs.exists(this.clientFilePath);
-    console.log('isClientFileExist', isClientFileExist);
     if (!isClientFileExist) {
-      this.clientFile = {
-        pending: {
-          routes: [],
-          modified: 0,
-        },
-        recorded: {modified: 0},
-      };
+      this.root.crossAppStore.showNotification(
+        'Файлы настроек не созданы.\nСоздаю...',
+      );
+      setTimeout(() => {
+        this.root.crossAppStore.showNotification('Созданы файлы настроек');
+      }, 3000);
+      this.clientFile = {routes: []};
 
       await RNFetchBlob.fs.writeFile(
         this.clientFilePath,
@@ -46,101 +46,135 @@ export class FsStore {
       const json = await RNFetchBlob.fs.readFile(this.clientFilePath, 'utf8');
       runInAction(() => (this.clientFile = JSON.parse(json)));
     }
-    console.log('clientFile_____', this.clientFile);
 
     const isServerFileExist = await RNFetchBlob.fs.exists(this.serverFilePath);
-    console.log('isServerFileExist', isServerFileExist);
-
     if (!isServerFileExist) {
-      this.serverFile = {
-        pending: {modified: 0},
-        recorded: {
-          routes: [],
-          modified: 0,
-        },
-      };
+      this.serverFile = {routes: []};
       await RNFetchBlob.fs.writeFile(
         this.serverFilePath,
         JSON.stringify(this.serverFile),
         'utf8',
       );
+    } else {
+      const json = await RNFetchBlob.fs.readFile(this.serverFilePath, 'utf8');
+      runInAction(() => (this.serverFile = JSON.parse(json)));
     }
 
-    const isTelephoneExist = await RNFetchBlob.fs.exists(this.clientOslikPath);
-    console.log('isTelephoneExist', isTelephoneExist);
-    if (!isTelephoneExist) {
+    const isOslikFileExist = await RNFetchBlob.fs.exists(this.oslikFilePath);
+    if (!isOslikFileExist) {
       await RNFetchBlob.fs.writeFile(
-        this.clientOslikPath,
+        this.oslikFilePath,
         JSON.stringify([]),
         'utf8',
       );
     } else {
-      const routes = await RNFetchBlob.fs.readFile(
-        this.clientOslikPath,
-        'utf8',
-      );
+      const routes = await RNFetchBlob.fs.readFile(this.oslikFilePath, 'utf8');
       runInAction(() => (this.root.routeStore.receivers = JSON.parse(routes)));
     }
   };
 
-  watchServerFile = async () => {
-    clearTimeout(this.serverTimer);
-
-    const jsonServer = await RNFetchBlob.fs.readFile(
-      this.serverFilePath,
-      'utf8',
-    );
-    this.serverFile = JSON.parse(jsonServer);
-    const jsonClient = await RNFetchBlob.fs.readFile(
-      this.clientFilePath,
-      'utf8',
-    );
-    const clientFile = JSON.parse(jsonClient) as TClient;
-
-    if (
-      this.serverFile.pending.modified > clientFile.pending.modified &&
-      clientFile.pending.routes.length !== 0
-    ) {
-      clientFile.pending.routes = [];
-      await RNFetchBlob.fs.writeFile(
-        this.clientFilePath,
-        JSON.stringify(clientFile),
-        'utf8',
+  watchPendingStatus = async () => {
+    try {
+      const isClientUpdated = await AsyncStorage.getItem('clientUpdated');
+      const isPendingUploaded = await RNFetchBlob.fs.exists(
+        this.clientUpdatedPath,
       );
-      this.root.crossAppStore.showNotification(
-        'Походное задание загружено в Ослика,\nможно отключиться',
-      );
-    }
-    if (this.serverFile.recorded.modified > clientFile.recorded.modified) {
-      if (
-        !this.recordedRoutes
-          .toString()
-          .includes(this.serverFile.recorded.routes.toString())
-      ) {
-        this.recordedRoutes.push(...this.serverFile.recorded.routes);
-        this.clientFile.recorded.modified = new Date().getTime();
-        await RNFetchBlob.fs.writeFile(
-          this.clientFilePath,
-          JSON.stringify(this.clientFile),
-          'utf8',
-        );
-        // TODO
-        this.root.crossAppStore.showNotification(
-          this.serverFile.recorded.routes.length > 0
-            ? 'Скачаны новые маршруты'
-            : 'Скачан новый маршрут',
-        );
+      if (isClientUpdated === 'true' && !isPendingUploaded) {
+        this.root.crossAppStore.showNotification('Маршруты загружены в Ослика');
+        await AsyncStorage.setItem('clientUpdated', 'false');
       }
+    } catch (e) {
+    } finally {
+      setTimeout(async () => {
+        this.watchPendingStatus();
+      }, 5000);
     }
-
-    this.serverTimer = setTimeout(() => {
-      this.watchServerFile();
-    }, 1000);
   };
+
+  watchRecordedStatus = async () => {
+    try {
+      const isServerUpdated = await RNFetchBlob.fs.exists(
+        this.serverUpdatedPath,
+      );
+      if (isServerUpdated) {
+        try {
+          const json = await RNFetchBlob.fs.readFile(
+            this.serverFilePath,
+            'utf8',
+          );
+          runInAction(() => (this.serverFile = {...JSON.parse(json)}));
+          await RNFetchBlob.fs.unlink(this.serverUpdatedPath);
+          this.root.crossAppStore.showNotification('Скачаны новые маршруты');
+        } catch (e) {
+          Alert.alert('Ошибка чтения serverFile: ' + e);
+        }
+      }
+    } catch (e) {
+    } finally {
+      setTimeout(() => {
+        this.watchRecordedStatus();
+      }, 5000);
+    }
+  };
+
+  // watchRecordedStatus = async () => {
+  //   clearTimeout(this.serverTimer);
+
+  //   const jsonServer = await RNFetchBlob.fs.readFile(
+  //     this.serverFilePath,
+  //     'utf8',
+  //   );
+  //   this.serverFile = JSON.parse(jsonServer);
+  //   const jsonClient = await RNFetchBlob.fs.readFile(
+  //     this.clientFilePath,
+  //     'utf8',
+  //   );
+  //   const clientFile = JSON.parse(jsonClient) as TClient;
+
+  //   if (
+  //     this.serverFile.pending.modified > clientFile.pending.modified &&
+  //     clientFile.pending.routes.length !== 0
+  //   ) {
+  //     clientFile.pending.routes = [];
+  //     await RNFetchBlob.fs.writeFile(
+  //       this.clientFilePath,
+  //       JSON.stringify(clientFile),
+  //       'utf8',
+  //     );
+  //     this.root.crossAppStore.showNotification(
+  //       'Походное задание загружено в Ослика,\nможно отключиться',
+  //     );
+  //   }
+  //   if (this.serverFile.recorded.modified > clientFile.recorded.modified) {
+  //     if (
+  //       !this.recordedRoutes
+  //         .toString()
+  //         .includes(this.serverFile.recorded.routes.toString())
+  //     ) {
+  //       this.recordedRoutes.push(...this.serverFile.recorded.routes);
+  //       this.clientFile.recorded.modified = new Date().getTime();
+  //       await RNFetchBlob.fs.writeFile(
+  //         this.clientFilePath,
+  //         JSON.stringify(this.clientFile),
+  //         'utf8',
+  //       );
+  //       // TODO
+  //       this.root.crossAppStore.showNotification(
+  //         this.serverFile.recorded.routes.length > 0
+  //           ? 'Скачаны новые маршруты'
+  //           : 'Скачан новый маршрут',
+  //       );
+  //     }
+  //   }
+
+  //   this.serverTimer = setTimeout(() => {
+  //     this.watchRecordedStatus();
+  //   }, 1000);
+  // };
 
   writeReceivers = async (): Promise<void> => {
     await RNFetchBlob.fs.writeFile(
-      this.clientOslikPath,
+      this.oslikFilePath,
       JSON.stringify(this.root.routeStore.receivers as TReceiver[]),
       'utf8',
     );

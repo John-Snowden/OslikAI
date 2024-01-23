@@ -7,9 +7,11 @@ import {TReceiver} from '$src/types';
 import {styles} from './styles';
 import {Card} from '../components';
 import {BackGround, Header} from '../../components';
-import {noReceiversText} from '../../../constants';
+import {noReceiversText, EMenuScreens} from '../../../constants';
 import {stores} from '../../../stores/storesHolder';
 import {NavigationService} from '../../../services';
+import {IconButton} from '../../components/iconButton';
+import {Donkey} from '../../../../assets/svg/Donkey';
 
 export const ReceiversScreen = observer(() => {
   const {receivers, setCurrentReceiver} = stores.routeStore;
@@ -56,6 +58,10 @@ export const ReceiversScreen = observer(() => {
     NavigationService.push('Modals', {screen: 'NewModal'});
   };
 
+  const addRoute = () => {
+    NavigationService.navigate(EMenuScreens.CreateRouteScreen);
+  };
+
   return (
     <>
       <BackGround />
@@ -70,6 +76,11 @@ export const ReceiversScreen = observer(() => {
           contentContainerStyle={styles.contentStyle}
           showsVerticalScrollIndicator={false}
           ListEmptyComponent={noData}
+        />
+        <IconButton
+          icon={<Donkey size={18} />}
+          style={styles.addRouteBox}
+          onPress={addRoute}
         />
       </View>
     </>

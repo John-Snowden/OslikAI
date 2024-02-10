@@ -18,7 +18,10 @@ interface IProps {
 
 export const Card: React.FC<IProps> = ({data, onPress, onEdit, onDelete}) => {
   const gps = data.gps ? data.gps : 'gps не указан';
-  const createdAt = `Создано ${format(new Date(data.date), 'dd-MM-yyyy')}`;
+  const createdAt = `Создано ${format(
+    new Date(data.date),
+    'dd-MM-yyyy, в hh:mm',
+  )}`;
   const duration = (data as TSender).duration
     ? `Длительность ${(data as TSender).duration.toFixed()} мин`
     : '';

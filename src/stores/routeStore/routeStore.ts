@@ -30,7 +30,7 @@ export class RouteStore {
     this.currentCustomTask = data;
   };
 
-  pushCustomTask = (data: TTask) => {
+  addCustomTask = (data: TTask) => {
     this.customRoute = [...this.customRoute, data];
   };
 

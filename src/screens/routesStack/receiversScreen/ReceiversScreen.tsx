@@ -59,7 +59,7 @@ export const ReceiversScreen = observer(() => {
   };
 
   const addRoute = () => {
-    NavigationService.navigate(EMenuScreens.CreateRouteScreen);
+    NavigationService.navigate(EMenuScreens.CreateCustomRouteScreen);
   };
 
   return (

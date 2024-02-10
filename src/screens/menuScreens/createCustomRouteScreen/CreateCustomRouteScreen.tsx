@@ -12,7 +12,7 @@ import {Header, MainButton} from '../../components';
 import {IconButton} from '../../components/iconButton';
 import {stores} from '../../../stores';
 
-export const CreateRouteScreen: React.FC = observer(() => {
+export const CreateCustomRouteScreen: React.FC = observer(() => {
   const {
     routeStore: {customRoute, setCurrentCustomTask, setManualRouteSave},
   } = stores;
@@ -22,7 +22,7 @@ export const CreateRouteScreen: React.FC = observer(() => {
   };
   const goToRegisterRoute = () => {
     setManualRouteSave(true);
-    NavigationService.navigate(EMenuScreens.RegisterRouteScreen);
+    NavigationService.navigate(EMenuScreens.NameRouteScreen);
   };
 
   const renderItem = ({item}: {item: TTask}) => {

@@ -10,8 +10,10 @@ import {navigationRef} from './src/services';
 import {EMenuScreens} from './src/constants';
 import {ModalsStack} from './src/screens/modalsStack/ModalsStack';
 import {NotificationModal} from './src/screens/components/notificationModal';
-import {RegisterRouteScreen} from './src/screens/menuScreens/registerRouteScreen';
-import {CreateRouteScreen} from './src/screens/menuScreens/createRouteScreen';
+import {
+  NameRouteScreen,
+  CreateCustomRouteScreen,
+} from './src/screens/menuScreens';
 import {BackGround, MenuScreen, BootScreen, RoutesStack} from './src/screens';
 
 const Stack = createNativeStackNavigator();
@@ -41,12 +43,12 @@ const App = () => {
             />
             <Stack.Screen name="Menu" component={MenuScreen} />
             <Stack.Screen
-              name={EMenuScreens.RegisterRouteScreen}
-              component={RegisterRouteScreen}
+              name={EMenuScreens.NameRouteScreen}
+              component={NameRouteScreen}
             />
             <Stack.Screen
-              name={EMenuScreens.CreateRouteScreen}
-              component={CreateRouteScreen}
+              name={EMenuScreens.CreateCustomRouteScreen}
+              component={CreateCustomRouteScreen}
             />
           </Stack.Navigator>
           <NotificationModal />

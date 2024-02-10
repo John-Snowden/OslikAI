@@ -18,9 +18,7 @@ interface IProps {
 export const Header: React.FC<IProps> = observer(
   ({title, isBackButton, isMenuButton = true}) => {
     const {
-      fsStore: {
-        serverFile: {routes},
-      },
+      fsStore: {serverFile},
       routeStore: {setManualRouteSave},
     } = stores;
 
@@ -29,7 +27,7 @@ export const Header: React.FC<IProps> = observer(
     };
     const goToSettings = () => {
       setManualRouteSave(false);
-      NavigationService.navigate('RegisterRouteScreen');
+      NavigationService.navigate('NameRouteScreen');
     };
 
     return (
@@ -56,9 +54,12 @@ export const Header: React.FC<IProps> = observer(
         /> */}
         <TouchableOpacity
           onPress={goToSettings}
-          disabled={routes.length === 0}
-          style={[styles.newRouteBox, routes.length !== 0 && styles.active]}>
-          <Text style={styles.text}>{routes.length}</Text>
+          disabled={serverFile.routes.length === 0}
+          style={[
+            styles.newRouteBox,
+            serverFile.routes.length !== 0 && styles.active,
+          ]}>
+          <Text style={styles.text}>{serverFile.routes.length}</Text>
           <Donkey size={16} />
         </TouchableOpacity>
       </View>

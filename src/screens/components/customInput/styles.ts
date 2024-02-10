@@ -17,9 +17,14 @@ export const styles = StyleSheet.create({
   },
   input: {
     color: Themes.white,
-    paddingLeft: normalize(12),
     width: '80%',
+    fontSize: normalize(14),
     borderRadius: normalize(6),
+    textAlign: 'center',
     backgroundColor: Themes.grayf4,
+  },
+  leftAligned: {
+    paddingLeft: normalize(16),
+    textAlign: 'left',
   },
 });

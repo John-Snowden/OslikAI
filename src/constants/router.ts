@@ -4,6 +4,6 @@ export enum EModals {
 }
 
 export enum EMenuScreens {
-  RegisterRouteScreen = 'RegisterRouteScreen',
-  CreateRouteScreen = 'CreateRouteScreen',
+  NameRouteScreen = 'NameRouteScreen',
+  CreateCustomRouteScreen = 'CreateCustomRouteScreen',
 }

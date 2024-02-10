@@ -34,7 +34,7 @@ export const styles = StyleSheet.create({
   },
   deleteButton: {
     alignSelf: 'center',
-    backgroundColor: Themes.lightBlue,
+    backgroundColor: Themes.red,
   },
   text: {
     textAlign: 'center',

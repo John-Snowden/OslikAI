@@ -33,18 +33,21 @@ export const EditSenderModal = observer(() => {
         <CustomInput
           title={'Имя отправителя'}
           value={nameValue}
+          isLeftAligned
           onChangeText={setName}
         />
         <CustomInput
           title={'gps отправителя'}
           value={gpsValue}
           keyboardType={'number-pad'}
+          isLeftAligned
           onChangeText={setGps}
         />
         <CustomInput
           title="Комментарий"
           value={commentText}
           onChangeText={setComment}
+          isLeftAligned
           inputStyle={styles.comment}
         />
         <MainButton title="Сохранить" onPress={onPress} style={styles.button} />

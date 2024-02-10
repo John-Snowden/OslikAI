@@ -32,12 +32,14 @@ export const EditReceiverModal = observer(() => {
         <CustomInput
           title={'Имя получателя'}
           value={nameValue}
+          isLeftAligned
           onChangeText={setName}
         />
         <CustomInput
           title={'gps получателя'}
           value={gpsValue}
           keyboardType={'number-pad'}
+          isLeftAligned
           onChangeText={setGps}
         />
         <MainButton title="ok" onPress={onPress} style={styles.button} />

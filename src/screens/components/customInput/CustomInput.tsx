@@ -18,6 +18,7 @@ interface IProps {
   inputStyle?: StyleProp<ViewStyle>;
   placeholder?: string;
   keyboardType?: KeyboardTypeOptions;
+  isLeftAligned?: boolean;
   onChangeText: (text: string) => void;
 }
 
@@ -28,6 +29,7 @@ export const CustomInput: React.FC<IProps> = ({
   inputStyle,
   placeholder,
   keyboardType,
+  isLeftAligned,
   onChangeText,
 }) => {
   return (
@@ -36,7 +38,7 @@ export const CustomInput: React.FC<IProps> = ({
       <TextInput
         value={value}
         onChangeText={onChangeText}
-        style={[styles.input, inputStyle]}
+        style={[styles.input, inputStyle, isLeftAligned && styles.leftAligned]}
         selectionColor={Themes.white}
         placeholder={placeholder}
         keyboardType={keyboardType}

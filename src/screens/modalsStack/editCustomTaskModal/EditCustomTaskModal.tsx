@@ -51,7 +51,7 @@ export const EditCustomTaskModal = () => {
       <View style={styles.inputGroup}>
         <View style={styles.row}>
           <CustomInput
-            value={String(task.distance)}
+            value={task.distance ? String(task.distance) : ''}
             style={styles.input}
             keyboardType={'number-pad'}
             onChangeText={setDistance}
@@ -60,7 +60,7 @@ export const EditCustomTaskModal = () => {
         </View>
         <View style={styles.row}>
           <CustomInput
-            value={String(task.speed)}
+            value={task.speed ? String(task.speed) : ''}
             style={styles.input}
             keyboardType={'number-pad'}
             onChangeText={setSpeed}
@@ -69,7 +69,7 @@ export const EditCustomTaskModal = () => {
         </View>
         <View style={styles.row}>
           <CustomInput
-            value={String(task.degree)}
+            value={task.degree ? String(task.degree) : ''}
             style={styles.input}
             keyboardType={'number-pad'}
             onChangeText={setDegrees}

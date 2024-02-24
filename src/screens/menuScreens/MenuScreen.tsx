@@ -3,42 +3,69 @@ import {View, Text, TouchableOpacity} from 'react-native';
 
 import {styles} from './styles';
 import {BackGround, Header} from '../components';
-import {Add} from '../../../assets/svg/Add';
+import {Joystick, Instructions, CompileRoute} from '../../../assets/svg';
 import {EMenuScreens} from '../../constants';
 import {NavigationService} from '../../services';
+import {TelegramIcon} from '../../../assets/svg/Telegram';
+import {stores} from '../../stores';
 
-// TODO delete screen?
 export const MenuScreen = () => {
-  const goToCreateRoute = () => {
+  const {serverFile} = stores.fsStore;
+
+  const goToSaveRecordedRoute = () => {
+    if (serverFile.routes.length === 0) return;
     NavigationService.navigate(EMenuScreens.NameRouteScreen);
+  };
+
+  const goToAddCustomTaskModal = () => {
+    NavigationService.navigate(EMenuScreens.CreateCustomRouteScreen);
+  };
+
+  const goToInstructionsScreen = () => {
+    NavigationService.navigate(EMenuScreens.InstructionsScreen);
+  };
+
+  const goToFeedbackScreen = () => {
+    NavigationService.navigate(EMenuScreens.FeedbackScreen);
   };
 
   return (
     <>
       <BackGround />
-      <Header title="меню" isBackButton />
+      <Header title="Меню" isBackButton isMenuButton={false} />
 
       <View style={styles.screen}>
         <View style={styles.buttonsWrapper}>
           <TouchableOpacity
-            style={styles.optionWrapper}
-            onPress={goToCreateRoute}>
-            <Add />
-            <Text style={styles.title}>Добавить маршрут</Text>
+            style={[styles.optionWrapper, styles.row]}
+            onPress={goToSaveRecordedRoute}>
+            <Joystick size={20} />
+            <Text style={styles.title}>Записанные маршруты</Text>
+            <Text style={styles.title}>({serverFile.routes.length})</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.optionWrapper}
-            onPress={goToCreateRoute}>
-            <Add />
-            <Text style={styles.title}>Добавить маршрут</Text>
+            onPress={goToAddCustomTaskModal}>
+            <CompileRoute size={20} />
+            <Text style={styles.title}>Собрать маршрут</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.optionWrapper}
-            onPress={goToCreateRoute}>
-            <Add />
-            <Text style={styles.title}>Добавить маршрут</Text>
+            onPress={goToInstructionsScreen}>
+            <Instructions size={21} />
+            <Text style={[styles.title, styles.margLeft]}>Инструкция</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.optionWrapper}
+            onPress={goToFeedbackScreen}>
+            <TelegramIcon size={22} />
+            <Text style={styles.title}>Обратная связь</Text>
           </TouchableOpacity>
         </View>
+      </View>
+
+      <View style={styles.versionBox}>
+        <Text style={[styles.title, styles.grey]}>v. 1.1</Text>
       </View>
     </>
   );

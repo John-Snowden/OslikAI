@@ -71,11 +71,12 @@ export const styles = StyleSheet.create({
     backgroundColor: Themes.grayf4,
   },
 
-  addButton: {
-    width: normalize(40),
-    height: normalize(40),
-    borderRadius: normalize(8),
-    marginRight: normalize(8),
+  flagButton: {
+    width: normalize(44),
+    height: normalize(30),
+    borderRadius: normalize(6),
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: Themes.lightBlue,
   },
 
@@ -85,7 +86,8 @@ export const styles = StyleSheet.create({
 
   addWrapper: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
     alignItems: 'center',
+    marginTop: normalize(6),
   },
 });

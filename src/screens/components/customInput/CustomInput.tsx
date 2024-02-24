@@ -6,17 +6,16 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 
 import {styles} from './styles';
 import {Themes} from '../../../../Theme';
 
 interface IProps {
   title?: string | undefined;
-  value: string | undefined;
+  defaultValue: number | string;
   style?: StyleProp<ViewStyle>;
   inputStyle?: StyleProp<ViewStyle>;
-  placeholder?: string;
   keyboardType?: KeyboardTypeOptions;
   isLeftAligned?: boolean;
   onChangeText: (text: string) => void;
@@ -24,26 +23,36 @@ interface IProps {
 
 export const CustomInput: React.FC<IProps> = ({
   title,
-  value,
+  defaultValue,
   style,
   inputStyle,
-  placeholder,
   keyboardType,
   isLeftAligned,
   onChangeText,
 }) => {
+  const [value, setValue] = useState(String(defaultValue));
+
+  const update = (text: string) => {
+    onChangeText(text);
+    setValue(text);
+  };
+
+  const onBlur = () => {
+    if (value === '' && keyboardType === 'number-pad') setValue('0');
+  };
+
   return (
     <View style={[styles.inputWrapper, style]}>
       {title && <Text style={styles.text}>{title}</Text>}
       <TextInput
         value={value}
-        onChangeText={onChangeText}
+        onChangeText={update}
         style={[styles.input, inputStyle, isLeftAligned && styles.leftAligned]}
         selectionColor={Themes.white}
-        placeholder={placeholder}
         keyboardType={keyboardType}
         placeholderTextColor={Themes.white}
         multiline
+        onBlur={onBlur}
       />
     </View>
   );

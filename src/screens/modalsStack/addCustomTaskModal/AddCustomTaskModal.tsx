@@ -10,13 +10,12 @@ import {CustomInput, MainButton} from '../../components';
 
 export const AddCustomTaskModal = () => {
   const {
-    crossAppStore: {showNotification},
-    routeStore: {addCustomTask},
+    routeStore: {addCustomTask, validateTask},
   } = stores;
 
   const [task, setTask] = useState<TTask>({
     id: String(new Date().getTime()),
-    distance: 0,
+    distance: 0.1,
     speed: 2,
     degree: 0,
     timeout: 0,
@@ -24,17 +23,22 @@ export const AddCustomTaskModal = () => {
 
   const setDistance = (text: string) => {
     setTask(prev => {
-      return {...prev, distance: Number(text)};
+      return {...prev, distance: Number(text.replace(',', '.'))};
     });
   };
   const setSpeed = (text: string) => {
     setTask(prev => {
-      return {...prev, speed: Number(text)};
+      return {...prev, speed: Number(text.replace(',', '.'))};
     });
   };
   const setDegrees = (text: string) => {
     setTask(prev => {
-      return {...prev, degree: Number(text)};
+      return {...prev, degree: Number(text.replace(',', '.'))};
+    });
+  };
+  const setTimeout = (text: string) => {
+    setTask(prev => {
+      return {...prev, degree: Number(text.replace(',', '.'))};
     });
   };
 
@@ -42,11 +46,12 @@ export const AddCustomTaskModal = () => {
     NavigationService.goBack();
   };
 
-  const save = () => {
-    if (Number.isInteger(task.distance) && Number.isInteger(task.speed)) {
+  const saveCustomTask = () => {
+    const isTaskValid = validateTask(task);
+    if (isTaskValid) {
       addCustomTask(task);
       NavigationService.goBack();
-    } else showNotification('Ошибка в заполнении походного задания');
+    }
   };
 
   const renderInputs = () => {
@@ -54,7 +59,7 @@ export const AddCustomTaskModal = () => {
       <View style={styles.inputGroup}>
         <View style={styles.row}>
           <CustomInput
-            value={task.distance ? String(task.distance) : ''}
+            defaultValue={0.1}
             style={styles.input}
             keyboardType={'number-pad'}
             onChangeText={setDistance}
@@ -63,7 +68,7 @@ export const AddCustomTaskModal = () => {
         </View>
         <View style={styles.row}>
           <CustomInput
-            value={task.speed ? String(task.speed) : ''}
+            defaultValue={2}
             style={styles.input}
             keyboardType={'number-pad'}
             onChangeText={setSpeed}
@@ -72,12 +77,23 @@ export const AddCustomTaskModal = () => {
         </View>
         <View style={styles.row}>
           <CustomInput
-            value={task.degree ? String(task.degree) : ''}
+            defaultValue={0}
             style={styles.input}
             keyboardType={'number-pad'}
             onChangeText={setDegrees}
           />
           <Text style={styles.text}>направление в градусах</Text>
+        </View>
+        <View style={styles.row}>
+          <CustomInput
+            defaultValue={0}
+            style={styles.input}
+            keyboardType={'number-pad'}
+            onChangeText={setTimeout}
+          />
+          <Text style={styles.text}>
+            {'ожидание перед выполнением\nв минутах'}
+          </Text>
         </View>
       </View>
     );
@@ -95,7 +111,7 @@ export const AddCustomTaskModal = () => {
         />
         <MainButton
           title="сохранить"
-          onPress={save}
+          onPress={saveCustomTask}
           style={styles.confirmButton}
         />
       </View>

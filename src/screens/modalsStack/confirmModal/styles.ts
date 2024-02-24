@@ -57,9 +57,16 @@ export const styles = StyleSheet.create({
   },
   row: {
     width: '86%',
-    marginVertical: normalize(8),
     alignSelf: 'center',
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  sep: {
+    width: '80%',
+    height: normalize(2),
+    borderRadius: normalize(6),
+    marginVertical: normalize(12),
+    backgroundColor: Themes.gray4a,
+    alignSelf: 'center',
   },
 });

@@ -16,12 +16,20 @@ export const OverviewScreen = observer(() => {
     backReceiverIndex,
     updatePendingRoutes,
     setBackReceiverIndex,
+    appendPhotos,
+    declineReverseRoute,
   } = stores.routeStore;
 
   const [image, setImage] = useState(currentSender.images[0]);
 
   const title = currentSender.name + ' - ' + currentReceiver.name;
   const isNoPhotos = currentSender.images.length === 0;
+
+  const fn = () => {
+    setBackReceiverIndex(-1);
+    declineReverseRoute();
+    NavigationService.navigate('Modals', {screen: 'ConfirmModal'});
+  };
 
   const renderImages = () => {
     return currentSender.images.map((link, index) => {
@@ -74,8 +82,13 @@ export const OverviewScreen = observer(() => {
         contentContainerStyle={styles.screen}
         showsVerticalScrollIndicator={false}>
         {isNoPhotos ? (
-          <View style={styles.noPhotoBox}>
-            <NoPhoto />
+          <View style={styles.noPhotoWrapper}>
+            <TouchableOpacity style={styles.noPhotoBox} onPress={appendPhotos}>
+              <NoPhoto />
+              <Text style={styles.textCenter}>
+                Рекомендуется добавить фото точки отправки
+              </Text>
+            </TouchableOpacity>
           </View>
         ) : (
           <>
@@ -92,10 +105,19 @@ export const OverviewScreen = observer(() => {
         )}
         <View>
           <View style={styles.backTrackBox}>
-            <Text style={styles.text}>Укажи обратный путь</Text>
+            <Text style={styles.text}>Укажи обратный маршрут</Text>
           </View>
           <ScrollView showsHorizontalScrollIndicator={false} horizontal>
             {renderBackRoutes()}
+            <TouchableOpacity
+              style={[
+                styles.numbBox,
+                backReceiverIndex === -1 && styles.selected,
+              ]}
+              onPress={fn}>
+              <Text style={styles.text}>Обратный маршрут</Text>
+              <Text style={styles.text}>не нужен</Text>
+            </TouchableOpacity>
           </ScrollView>
         </View>
       </ScrollView>

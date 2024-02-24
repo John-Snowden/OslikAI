@@ -117,61 +117,6 @@ export class FsStore {
     }
   };
 
-  // watchRecordedStatus = async () => {
-  //   clearTimeout(this.serverTimer);
-
-  //   const jsonServer = await RNFetchBlob.fs.readFile(
-  //     this.serverFilePath,
-  //     'utf8',
-  //   );
-  //   this.serverFile = JSON.parse(jsonServer);
-  //   const jsonClient = await RNFetchBlob.fs.readFile(
-  //     this.clientFilePath,
-  //     'utf8',
-  //   );
-  //   const clientFile = JSON.parse(jsonClient) as TClient;
-
-  //   if (
-  //     this.serverFile.pending.modified > clientFile.pending.modified &&
-  //     clientFile.pending.routes.length !== 0
-  //   ) {
-  //     clientFile.pending.routes = [];
-  //     await RNFetchBlob.fs.writeFile(
-  //       this.clientFilePath,
-  //       JSON.stringify(clientFile),
-  //       'utf8',
-  //     );
-  //     this.root.crossAppStore.showNotification(
-  //       'Походное задание загружено в Ослика,\nможно отключиться',
-  //     );
-  //   }
-  //   if (this.serverFile.recorded.modified > clientFile.recorded.modified) {
-  //     if (
-  //       !this.recordedRoutes
-  //         .toString()
-  //         .includes(this.serverFile.recorded.routes.toString())
-  //     ) {
-  //       this.recordedRoutes.push(...this.serverFile.recorded.routes);
-  //       this.clientFile.recorded.modified = new Date().getTime();
-  //       await RNFetchBlob.fs.writeFile(
-  //         this.clientFilePath,
-  //         JSON.stringify(this.clientFile),
-  //         'utf8',
-  //       );
-  //       // TODO
-  //       this.root.crossAppStore.showNotification(
-  //         this.serverFile.recorded.routes.length > 0
-  //           ? 'Скачаны новые маршруты'
-  //           : 'Скачан новый маршрут',
-  //       );
-  //     }
-  //   }
-
-  //   this.serverTimer = setTimeout(() => {
-  //     this.watchRecordedStatus();
-  //   }, 1000);
-  // };
-
   writeReceivers = async (): Promise<void> => {
     await RNFetchBlob.fs.writeFile(
       this.oslikFilePath,

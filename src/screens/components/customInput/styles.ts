@@ -18,10 +18,11 @@ export const styles = StyleSheet.create({
   input: {
     color: Themes.white,
     width: '80%',
+    height: normalize(40),
     fontSize: normalize(14),
     borderRadius: normalize(6),
     textAlign: 'center',
-    backgroundColor: Themes.grayf4,
+    backgroundColor: Themes.gray4a,
   },
   leftAligned: {
     paddingLeft: normalize(16),

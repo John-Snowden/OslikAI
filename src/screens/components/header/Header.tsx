@@ -6,8 +6,7 @@ import {IconButton} from '../iconButton';
 import {observer} from 'mobx-react-lite';
 import {stores} from '../../../stores/storesHolder';
 import {NavigationService} from '../../../services';
-import {ArrowLeft, Disconnected, Donkey} from '../../../../assets/svg';
-import {Themes} from '../../../../Theme';
+import {ArrowLeft, Menu} from '../../../../assets/svg';
 
 interface IProps {
   title: string;
@@ -18,16 +17,15 @@ interface IProps {
 export const Header: React.FC<IProps> = observer(
   ({title, isBackButton, isMenuButton = true}) => {
     const {
-      fsStore: {serverFile},
       routeStore: {setManualRouteSave},
     } = stores;
 
     const goBack = () => {
       NavigationService.goBack();
     };
-    const goToSettings = () => {
+    const goToMenu = () => {
       setManualRouteSave(false);
-      NavigationService.navigate('NameRouteScreen');
+      NavigationService.navigate('Menu');
     };
 
     return (
@@ -40,28 +38,11 @@ export const Header: React.FC<IProps> = observer(
         <View style={styles.titleBox}>
           <Text style={styles.title}>{title}</Text>
         </View>
-        {/* TODO */}
-        {/* <IconButton
-          icon={
-            <View>
-              <Disconnected fill={isConnected ? Themes.white : Themes.red} />
-              {!isConnected && <View style={styles.line} />}
-            </View>
-          }
-          style={[styles.connectionButton, isConnected && styles.active]}
-          isDisabled={!isConnected}
-          onPress={safeRemove}
-        /> */}
-        <TouchableOpacity
-          onPress={goToSettings}
-          disabled={serverFile.routes.length === 0}
-          style={[
-            styles.newRouteBox,
-            serverFile.routes.length !== 0 && styles.active,
-          ]}>
-          <Text style={styles.text}>{serverFile.routes.length}</Text>
-          <Donkey size={16} />
-        </TouchableOpacity>
+        {isMenuButton && (
+          <TouchableOpacity onPress={goToMenu} style={styles.menu}>
+            <Menu size={18} />
+          </TouchableOpacity>
+        )}
       </View>
     );
   },

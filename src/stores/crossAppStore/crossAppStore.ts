@@ -2,6 +2,7 @@ import {runInAction} from 'mobx';
 import SplashScreen from 'react-native-splash-screen';
 
 import {NavigationService} from '../../services';
+import {EMenuScreens} from '../../constants';
 
 import {StoresHolder} from '../storesHolder';
 
@@ -22,7 +23,13 @@ export class CrossAppStore {
     this.root.fsStore.watchRecordedStatus();
     SplashScreen.hide();
     setTimeout(() => {
-      NavigationService.replace('RoutesStack', {screen: 'ReceiversScreen'});
+      const {receivers} = this.root.routeStore;
+      NavigationService.replace(
+        receivers.length === 0
+          ? EMenuScreens.InstructionsScreen
+          : 'RoutesStack',
+        {screen: 'ReceiversScreen'},
+      );
     }, 2300);
   };
 

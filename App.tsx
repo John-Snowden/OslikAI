@@ -14,7 +14,14 @@ import {
   NameRouteScreen,
   CreateCustomRouteScreen,
 } from './src/screens/menuScreens';
-import {BackGround, MenuScreen, BootScreen, RoutesStack} from './src/screens';
+import {
+  BackGround,
+  MenuScreen,
+  BootScreen,
+  RoutesStack,
+  FeedbackScreen,
+  InstructionsScreen,
+} from './src/screens';
 
 const Stack = createNativeStackNavigator();
 
@@ -42,6 +49,14 @@ const App = () => {
               options={{presentation: 'transparentModal', animation: 'fade'}}
             />
             <Stack.Screen name="Menu" component={MenuScreen} />
+            <Stack.Screen
+              name={EMenuScreens.InstructionsScreen}
+              component={InstructionsScreen}
+            />
+            <Stack.Screen
+              name={EMenuScreens.FeedbackScreen}
+              component={FeedbackScreen}
+            />
             <Stack.Screen
               name={EMenuScreens.NameRouteScreen}
               component={NameRouteScreen}

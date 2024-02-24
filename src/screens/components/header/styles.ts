@@ -36,19 +36,19 @@ export const styles = StyleSheet.create({
     color: Themes.white,
   },
   margLeft: {marginLeft: normalize(12)},
-  newRouteBox: {
+  menu: {
     position: 'absolute',
     right: 0,
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    height: normalize(32),
+    height: normalize(30),
     width: normalize(46),
     borderRadius: normalize(6),
     paddingLeft: normalize(6),
     paddingRight: normalize(7),
     marginRight: normalize(18),
-    backgroundColor: Themes.gray4a,
+    backgroundColor: Themes.lightBlue,
   },
   active: {backgroundColor: Themes.lightBlue},
   line: {

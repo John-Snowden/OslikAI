@@ -22,6 +22,10 @@ export const EditSenderModal = observer(() => {
     goBack();
   };
 
+  const editComment = (text: string) => {
+    setComment(text.trim());
+  };
+
   const goBack = () => {
     NavigationService.goBack();
   };
@@ -32,21 +36,21 @@ export const EditSenderModal = observer(() => {
       <View style={styles.contentWrapper}>
         <CustomInput
           title={'Имя отправителя'}
-          value={nameValue}
+          defaultValue={nameValue}
           isLeftAligned
           onChangeText={setName}
         />
         <CustomInput
           title={'gps отправителя'}
-          value={gpsValue}
+          defaultValue={gpsValue}
           keyboardType={'number-pad'}
           isLeftAligned
           onChangeText={setGps}
         />
         <CustomInput
           title="Комментарий"
-          value={commentText}
-          onChangeText={setComment}
+          defaultValue={commentText}
+          onChangeText={editComment}
           isLeftAligned
           inputStyle={styles.comment}
         />

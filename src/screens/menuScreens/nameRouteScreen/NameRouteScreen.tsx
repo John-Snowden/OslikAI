@@ -23,7 +23,8 @@ import {SCREEN_HEIGHT, statusBar} from '../../../constants';
 import {BackGround, CustomInput, Header, MainButton} from '../../components';
 
 export const NameRouteScreen = observer(() => {
-  const {receivers, isManualRouteSave, saveRecordedRoute} = stores.routeStore;
+  const {receivers, isManualRouteSave, saveRecordedRoute, pickPhotos} =
+    stores.routeStore;
 
   const [senderName, setSenderName] = useState('');
   const [senderGps, setSenderGps] = useState('');
@@ -33,11 +34,8 @@ export const NameRouteScreen = observer(() => {
   const [receiverId, setReceiverId] = useState('');
   const [isFirstScreen, setFirstScreen] = useState(true);
 
-  const pickPhotos = async () => {
-    const photos = await launchImageLibrary({mediaType: 'photo'});
-    const uris = photos.assets?.map(asset => {
-      return asset.uri as string;
-    });
+  const setPhotos = async () => {
+    const uris = await pickPhotos();
     if (uris) setSenderPhotos(uris);
   };
 
@@ -56,7 +54,7 @@ export const NameRouteScreen = observer(() => {
       receiverGps,
       receiverId,
     );
-    NavigationService.navigate('ReceiversScreen');
+    NavigationService.navigate('RoutesStack', {screen: 'ReceiversScreen'});
   };
 
   const onScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
@@ -111,18 +109,18 @@ export const NameRouteScreen = observer(() => {
         <View style={styles.screen1}>
           <Header title="Сохранить маршрут" isBackButton isMenuButton={false} />
           <View style={styles.box}>
-            <Text style={styles.title}>Добавь отправителя</Text>
+            <Text style={styles.title}>Назови отправителя</Text>
           </View>
           <View style={styles.inputsWrapper}>
             <CustomInput
               title="Имя отправителя"
-              value={senderName}
+              defaultValue={senderName}
               isLeftAligned
               onChangeText={setSenderName}
             />
             <CustomInput
               title="gps отправителя"
-              value={senderGps}
+              defaultValue={senderGps}
               keyboardType={'number-pad'}
               isLeftAligned
               onChangeText={setSenderGps}
@@ -135,7 +133,7 @@ export const NameRouteScreen = observer(() => {
             <IconButton
               icon={<AddPhoto />}
               style={styles.bttn}
-              onPress={pickPhotos}
+              onPress={setPhotos}
             />
             <FlatList
               data={senderPhotos}
@@ -151,13 +149,13 @@ export const NameRouteScreen = observer(() => {
           <View style={styles.inputsWrapper}>
             <CustomInput
               title="Имя получателя"
-              value={receiverName}
+              defaultValue={receiverName}
               isLeftAligned
               onChangeText={editReceiverName}
             />
             <CustomInput
               title="gps получателя"
-              value={receiverGps}
+              defaultValue={receiverGps}
               keyboardType={'number-pad'}
               isLeftAligned
               onChangeText={editReceiverGps}

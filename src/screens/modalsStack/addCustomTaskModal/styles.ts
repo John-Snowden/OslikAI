@@ -40,7 +40,6 @@ export const styles = StyleSheet.create({
     marginBottom: normalize(12),
   },
   text: {
-    textAlign: 'center',
     paddingHorizontal: normalize(16),
     marginBottom: normalize(4),
     fontSize: normalize(12),
@@ -48,6 +47,7 @@ export const styles = StyleSheet.create({
   },
   inputGroup: {
     marginVertical: normalize(8),
+    width: '90%',
   },
   inputsBox: {
     marginBottom: normalize(20),

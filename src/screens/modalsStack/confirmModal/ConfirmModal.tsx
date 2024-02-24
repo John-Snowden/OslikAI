@@ -23,8 +23,11 @@ export const ConfirmModal = observer(() => {
   const [timeouts, setTimeouts] = useState<number[]>([0, 0]);
   const [speeds, setSpeeds] = useState<number[]>([2, 2]);
 
+  const isReverseRoute = backReceiverIndex !== -1;
+
   const goBack = () => {
     updatePendingRoutes();
+    setBackReceiverIndex(-1);
     NavigationService.goBack();
   };
 
@@ -55,7 +58,7 @@ export const ConfirmModal = observer(() => {
       <View style={styles.inputGroup}>
         <View style={styles.row}>
           <CustomInput
-            value={String(timeouts[0])}
+            defaultValue={timeouts[0]}
             style={styles.input}
             keyboardType={'number-pad'}
             onChangeText={changeTimeoutA}
@@ -65,34 +68,39 @@ export const ConfirmModal = observer(() => {
         </View>
         <View style={styles.row}>
           <CustomInput
-            value={String(speeds[0])}
+            defaultValue={speeds[0]}
             style={styles.input}
             keyboardType={'number-pad'}
             onChangeText={changeSpeedA}
           />
           <Text style={styles.text}>{` км/ч`}</Text>
         </View>
-        <View style={styles.row}>
-          <CustomInput
-            value={String(timeouts[1])}
-            style={styles.input}
-            keyboardType={'number-pad'}
-            onChangeText={changeTimeoutB}
-          />
-          <Text
-            style={
-              styles.text
-            }>{` минут с точки ${currentReceiver?.name}`}</Text>
-        </View>
-        <View style={styles.row}>
-          <CustomInput
-            value={String(speeds[1])}
-            style={styles.input}
-            keyboardType={'number-pad'}
-            onChangeText={changeSpeedB}
-          />
-          <Text style={styles.text}>{` км/ч`}</Text>
-        </View>
+        {isReverseRoute && (
+          <>
+            <View style={styles.sep} />
+            <View style={styles.row}>
+              <CustomInput
+                defaultValue={timeouts[1]}
+                style={styles.input}
+                keyboardType={'number-pad'}
+                onChangeText={changeTimeoutB}
+              />
+              <Text
+                style={
+                  styles.text
+                }>{` минут с точки ${currentReceiver?.name}`}</Text>
+            </View>
+            <View style={styles.row}>
+              <CustomInput
+                defaultValue={speeds[1]}
+                style={styles.input}
+                keyboardType={'number-pad'}
+                onChangeText={changeSpeedB}
+              />
+              <Text style={styles.text}>{` км/ч`}</Text>
+            </View>
+          </>
+        )}
       </View>
     );
   };
@@ -103,13 +111,16 @@ export const ConfirmModal = observer(() => {
       <View style={styles.contentWrapper}>
         <View style={styles.saveRouteBox}>
           <Text style={styles.text}>
-            {`Ты сформировал маршрут. Теперь надо сохранить.\n`}
-            {`Ослик поедет от точки ${currentSender.name} до точки ${currentReceiver.name}.\nИ вернется на точку ${currentReceiver.senders[backReceiverIndex].name}`}
+            {`Ослик поедет от точки ${currentSender.name} до точки ${currentReceiver.name}.`}
+            {isReverseRoute &&
+              `\nИ вернется на точку ${currentReceiver.senders[backReceiverIndex].name}`}
           </Text>
         </View>
         <View>
           <Text style={styles.text}>
-            {`Если нужно, добавь таймер и среднюю скорость для каждого маршрута. Перед выдвижением Ослик простоит указанное количество времени.`}
+            {`Если нужно, добавь ${
+              isReverseRoute ? 'таймеры' : 'таймер'
+            }. Перед выдвижением Ослик простоит указанное количество времени.`}
           </Text>
         </View>
         <View style={styles.inputsBox}>{renderInputs()}</View>

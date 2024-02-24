@@ -9,7 +9,9 @@ export const styles = StyleSheet.create({
   },
 
   noDataBox: {
-    paddingHorizontal: normalize(14),
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   text: {
     fontSize: normalize(14),
@@ -50,15 +52,24 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
   },
-  addRouteBox: {
+  addRoute: {
     position: 'absolute',
-    right: normalize(18),
+    right: normalize(12),
     bottom: normalize(30),
-    width: normalize(40),
-    height: normalize(40),
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    paddingLeft: normalize(8),
+    borderRadius: normalize(8),
+    padding: normalize(6),
+  },
+  addRouteBox: {
+    width: normalize(44),
+    height: normalize(30),
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: normalize(8),
+    marginLeft: normalize(8),
     backgroundColor: Themes.lightBlue,
   },
 });

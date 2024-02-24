@@ -6,16 +6,27 @@ import {normalize} from '../../../../utils';
 export const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    padding: normalize(16),
+    paddingHorizontal: normalize(12),
+    paddingTop: normalize(16),
+    paddingBottom: normalize(26),
   },
-  noPhotoBox: {
+  noPhotoWrapper: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: normalize(8),
     borderWidth: 1,
+    borderRadius: normalize(8),
     borderColor: Themes.gray4a,
     backgroundColor: Themes.blue23,
+  },
+  noPhotoBox: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: normalize(20),
+    marginHorizontal: normalize(12),
+    borderWidth: 1,
+    borderRadius: normalize(8),
+    borderColor: Themes.gray4a,
   },
   receiverCard: {
     backgroundColor: Themes.red,
@@ -37,7 +48,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   margRight: {
-    marginRight: normalize(4),
+    marginRight: normalize(6),
   },
   commBox: {
     marginVertical: normalize(24),
@@ -46,8 +57,15 @@ export const styles = StyleSheet.create({
     fontSize: normalize(14),
     color: Themes.white,
   },
+  textCenter: {
+    marginTop: normalize(6),
+    fontSize: normalize(14),
+    color: Themes.white,
+    textAlign: 'center',
+  },
   numbBox: {
     height: normalize(50),
+    minWidth: normalize(100),
     paddingHorizontal: normalize(14),
     borderRadius: normalize(8),
     backgroundColor: Themes.blue3b,
@@ -59,7 +77,7 @@ export const styles = StyleSheet.create({
     backgroundColor: Themes.lightBlue,
   },
   backTrackBox: {
-    marginTop: normalize(24),
+    marginTop: normalize(16),
     marginBottom: normalize(6),
   },
 });

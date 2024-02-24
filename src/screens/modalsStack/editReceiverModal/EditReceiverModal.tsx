@@ -31,13 +31,13 @@ export const EditReceiverModal = observer(() => {
       <View style={styles.contentWrapper}>
         <CustomInput
           title={'Имя получателя'}
-          value={nameValue}
+          defaultValue={nameValue}
           isLeftAligned
           onChangeText={setName}
         />
         <CustomInput
           title={'gps получателя'}
-          value={gpsValue}
+          defaultValue={gpsValue}
           keyboardType={'number-pad'}
           isLeftAligned
           onChangeText={setGps}

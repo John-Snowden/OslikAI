@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {StoresHolder} from '../storesHolder';
 import {TReceiver, TSender, TTask} from '../../types';
+import {launchImageLibrary} from 'react-native-image-picker';
 
 export class RouteStore {
   root: StoresHolder;
@@ -148,11 +149,18 @@ export class RouteStore {
     }
   };
 
-  writePendingRoutes = async (timeouts: number[], speeds: number[]) => {
-    this.root.fsStore.clientFile.routes[0][0].timeout = timeouts[0];
-    this.root.fsStore.clientFile.routes[1][0].timeout = timeouts[1];
+  declineReverseRoute = () => {
+    this.backReceiverIndex = -1;
+    this.root.fsStore.clientFile.routes = [toJS(this.currentSender.route)];
+  };
 
-    this.root.fsStore.clientFile.routes.forEach((r, i) => {
+  writePendingRoutes = async (timeouts: number[], speeds: number[]) => {
+    const pendingRoutes = this.root.fsStore.clientFile.routes;
+
+    pendingRoutes[0][0].timeout = timeouts[0];
+    if (pendingRoutes.length === 2) pendingRoutes[1][0].timeout = timeouts[1];
+
+    pendingRoutes.forEach((r, i) => {
       r.forEach(task => {
         task.speed = speeds[i];
       });
@@ -172,5 +180,39 @@ export class RouteStore {
     } catch (e) {
       Alert.alert('Ошибка записи clientUpdatedPath');
     }
+  };
+
+  pickPhotos = async () => {
+    const photos = await launchImageLibrary({mediaType: 'photo'});
+    const uris = photos.assets?.map(asset => {
+      return asset.uri as string;
+    });
+    return uris;
+  };
+
+  appendPhotos = async () => {
+    const photos = await this.pickPhotos();
+    if (photos) this.currentSender.images.push(...photos);
+  };
+
+  validateTask = (task: TTask): boolean => {
+    const numberOrFloat = /^(\d+|\d{1,3}(,\d{3})*)([.,]\d+)?$/;
+    const isDistanceValid = numberOrFloat.test(task.distance.toString());
+    const isDegreeValid = numberOrFloat.test(task.degree.toString());
+    const isSpeedValid = numberOrFloat.test(task.speed.toString());
+    const isTimeoutValid = numberOrFloat.test(task.timeout.toString());
+
+    if (!isDistanceValid)
+      this.root.crossAppStore.showNotification('Ошибка в заполнении дистанции');
+    if (!isDegreeValid)
+      this.root.crossAppStore.showNotification(
+        'Ошибка в заполнении направления',
+      );
+    if (!isSpeedValid)
+      this.root.crossAppStore.showNotification('Ошибка в заполнении скорости');
+    if (!isTimeoutValid)
+      this.root.crossAppStore.showNotification('Ошибка в заполнении таймаута');
+
+    return isDistanceValid && isDegreeValid && isSpeedValid && isTimeoutValid;
   };
 }

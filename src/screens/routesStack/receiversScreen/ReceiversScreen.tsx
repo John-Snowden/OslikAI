@@ -1,17 +1,16 @@
 import React, {useMemo} from 'react';
 import {observer} from 'mobx-react-lite';
-import {Text, View, FlatList, Pressable} from 'react-native';
+import {Text, View, FlatList, Pressable, TouchableOpacity} from 'react-native';
 
 import {TReceiver} from '$src/types';
 
 import {styles} from './styles';
 import {Card} from '../components';
 import {BackGround, Header} from '../../components';
-import {noReceiversText, EMenuScreens} from '../../../constants';
+import {EMenuScreens} from '../../../constants';
 import {stores} from '../../../stores/storesHolder';
 import {NavigationService} from '../../../services';
-import {IconButton} from '../../components/iconButton';
-import {Donkey} from '../../../../assets/svg/Donkey';
+import {CompileRoute} from '../../../../assets/svg';
 
 export const ReceiversScreen = observer(() => {
   const {receivers, setCurrentReceiver} = stores.routeStore;
@@ -19,11 +18,7 @@ export const ReceiversScreen = observer(() => {
   const noData = useMemo(() => {
     return (
       <View style={styles.noDataBox}>
-        {noReceiversText.map(text => (
-          <Text key={text} style={styles.text}>
-            {text}
-          </Text>
-        ))}
+        <Text style={styles.text}>Маршрутов нет</Text>
       </View>
     );
   }, []);
@@ -73,15 +68,19 @@ export const ReceiversScreen = observer(() => {
         <FlatList
           data={receivers.slice()}
           renderItem={renderItem}
-          contentContainerStyle={styles.contentStyle}
+          contentContainerStyle={[
+            styles.contentStyle,
+            receivers.length === 0 && styles.noDataBox,
+          ]}
           showsVerticalScrollIndicator={false}
           ListEmptyComponent={noData}
         />
-        <IconButton
-          icon={<Donkey size={18} />}
-          style={styles.addRouteBox}
-          onPress={addRoute}
-        />
+        <TouchableOpacity style={styles.addRoute} onPress={addRoute}>
+          <Text style={styles.text}>Собрать маршрут</Text>
+          <View style={styles.addRouteBox}>
+            <CompileRoute size={20} />
+          </View>
+        </TouchableOpacity>
       </View>
     </>
   );

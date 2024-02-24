@@ -5,7 +5,7 @@ import {TTask} from '$src/types';
 
 import {styles} from './styles';
 import {stores} from '../../../stores/storesHolder';
-import {NavigationService} from '../../../services';
+import {NavigationService, navigationRef} from '../../../services';
 import {CustomInput, MainButton} from '../../components';
 
 export const EditCustomTaskModal = () => {
@@ -13,12 +13,16 @@ export const EditCustomTaskModal = () => {
     routeStore: {editCustomTask},
   } = stores;
 
+  const item = {
+    ...(navigationRef.getCurrentRoute()?.params as {item: TTask})?.item,
+  };
+
   const [task, setTask] = useState<TTask>({
     id: String(new Date().getTime()),
-    distance: 0,
-    speed: 2,
-    degree: 0,
-    timeout: 0,
+    distance: item.distance,
+    speed: item.speed,
+    degree: item.degree,
+    timeout: item.timeout,
   });
 
   const setDistance = (text: string) => {
@@ -51,7 +55,7 @@ export const EditCustomTaskModal = () => {
       <View style={styles.inputGroup}>
         <View style={styles.row}>
           <CustomInput
-            value={task.distance ? String(task.distance) : ''}
+            defaultValue={item.distance}
             style={styles.input}
             keyboardType={'number-pad'}
             onChangeText={setDistance}
@@ -60,7 +64,7 @@ export const EditCustomTaskModal = () => {
         </View>
         <View style={styles.row}>
           <CustomInput
-            value={task.speed ? String(task.speed) : ''}
+            defaultValue={item.speed}
             style={styles.input}
             keyboardType={'number-pad'}
             onChangeText={setSpeed}
@@ -69,7 +73,7 @@ export const EditCustomTaskModal = () => {
         </View>
         <View style={styles.row}>
           <CustomInput
-            value={task.degree ? String(task.degree) : ''}
+            defaultValue={item.degree}
             style={styles.input}
             keyboardType={'number-pad'}
             onChangeText={setDegrees}

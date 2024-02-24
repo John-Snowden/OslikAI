@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
     borderRadius: normalize(6),
     marginHorizontal: normalize(4),
     borderWidth: 1,
-    borderColor: 'red',
+    borderColor: Themes.red,
     justifyContent: 'center',
     alignItems: 'center',
     shadowColor: Themes.red,
@@ -33,7 +33,7 @@ export const styles = StyleSheet.create({
     borderRadius: normalize(8),
     borderWidth: 1,
     borderColor: Themes.mudBlue,
-    backgroundColor: Themes.blue3a,
+    backgroundColor: Themes.black + '4D',
   },
   iconWrapper: {
     flexDirection: 'row',

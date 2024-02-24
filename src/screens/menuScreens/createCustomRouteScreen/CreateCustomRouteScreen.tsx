@@ -7,7 +7,7 @@ import {NavigationService} from '../../../services';
 
 import {styles} from './styles';
 import {TTask} from '../../../types';
-import {Delete, Edit, Add} from '../../../../assets/svg';
+import {Delete, Edit, Point} from '../../../../assets/svg';
 import {Header, MainButton} from '../../components';
 import {IconButton} from '../../components/iconButton';
 import {stores} from '../../../stores';
@@ -32,7 +32,10 @@ export const CreateCustomRouteScreen: React.FC = observer(() => {
     };
     const onEdit = () => {
       setCurrentCustomTask(item);
-      NavigationService.navigate('Modals', {screen: 'EditCustomTaskModal'});
+      NavigationService.navigate('Modals', {
+        screen: 'EditCustomTaskModal',
+        item,
+      });
     };
 
     const duration = (item.distance / item.speed) * 60;
@@ -47,15 +50,9 @@ export const CreateCustomRouteScreen: React.FC = observer(() => {
             />
 
             <View style={styles.content}>
-              <Text style={styles.text} numberOfLines={1}>
-                {item.distance} км
-              </Text>
-              <Text style={styles.text} numberOfLines={1}>
-                {item.speed} км/ч
-              </Text>
-              <Text style={styles.text} numberOfLines={1}>
-                {item.degree} градусов
-              </Text>
+              <Text style={styles.text}>{item.distance} км</Text>
+              <Text style={styles.text}>{item.speed} км/ч</Text>
+              <Text style={styles.text}>{item.degree} градусов</Text>
             </View>
 
             <IconButton
@@ -82,10 +79,10 @@ export const CreateCustomRouteScreen: React.FC = observer(() => {
           contentContainerStyle={styles.containerStyle}
           ListFooterComponent={
             <View style={styles.addWrapper}>
-              <Text style={styles.text}>Добавить походное задание</Text>
+              <Text style={styles.text}>Добавить задачу</Text>
               <IconButton
-                icon={<Add />}
-                style={styles.addButton}
+                icon={<Point size={18} />}
+                style={styles.flagButton}
                 onPress={addTask}
               />
             </View>

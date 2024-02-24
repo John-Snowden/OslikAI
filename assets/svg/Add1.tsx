@@ -2,7 +2,7 @@ import React from 'react';
 import {Path, Svg} from 'react-native-svg';
 import {Themes} from '../../Theme';
 
-export const Add = () => {
+export const Add1 = () => {
   return (
     <Svg width="20" height="20" viewBox="0 0 24 24" fill={Themes.white}>
       <Path

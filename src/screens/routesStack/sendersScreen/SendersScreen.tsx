@@ -14,12 +14,13 @@ import {NavigationService} from '../../../services';
 export const SendersScreen = observer(() => {
   const {
     routeStore: {
+      currentReceiver,
       currentReceiver: {senders},
       setCurrentSender,
     },
   } = stores;
 
-  const isNoData = senders.length === 0;
+  const isSenders = senders.length !== 0;
 
   const renderItem = ({item}: {item: TSender}) => {
     const goToEditSenderModal = () => {
@@ -52,10 +53,17 @@ export const SendersScreen = observer(() => {
     <>
       <BackGround />
       <Header title={'Точка отправления'} isBackButton />
+      {isSenders && (
+        <View style={styles.titleBox}>
+          <Text style={styles.text}>
+            Выбери отправителя для {currentReceiver.name}
+          </Text>
+        </View>
+      )}
       <FlatList
         data={senders.slice()}
         renderItem={renderItem}
-        contentContainerStyle={[styles.contentStyle, isNoData && styles.flex]}
+        contentContainerStyle={[styles.contentStyle, !isSenders && styles.flex]}
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={
           <View style={styles.flex}>

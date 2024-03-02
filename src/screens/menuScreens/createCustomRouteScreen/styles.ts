@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
     paddingBottom: normalize(40),
   },
   taskWrapper: {
-    width: '90%',
+    width: '94%',
     backgroundColor: Themes.blue3b,
     padding: normalize(8),
     marginBottom: normalize(18),
@@ -68,16 +68,16 @@ export const styles = StyleSheet.create({
     paddingVertical: normalize(16),
     borderRadius: normalize(6),
     marginHorizontal: normalize(12),
+    paddingHorizontal: normalize(4),
     backgroundColor: Themes.grayf4,
   },
 
   flagButton: {
-    width: normalize(44),
     height: normalize(30),
     borderRadius: normalize(6),
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: Themes.lightBlue,
+    marginRight: normalize(10),
   },
 
   footer: {
@@ -85,9 +85,10 @@ export const styles = StyleSheet.create({
   },
 
   addWrapper: {
+    alignSelf: 'flex-end',
     flexDirection: 'row',
-    justifyContent: 'flex-end',
     alignItems: 'center',
-    marginTop: normalize(6),
+    paddingLeft: normalize(24),
+    paddingVertical: normalize(6),
   },
 });

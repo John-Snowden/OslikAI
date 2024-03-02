@@ -6,7 +6,7 @@ import {IconButton} from '../iconButton';
 import {observer} from 'mobx-react-lite';
 import {stores} from '../../../stores/storesHolder';
 import {NavigationService} from '../../../services';
-import {ArrowLeft, Menu} from '../../../../assets/svg';
+import {Back, Menu} from '../../../../assets/svg';
 
 interface IProps {
   title: string;
@@ -32,7 +32,7 @@ export const Header: React.FC<IProps> = observer(
       <View style={[styles.header, styles.row]}>
         {isBackButton && (
           <View style={styles.backButton}>
-            <IconButton icon={<ArrowLeft />} onPress={goBack} />
+            <IconButton icon={<Back />} onPress={goBack} />
           </View>
         )}
         <View style={styles.titleBox}>
@@ -40,7 +40,7 @@ export const Header: React.FC<IProps> = observer(
         </View>
         {isMenuButton && (
           <TouchableOpacity onPress={goToMenu} style={styles.menu}>
-            <Menu size={18} />
+            <Menu size={17} />
           </TouchableOpacity>
         )}
       </View>

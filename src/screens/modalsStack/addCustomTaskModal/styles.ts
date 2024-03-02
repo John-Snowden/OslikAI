@@ -40,7 +40,7 @@ export const styles = StyleSheet.create({
     marginBottom: normalize(12),
   },
   text: {
-    paddingHorizontal: normalize(16),
+    paddingLeft: normalize(6),
     marginBottom: normalize(4),
     fontSize: normalize(12),
     color: Themes.white,

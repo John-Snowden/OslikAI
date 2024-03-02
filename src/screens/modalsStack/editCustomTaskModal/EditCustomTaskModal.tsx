@@ -6,7 +6,7 @@ import {TTask} from '$src/types';
 import {styles} from './styles';
 import {stores} from '../../../stores/storesHolder';
 import {NavigationService, navigationRef} from '../../../services';
-import {CustomInput, MainButton} from '../../components';
+import {BackGround, CustomInput, MainButton} from '../../components';
 
 export const EditCustomTaskModal = () => {
   const {
@@ -38,6 +38,11 @@ export const EditCustomTaskModal = () => {
   const setDegrees = (text: string) => {
     setTask(prev => {
       return {...prev, degree: Number(text)};
+    });
+  };
+  const setTaskTimeout = (text: string) => {
+    setTask(prev => {
+      return {...prev, timeout: Number(text)};
     });
   };
 
@@ -79,6 +84,17 @@ export const EditCustomTaskModal = () => {
             onChangeText={setDegrees}
           />
           <Text style={styles.text}>направление в градусах</Text>
+        </View>
+        <View style={styles.row}>
+          <CustomInput
+            defaultValue={item.timeout}
+            style={styles.input}
+            keyboardType={'number-pad'}
+            onChangeText={setTaskTimeout}
+          />
+          <Text style={styles.text} numberOfLines={2}>
+            таймаут перед выполнением в минутах
+          </Text>
         </View>
       </View>
     );

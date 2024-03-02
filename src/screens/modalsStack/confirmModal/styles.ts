@@ -24,6 +24,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: normalize(8),
     paddingVertical: normalize(18),
+    marginVertical: normalize(18),
     borderWidth: 1,
     borderColor: Themes.grayf4,
   },
@@ -38,16 +39,19 @@ export const styles = StyleSheet.create({
   },
   saveRouteBox: {
     marginBottom: normalize(12),
+    marginHorizontal: normalize(16),
   },
   text: {
-    textAlign: 'center',
-    paddingHorizontal: normalize(16),
+    paddingLeft: normalize(6),
     marginBottom: normalize(4),
     fontSize: normalize(12),
     color: Themes.white,
   },
   inputGroup: {
     marginVertical: normalize(8),
+  },
+  routeBox: {
+    marginHorizontal: normalize(24),
   },
   inputsBox: {
     marginBottom: normalize(20),

@@ -14,12 +14,20 @@ export const styles = StyleSheet.create({
   },
   tgBox: {
     flexDirection: 'row',
-    marginVertical: normalize(8),
-    marginBottom: normalize(24),
+    marginVertical: normalize(4),
   },
   text: {
     fontSize: normalize(14),
     color: Themes.white,
   },
   margLeft: {marginLeft: normalize(8)},
+  sep: {
+    width: '90%',
+    height: normalize(2),
+    borderRadius: normalize(6),
+    marginTop: normalize(16),
+    marginBottom: normalize(18),
+    backgroundColor: Themes.gray4a,
+    alignSelf: 'flex-start',
+  },
 });

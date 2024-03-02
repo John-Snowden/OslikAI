@@ -6,6 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {StoresHolder} from '../storesHolder';
 import {TReceiver, TSender, TTask} from '../../types';
 import {launchImageLibrary} from 'react-native-image-picker';
+import {NavigationService} from '../../services';
 
 export class RouteStore {
   root: StoresHolder;
@@ -17,6 +18,7 @@ export class RouteStore {
   receivers: TReceiver[] = [];
   currentReceiver!: TReceiver;
   currentSender!: TSender;
+
   backReceiverIndex: number = -1;
 
   customRoute: TTask[] = [];
@@ -55,7 +57,7 @@ export class RouteStore {
     this.currentReceiver = data;
   };
 
-  saveRecordedRoute = async (
+  saveRoute = async (
     sName: string,
     sGps: string,
     sPhotos: string[],
@@ -63,6 +65,13 @@ export class RouteStore {
     rGps: string,
     rId: string,
   ) => {
+    if (sName.toLowerCase() === rName.toLowerCase()) {
+      this.root.crossAppStore.showNotification(
+        'Имена отправителя и получателя\nне должны совпадать. ',
+      );
+      return;
+    }
+
     const savedRoute = this.isManualRouteSave
       ? this.customRoute
       : (this.root.fsStore.serverFile.routes.shift() as TTask[]);
@@ -98,6 +107,8 @@ export class RouteStore {
       this.root.fsStore.serverFilePath,
       JSON.stringify(this.root.fsStore.serverFile),
     );
+    this.root.crossAppStore.showNotification('Новый маршрут сохранен');
+    NavigationService.navigate('RoutesStack', {screen: 'ReceiversScreen'});
   };
 
   editReceiver = (name: string, gps: string) => {
@@ -140,10 +151,10 @@ export class RouteStore {
   updatePendingRoutes = () => {
     if (this.backReceiverIndex === -1) this.root.fsStore.clientFile.routes = [];
     else {
-      const routeA = toJS(this.currentSender.route);
-      const routeB = toJS(
-        this.currentReceiver.senders[this.backReceiverIndex].route.reverse(),
-      );
+      const routeA = [...this.currentSender.route];
+      const routeB = [
+        ...toJS(this.currentReceiver.senders[this.backReceiverIndex].route),
+      ].reverse();
 
       this.root.fsStore.clientFile.routes = [routeA, routeB];
     }
@@ -151,10 +162,10 @@ export class RouteStore {
 
   declineReverseRoute = () => {
     this.backReceiverIndex = -1;
-    this.root.fsStore.clientFile.routes = [toJS(this.currentSender.route)];
+    this.root.fsStore.clientFile.routes = [this.currentSender.route];
   };
 
-  writePendingRoutes = async (timeouts: number[], speeds: number[]) => {
+  writePendingRoutes = async (timeouts: number[], speedRates: number[]) => {
     const pendingRoutes = this.root.fsStore.clientFile.routes;
 
     pendingRoutes[0][0].timeout = timeouts[0];
@@ -162,7 +173,7 @@ export class RouteStore {
 
     pendingRoutes.forEach((r, i) => {
       r.forEach(task => {
-        task.speed = speeds[i];
+        task.speed = task.speed * speedRates[i];
       });
     });
 
@@ -174,6 +185,7 @@ export class RouteStore {
         'utf8',
       );
     } catch (e) {}
+
     try {
       await RNFetchBlob.fs.writeFile(this.root.fsStore.clientUpdatedPath, '');
       await AsyncStorage.setItem('clientUpdated', 'true');
@@ -204,15 +216,25 @@ export class RouteStore {
 
     if (!isDistanceValid)
       this.root.crossAppStore.showNotification('Ошибка в заполнении дистанции');
-    if (!isDegreeValid)
+    else if (!isDegreeValid)
       this.root.crossAppStore.showNotification(
         'Ошибка в заполнении направления',
       );
-    if (!isSpeedValid)
+    else if (!isSpeedValid)
       this.root.crossAppStore.showNotification('Ошибка в заполнении скорости');
-    if (!isTimeoutValid)
+    else if (!isTimeoutValid)
       this.root.crossAppStore.showNotification('Ошибка в заполнении таймаута');
+    else if (task.distance > 0 && task.speed === 0)
+      this.root.crossAppStore.showNotification(
+        'Указана дистанция, но не указана скорость',
+      );
 
-    return isDistanceValid && isDegreeValid && isSpeedValid && isTimeoutValid;
+    return (
+      isDistanceValid &&
+      isDegreeValid &&
+      isSpeedValid &&
+      isTimeoutValid &&
+      !(task.distance > 0 && task.speed === 0)
+    );
   };
 }

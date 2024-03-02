@@ -9,7 +9,7 @@ interface IProps {
 export const Point: React.FC<IProps> = ({size}) => {
   return (
     <Svg
-      fill={Themes.white}
+      fill={Themes.lightBlue}
       width={size}
       height={size}
       viewBox="0 0 425.963 425.963">

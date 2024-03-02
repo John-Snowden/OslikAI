@@ -5,7 +5,7 @@ import {Themes} from '../../Theme';
 export const Edit = () => {
   return (
     <Svg
-      fill={Themes.white}
+      fill={Themes.lightBlue}
       height="18"
       width="18"
       viewBox="0 0 430.848 430.848">

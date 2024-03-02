@@ -2,10 +2,16 @@ import {StyleSheet} from 'react-native';
 
 import {Themes} from '../../../../Theme';
 import {normalize} from '../../../../utils';
+import {SCREEN_HEIGHT} from '../../../constants';
 
 export const styles = StyleSheet.create({
   screen: {
     flex: 1,
+  },
+
+  titleBox: {
+    marginTop: normalize(24),
+    marginHorizontal: normalize(20),
   },
 
   noDataBox: {
@@ -19,7 +25,7 @@ export const styles = StyleSheet.create({
   },
 
   contentStyle: {
-    paddingVertical: normalize(24),
+    paddingVertical: normalize(12),
   },
 
   deleteButton: {
@@ -63,13 +69,10 @@ export const styles = StyleSheet.create({
     borderRadius: normalize(8),
     padding: normalize(6),
   },
-  addRouteBox: {
-    width: normalize(44),
-    height: normalize(30),
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: normalize(8),
-    marginLeft: normalize(8),
-    backgroundColor: Themes.lightBlue,
+  bgAnimation: {
+    position: 'absolute',
+    left: -200,
+    top: SCREEN_HEIGHT / 5,
+    opacity: 0.02,
   },
 });

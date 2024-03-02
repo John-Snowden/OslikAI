@@ -1,7 +1,7 @@
 export const Themes = {
   black: '#000000',
   white: '#EAF1FF',
-  red: 'red',
+  red: '#D22B2B',
   grayc7: '#c6c7c7',
   gray4a: '#383a4a',
   grayf4: '#3A3E4F',

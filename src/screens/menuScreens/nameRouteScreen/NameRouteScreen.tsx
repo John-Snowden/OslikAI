@@ -1,6 +1,5 @@
 import {observer} from 'mobx-react-lite';
 import React, {useRef, useState} from 'react';
-import {launchImageLibrary} from 'react-native-image-picker';
 import {
   FlatList,
   NativeScrollEvent,
@@ -13,7 +12,6 @@ import {
 import FastImage from 'react-native-fast-image';
 
 import {TReceiver} from '$src/types';
-import {NavigationService} from '../../../services';
 
 import {styles} from './styles';
 import {stores} from '../../../stores';
@@ -23,7 +21,7 @@ import {SCREEN_HEIGHT, statusBar} from '../../../constants';
 import {BackGround, CustomInput, Header, MainButton} from '../../components';
 
 export const NameRouteScreen = observer(() => {
-  const {receivers, isManualRouteSave, saveRecordedRoute, pickPhotos} =
+  const {receivers, isManualRouteSave, saveRoute, pickPhotos} =
     stores.routeStore;
 
   const [senderName, setSenderName] = useState('');
@@ -46,7 +44,7 @@ export const NameRouteScreen = observer(() => {
   };
 
   const save = () => {
-    saveRecordedRoute(
+    saveRoute(
       senderName,
       senderGps,
       senderPhotos,
@@ -54,7 +52,6 @@ export const NameRouteScreen = observer(() => {
       receiverGps,
       receiverId,
     );
-    NavigationService.navigate('RoutesStack', {screen: 'ReceiversScreen'});
   };
 
   const onScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
@@ -107,13 +104,17 @@ export const NameRouteScreen = observer(() => {
         scrollEventThrottle={200}
         pagingEnabled>
         <View style={styles.screen1}>
-          <Header title="Сохранить маршрут" isBackButton isMenuButton={false} />
+          <Header
+            title="Сохранение маршрута"
+            isBackButton
+            isMenuButton={false}
+          />
           <View style={styles.box}>
             <Text style={styles.title}>Назови отправителя</Text>
           </View>
           <View style={styles.inputsWrapper}>
             <CustomInput
-              title="Имя отправителя"
+              title="Имя отправителя (обязательно)"
               defaultValue={senderName}
               isLeftAligned
               onChangeText={setSenderName}
@@ -127,7 +128,9 @@ export const NameRouteScreen = observer(() => {
             />
           </View>
           <View style={styles.box}>
-            <Text style={styles.title}>Добавь фото точки отправления</Text>
+            <Text style={styles.title}>
+              Рекомендую добавить фото точки отправления
+            </Text>
           </View>
           <View style={styles.imageWrapper}>
             <IconButton
@@ -142,6 +145,7 @@ export const NameRouteScreen = observer(() => {
             />
           </View>
         </View>
+        <View style={styles.connector} />
         <View style={styles.screen2}>
           <View style={styles.box}>
             <Text style={styles.title}>Добавь получателя</Text>

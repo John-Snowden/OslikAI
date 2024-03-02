@@ -24,9 +24,12 @@ export const styles = StyleSheet.create({
   noDataBox: {
     paddingHorizontal: normalize(14),
   },
+  titleBox: {
+    marginTop: normalize(24),
+    marginHorizontal: normalize(20),
+  },
   text: {
     fontSize: normalize(14),
-    alignSelf: 'center',
     color: Themes.white,
   },
   gps: {
@@ -65,7 +68,7 @@ export const styles = StyleSheet.create({
   },
 
   contentStyle: {
-    paddingVertical: normalize(24),
+    paddingVertical: normalize(12),
   },
 
   deleteButton: {

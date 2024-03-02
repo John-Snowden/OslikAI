@@ -5,8 +5,9 @@ import {TouchableOpacity, View, Text} from 'react-native';
 import {TReceiver, TSender} from '$src/types';
 
 import {styles} from './styles';
-import {Delete, Edit} from '../../../../assets/svg';
+import {Delete, Pencil, Edit} from '../../../../assets/svg';
 import {IconButton} from '../../components/iconButton';
+import ru from 'date-fns/locale/ru';
 
 interface IProps {
   data: TReceiver | TSender;
@@ -18,13 +19,13 @@ interface IProps {
 
 export const Card: React.FC<IProps> = ({data, onPress, onEdit, onDelete}) => {
   const gps = data.gps ? data.gps : 'gps не указан';
-  const createdAt = `Создано ${format(
-    new Date(data.date),
-    'dd-MM-yyyy, в hh:mm',
-  )}`;
+  const createdAt = `Создано ${format(new Date(data.date), 'd MMM в hh:mm', {
+    locale: ru,
+  })}`;
   const duration = (data as TSender).duration
-    ? `Длительность ${(data as TSender).duration.toFixed()} мин`
+    ? `Время выполнения ${(data as TSender).duration.toFixed()} мин`
     : '';
+  const route = (data as TSender).route ? (data as TSender).route : null;
 
   return (
     <TouchableOpacity
@@ -47,7 +48,18 @@ export const Card: React.FC<IProps> = ({data, onPress, onEdit, onDelete}) => {
           </Text>
         </View>
 
-        <IconButton icon={<Edit />} onPress={onEdit} style={styles.buttonBox} />
+        {route && (
+          <IconButton
+            icon={<Edit />}
+            onPress={onEdit}
+            style={styles.viewRouteButton}
+          />
+        )}
+        <IconButton
+          icon={<Pencil size={18} />}
+          onPress={onEdit}
+          style={styles.buttonBox}
+        />
       </View>
 
       {(data as TSender).comment && (

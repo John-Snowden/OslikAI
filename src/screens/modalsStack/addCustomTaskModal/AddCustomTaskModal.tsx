@@ -33,12 +33,12 @@ export const AddCustomTaskModal = () => {
   };
   const setDegrees = (text: string) => {
     setTask(prev => {
-      return {...prev, degree: Number(text.replace(',', '.'))};
+      return {...prev, degree: Math.round(Number(text.replace(',', '.')))};
     });
   };
   const setTimeout = (text: string) => {
     setTask(prev => {
-      return {...prev, degree: Number(text.replace(',', '.'))};
+      return {...prev, timeout: Math.round(Number(text.replace(',', '.')))};
     });
   };
 

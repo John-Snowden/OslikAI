@@ -10,7 +10,7 @@ interface IProps {
 export const Joystick: React.FC<IProps> = ({size}) => {
   return (
     <Svg
-      fill={Themes.white}
+      fill={Themes.lightBlue}
       width={size}
       height={size}
       viewBox="924 796 200 200">

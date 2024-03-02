@@ -7,7 +7,7 @@ export const Delete = () => {
     <Svg width="16" height="16" viewBox="0 0 512.000000 512.000000">
       <G
         transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
-        fill={Themes.white}
+        fill={Themes.red}
         stroke="none">
         <Path
           d="M2250 5105 c-273 -57 -495 -250 -589 -511 -17 -47 -31 -93 -31 -103

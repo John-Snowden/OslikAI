@@ -9,7 +9,7 @@ interface IProps {
 
 export const Instructions: React.FC<IProps> = ({size}) => {
   return (
-    <Svg fill={Themes.white} height={size} width={size} viewBox="0 0 32 32">
+    <Svg fill={Themes.lightBlue} height={size} width={size} viewBox="0 0 32 32">
       <G>
         <Path d="M11,30H5c-1.7,0-3-1.3-3-3v-6c0-1.7,1.3-3,3-3h6c1.7,0,3,1.3,3,3v6C14,28.7,12.7,30,11,30z" />
       </G>

@@ -26,7 +26,6 @@ export const styles = StyleSheet.create({
     marginVertical: normalize(6),
     paddingVertical: normalize(6),
   },
-  margLeft: {marginLeft: normalize(12)},
   versionBox: {
     margin: normalize(16),
     alignSelf: 'flex-end',

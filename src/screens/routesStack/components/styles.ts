@@ -19,13 +19,26 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+  viewRouteButton: {
+    height: normalize(50),
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: normalize(6),
+    backgroundColor: Themes.grayf4,
+    paddingVertical: normalize(12),
+    paddingLeft: normalize(14),
+    paddingRight: normalize(10),
+    marginRight: normalize(6),
+  },
   buttonBox: {
     height: normalize(50),
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: normalize(6),
     backgroundColor: Themes.grayf4,
-    padding: normalize(12),
+    paddingVertical: normalize(12),
+    paddingLeft: normalize(13),
+    paddingRight: normalize(9),
   },
   deleteButton: {
     borderRadius: normalize(6),
@@ -55,7 +68,6 @@ export const styles = StyleSheet.create({
   duration: {
     fontSize: normalize(12),
     marginTop: normalize(8),
-    marginBottom: normalize(4),
     color: Themes.white,
   },
   gps: {

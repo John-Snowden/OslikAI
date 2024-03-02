@@ -39,26 +39,26 @@ export const MenuScreen = () => {
           <TouchableOpacity
             style={[styles.optionWrapper, styles.row]}
             onPress={goToSaveRecordedRoute}>
-            <Joystick size={20} />
+            <Joystick size={18} />
             <Text style={styles.title}>Записанные маршруты</Text>
             <Text style={styles.title}>({serverFile.routes.length})</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.optionWrapper}
             onPress={goToAddCustomTaskModal}>
-            <CompileRoute size={20} />
-            <Text style={styles.title}>Собрать маршрут</Text>
+            <CompileRoute size={18} />
+            <Text style={styles.title}>Собрать маршрут вручную</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.optionWrapper}
             onPress={goToInstructionsScreen}>
-            <Instructions size={21} />
-            <Text style={[styles.title, styles.margLeft]}>Инструкция</Text>
+            <Instructions size={18} />
+            <Text style={styles.title}>Инструкция</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.optionWrapper}
             onPress={goToFeedbackScreen}>
-            <TelegramIcon size={22} />
+            <TelegramIcon size={19} />
             <Text style={styles.title}>Обратная связь</Text>
           </TouchableOpacity>
         </View>

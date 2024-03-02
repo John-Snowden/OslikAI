@@ -18,6 +18,7 @@ export const FeedbackScreen: React.FC = () => {
           <TelegramIcon size={22} />
           <Text style={[styles.text, styles.margLeft]}>t.me/Oslik/Zakaz</Text>
         </View>
+        <View style={styles.sep} />
         <Text style={styles.text}>
           Вопросы по работе Ослика отправляй в телеграм-бот
         </Text>
@@ -25,6 +26,7 @@ export const FeedbackScreen: React.FC = () => {
           <TelegramIcon size={22} />
           <Text style={[styles.text, styles.margLeft]}>t.me/Oslik/Pomosh</Text>
         </View>
+        <View style={styles.sep} />
         <Text style={styles.text}>
           Отзывы, критику, предложения по оптимизации отправляй в телеграм-бот
         </Text>

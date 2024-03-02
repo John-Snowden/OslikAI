@@ -16,7 +16,9 @@ export const styles = StyleSheet.create({
   },
   backButton: {
     position: 'absolute',
-    left: normalize(10),
+    left: normalize(7),
+    height: normalize(38),
+    width: normalize(56),
   },
   titleBox: {
     justifyContent: 'center',
@@ -42,13 +44,11 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    height: normalize(30),
-    width: normalize(46),
+    height: normalize(38),
+    width: normalize(56),
     borderRadius: normalize(6),
     paddingLeft: normalize(6),
-    paddingRight: normalize(7),
-    marginRight: normalize(18),
-    backgroundColor: Themes.lightBlue,
+    marginRight: normalize(16),
   },
   active: {backgroundColor: Themes.lightBlue},
   line: {

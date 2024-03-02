@@ -8,7 +8,11 @@ interface IProps {
 
 export const CompileRoute: React.FC<IProps> = ({size}) => {
   return (
-    <Svg fill={Themes.white} height={size} width={size} viewBox="0 0 396 396">
+    <Svg
+      fill={Themes.lightBlue}
+      height={size}
+      width={size}
+      viewBox="0 0 396 396">
       <G>
         <Path
           d="M350.31,148.038c8.462-24.927,8.463-35.665,8.463-41.521C358.773,47.783,310.99,0,252.258,0

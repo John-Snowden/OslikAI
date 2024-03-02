@@ -11,7 +11,7 @@ export const NoPhoto = () => {
       preserveAspectRatio="xMidYMid meet">
       <G
         transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
-        fill={Themes.white}
+        fill={Themes.lightBlue}
         stroke="none">
         <Path
           d="M4575 4786 c-16 -8 -203 -188 -415 -400 l-385 -386 -55 0 -55 0 -29

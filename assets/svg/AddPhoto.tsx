@@ -12,7 +12,7 @@ export const AddPhoto = () => {
       preserveAspectRatio="xMidYMid meet">
       <G
         transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
-        fill={Themes.white}
+        fill={Themes.lightBlue}
         stroke="none">
         <Path
           d="M4200 4568 c-25 -13 -55 -38 -67 -57 -21 -32 -23 -45 -23 -192 l0

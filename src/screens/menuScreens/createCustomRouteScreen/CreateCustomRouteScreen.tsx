@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {observer} from 'mobx-react-lite';
-import {FlatList, Text, View} from 'react-native';
+import {FlatList, Text, TouchableOpacity, View} from 'react-native';
 
 import {EMenuScreens} from '../../../constants';
 import {NavigationService} from '../../../services';
@@ -39,6 +39,8 @@ export const CreateCustomRouteScreen: React.FC = observer(() => {
     };
 
     const duration = (item.distance / item.speed) * 60;
+    const durationToFixed = Math.round(duration) === 0 ? '< 1' : duration;
+
     return (
       <View style={styles.fullWidth}>
         <View key={item.id} style={styles.taskWrapper}>
@@ -52,7 +54,8 @@ export const CreateCustomRouteScreen: React.FC = observer(() => {
             <View style={styles.content}>
               <Text style={styles.text}>{item.distance} км</Text>
               <Text style={styles.text}>{item.speed} км/ч</Text>
-              <Text style={styles.text}>{item.degree} градусов</Text>
+              <Text style={styles.text}>{item.degree} град.</Text>
+              <Text style={styles.text}>{item.timeout} мин</Text>
             </View>
 
             <IconButton
@@ -62,7 +65,9 @@ export const CreateCustomRouteScreen: React.FC = observer(() => {
             />
           </View>
 
-          <Text style={styles.createdAt}>Длительность {duration} мин</Text>
+          <Text style={styles.createdAt}>
+            Время выполнения {durationToFixed} мин
+          </Text>
         </View>
       </View>
     );
@@ -78,14 +83,12 @@ export const CreateCustomRouteScreen: React.FC = observer(() => {
           style={styles.fullWidth}
           contentContainerStyle={styles.containerStyle}
           ListFooterComponent={
-            <View style={styles.addWrapper}>
+            <TouchableOpacity onPress={addTask} style={styles.addWrapper}>
               <Text style={styles.text}>Добавить задачу</Text>
-              <IconButton
-                icon={<Point size={18} />}
-                style={styles.flagButton}
-                onPress={addTask}
-              />
-            </View>
+              <View style={styles.flagButton}>
+                <Point size={20} />
+              </View>
+            </TouchableOpacity>
           }
           ListFooterComponentStyle={styles.footer}
         />

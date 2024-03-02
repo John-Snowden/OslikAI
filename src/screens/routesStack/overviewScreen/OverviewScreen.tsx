@@ -5,7 +5,7 @@ import {View, Text, TouchableOpacity, ScrollView} from 'react-native';
 
 import {styles} from './styles';
 import {BackGround, Header} from '../../components';
-import {NoPhoto} from '../../../../assets/svg';
+import {AddPhoto} from '../../../../assets/svg';
 import {stores} from '../../../stores/storesHolder';
 import {NavigationService} from '../../../services';
 
@@ -84,9 +84,11 @@ export const OverviewScreen = observer(() => {
         {isNoPhotos ? (
           <View style={styles.noPhotoWrapper}>
             <TouchableOpacity style={styles.noPhotoBox} onPress={appendPhotos}>
-              <NoPhoto />
+              <View style={styles.button}>
+                <AddPhoto />
+              </View>
               <Text style={styles.textCenter}>
-                Рекомендуется добавить фото точки отправки
+                Рекомендую добавить фото точки отправления
               </Text>
             </TouchableOpacity>
           </View>

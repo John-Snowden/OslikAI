@@ -5,16 +5,17 @@ import {SCREEN_HEIGHT, statusBar} from '../../../constants';
 
 export const styles = StyleSheet.create({
   screen1: {
-    height: SCREEN_HEIGHT - statusBar,
+    height: SCREEN_HEIGHT - statusBar - SCREEN_HEIGHT / 3,
   },
   screen2: {
-    height: SCREEN_HEIGHT - statusBar,
+    height: SCREEN_HEIGHT - statusBar - SCREEN_HEIGHT / 5,
   },
   flex: {flex: 1},
   inputsWrapper: {
     marginTop: normalize(6),
     marginHorizontal: normalize(18),
-    paddingVertical: normalize(20),
+    paddingTop: normalize(16),
+    paddingBottom: normalize(20),
     borderRadius: normalize(8),
     borderWidth: 1,
     borderColor: Themes.grayf4,
@@ -79,11 +80,10 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     width: '100%',
     justifyContent: 'center',
-    height: normalize(80),
     bottom: 0,
-    borderTopLeftRadius: normalize(8),
-    borderTopRightRadius: normalize(8),
-    backgroundColor: Themes.blue3b,
+    paddingVertical: normalize(12),
+    borderRadius: normalize(6),
+    backgroundColor: Themes.black + '33',
   },
   confirmButton: {
     alignSelf: 'center',
@@ -96,5 +96,11 @@ export const styles = StyleSheet.create({
     width: normalize(40),
     borderRadius: normalize(6),
     marginHorizontal: normalize(8),
+  },
+  connector: {
+    width: 2,
+    height: SCREEN_HEIGHT * 0.3,
+    alignSelf: 'center',
+    backgroundColor: Themes.gray60,
   },
 });

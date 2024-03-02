@@ -17,7 +17,6 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: normalize(8),
     borderColor: Themes.gray4a,
-    backgroundColor: Themes.blue23,
   },
   noPhotoBox: {
     justifyContent: 'center',
@@ -27,6 +26,7 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: normalize(8),
     borderColor: Themes.gray4a,
+    backgroundColor: Themes.blue3b,
   },
   receiverCard: {
     backgroundColor: Themes.red,
@@ -43,6 +43,13 @@ export const styles = StyleSheet.create({
     marginTop: normalize(6),
     marginBottom: normalize(20),
     borderRadius: normalize(8),
+  },
+  button: {
+    height: normalize(30),
+    width: normalize(60),
+    borderRadius: normalize(6),
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   imgButtonWrapper: {
     flexDirection: 'row',

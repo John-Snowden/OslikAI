@@ -10,7 +10,7 @@ interface IProps {
 export const Menu: React.FC<IProps> = ({size}) => {
   return (
     <Svg
-      fill={Themes.white}
+      fill={Themes.lightBlue}
       width={size}
       height={size}
       viewBox="0 0 172.122 172.122">

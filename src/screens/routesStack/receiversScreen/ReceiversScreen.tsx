@@ -1,19 +1,20 @@
 import React, {useMemo} from 'react';
 import {observer} from 'mobx-react-lite';
-import {Text, View, FlatList, Pressable, TouchableOpacity} from 'react-native';
+import {Text, View, FlatList, Pressable} from 'react-native';
 
 import {TReceiver} from '$src/types';
 
 import {styles} from './styles';
 import {Card} from '../components';
 import {BackGround, Header} from '../../components';
-import {EMenuScreens} from '../../../constants';
 import {stores} from '../../../stores/storesHolder';
 import {NavigationService} from '../../../services';
-import {CompileRoute} from '../../../../assets/svg';
+import Animated from 'react-native-reanimated';
 
 export const ReceiversScreen = observer(() => {
   const {receivers, setCurrentReceiver} = stores.routeStore;
+
+  const isReceivers = receivers.length !== 0;
 
   const noData = useMemo(() => {
     return (
@@ -53,34 +54,28 @@ export const ReceiversScreen = observer(() => {
     NavigationService.push('Modals', {screen: 'NewModal'});
   };
 
-  const addRoute = () => {
-    NavigationService.navigate(EMenuScreens.CreateCustomRouteScreen);
-  };
-
   return (
     <>
       <BackGround />
       <View style={styles.screen}>
-        <Header
-          title={receivers.length === 0 ? 'Инструкция' : 'Точка получения'}
-        />
-        <Pressable style={styles.newButton} onLongPress={goToNewModal} />
+        <Animated.View style={[styles.bgAnimation]}></Animated.View>
+        <Header title={isReceivers ? 'Точка получения' : 'Инструкция'} />
+        {isReceivers && (
+          <View style={styles.titleBox}>
+            <Text style={styles.text}>Выбери, куда отправляешь</Text>
+          </View>
+        )}
         <FlatList
           data={receivers.slice()}
           renderItem={renderItem}
           contentContainerStyle={[
             styles.contentStyle,
-            receivers.length === 0 && styles.noDataBox,
+            !isReceivers && styles.noDataBox,
           ]}
           showsVerticalScrollIndicator={false}
           ListEmptyComponent={noData}
         />
-        <TouchableOpacity style={styles.addRoute} onPress={addRoute}>
-          <Text style={styles.text}>Собрать маршрут</Text>
-          <View style={styles.addRouteBox}>
-            <CompileRoute size={20} />
-          </View>
-        </TouchableOpacity>
+        <Pressable style={styles.newButton} onLongPress={goToNewModal} />
       </View>
     </>
   );

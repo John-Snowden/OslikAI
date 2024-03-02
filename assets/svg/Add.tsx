@@ -11,7 +11,7 @@ export const Add = () => {
       preserveAspectRatio="xMidYMid meet">
       <G
         transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
-        fill={Themes.white}
+        fill={Themes.lightBlue}
         stroke="none">
         <Path
           d="M2708 5110 c-113 -20 -211 -64 -325 -143 l-72 -50 -78 6 c-362 24

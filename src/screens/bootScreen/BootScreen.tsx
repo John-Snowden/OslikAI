@@ -9,14 +9,12 @@ import Animated, {
 } from 'react-native-reanimated';
 import {View} from 'react-native';
 import React, {useEffect} from 'react';
-import SplashScreen from 'react-native-splash-screen';
 
 import {Donkey} from '../../../assets/svg';
 
 import {Themes} from '../../../Theme';
 import {offsetX, styles} from './styles';
 import {stores} from '../../stores';
-import {BackGround} from '../components';
 
 export const BootScreen: React.FC = () => {
   const {loadApp} = stores.crossAppStore;
@@ -75,7 +73,6 @@ export const BootScreen: React.FC = () => {
 
   return (
     <>
-      <BackGround />
       <View style={styles.screen}>
         <Animated.View style={[styles.oslik, aStyleOslik]}>
           <View style={styles.wheelBox}>

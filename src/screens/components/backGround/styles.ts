@@ -7,8 +7,9 @@ export const styles = StyleSheet.create({
     right: 0,
     top: 0,
     bottom: 0,
-    opacity: 0.985,
+    opacity: 0.99,
   },
+
   map: {
     position: 'absolute',
     left: 0,

@@ -17,8 +17,8 @@ import {styles} from './styles';
 import {stores} from '../../../stores';
 import {AddPhoto} from '../../../../assets/svg';
 import {IconButton} from '../../components/iconButton';
-import {SCREEN_HEIGHT, statusBar} from '../../../constants';
-import {BackGround, CustomInput, Header, MainButton} from '../../components';
+import {SCREEN_HEIGHT} from '../../../constants';
+import {CustomInput, Header, MainButton} from '../../components';
 
 export const NameRouteScreen = observer(() => {
   const {receivers, isManualRouteSave, saveRoute, pickPhotos} =
@@ -96,7 +96,6 @@ export const NameRouteScreen = observer(() => {
 
   return (
     <>
-      <BackGround />
       <ScrollView
         ref={ref}
         showsVerticalScrollIndicator={false}

@@ -12,15 +12,17 @@ interface IProps {
   title: string;
   isBackButton?: boolean;
   isMenuButton?: boolean;
+  onBackPress?: () => void;
 }
 
 export const Header: React.FC<IProps> = observer(
-  ({title, isBackButton, isMenuButton = true}) => {
+  ({title, isBackButton, isMenuButton = true, onBackPress}) => {
     const {
       routeStore: {setManualRouteSave},
     } = stores;
 
     const goBack = () => {
+      if (onBackPress) onBackPress();
       NavigationService.goBack();
     };
     const goToMenu = () => {

@@ -5,8 +5,8 @@ import {Text, View, FlatList, Pressable} from 'react-native';
 import {TReceiver} from '$src/types';
 
 import {styles} from './styles';
-import {Card} from '../components';
-import {BackGround, Header} from '../../components';
+import {Card} from '../components/card';
+import {Header} from '../../components';
 import {stores} from '../../../stores/storesHolder';
 import {NavigationService} from '../../../services';
 import Animated from 'react-native-reanimated';
@@ -44,7 +44,7 @@ export const ReceiversScreen = observer(() => {
       <Card
         data={item}
         onPress={goToTracksScreen}
-        onEdit={goToEditModal}
+        onEditSender={goToEditModal}
         onDelete={goToDeleteModal}
       />
     );
@@ -56,7 +56,6 @@ export const ReceiversScreen = observer(() => {
 
   return (
     <>
-      <BackGround />
       <View style={styles.screen}>
         <Animated.View style={[styles.bgAnimation]}></Animated.View>
         <Header title={isReceivers ? 'Точка получения' : 'Инструкция'} />

@@ -32,6 +32,11 @@ export const styles = StyleSheet.create({
     fontSize: normalize(14),
     color: Themes.white,
   },
+  textCenter: {
+    textAlign: 'center',
+    fontSize: normalize(14),
+    color: Themes.white,
+  },
   gps: {
     fontSize: normalize(12),
     marginHorizontal: normalize(8),

@@ -4,7 +4,7 @@ import FastImage from 'react-native-fast-image';
 import {View, Text, TouchableOpacity, ScrollView} from 'react-native';
 
 import {styles} from './styles';
-import {BackGround, Header} from '../../components';
+import {Header} from '../../components';
 import {AddPhoto} from '../../../../assets/svg';
 import {stores} from '../../../stores/storesHolder';
 import {NavigationService} from '../../../services';
@@ -76,7 +76,6 @@ export const OverviewScreen = observer(() => {
 
   return (
     <>
-      <BackGround />
       <Header title={title} isBackButton />
       <ScrollView
         contentContainerStyle={styles.screen}

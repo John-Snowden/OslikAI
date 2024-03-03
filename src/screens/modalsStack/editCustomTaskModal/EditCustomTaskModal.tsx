@@ -6,7 +6,7 @@ import {TTask} from '$src/types';
 import {styles} from './styles';
 import {stores} from '../../../stores/storesHolder';
 import {NavigationService, navigationRef} from '../../../services';
-import {BackGround, CustomInput, MainButton} from '../../components';
+import {CustomInput, MainButton} from '../../components';
 
 export const EditCustomTaskModal = () => {
   const {

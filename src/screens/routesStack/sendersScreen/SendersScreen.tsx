@@ -5,8 +5,8 @@ import {FlatList, Text, View} from 'react-native';
 import {TSender} from '$src/types';
 
 import {styles} from './styles';
-import {Card} from '../components';
-import {BackGround, Header} from '../../components';
+import {Card} from '../components/card';
+import {Header} from '../../components';
 import {noSendersText} from '../../../constants';
 import {stores} from '../../../stores/storesHolder';
 import {NavigationService} from '../../../services';
@@ -17,6 +17,7 @@ export const SendersScreen = observer(() => {
       currentReceiver,
       currentReceiver: {senders},
       setCurrentSender,
+      setCustomRoute,
     },
   } = stores;
 
@@ -28,9 +29,16 @@ export const SendersScreen = observer(() => {
       NavigationService.push('Modals', {screen: 'EditSenderModal'});
     };
 
+    const goToEditSenderRouteScreen = () => {
+      setCurrentSender(item);
+
+      setCustomRoute(item.route);
+      NavigationService.push('EditSenderRouteScreen');
+    };
+
     const goToRouteOverviewScreen = () => {
       setCurrentSender(item);
-      NavigationService.navigate('OverviewScreen' as never);
+      NavigationService.navigate('OverviewScreen');
     };
 
     const goToDeleteModal = () => {
@@ -43,7 +51,8 @@ export const SendersScreen = observer(() => {
         data={item}
         isShowDuration
         onPress={goToRouteOverviewScreen}
-        onEdit={goToEditSenderModal}
+        onEditSender={goToEditSenderModal}
+        onEditSenderRoute={goToEditSenderRouteScreen}
         onDelete={goToDeleteModal}
       />
     );
@@ -51,7 +60,6 @@ export const SendersScreen = observer(() => {
 
   return (
     <>
-      <BackGround />
       <Header title={'Точка отправления'} isBackButton />
       {isSenders && (
         <View style={styles.titleBox}>
@@ -67,7 +75,7 @@ export const SendersScreen = observer(() => {
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={
           <View style={styles.flex}>
-            <Text style={styles.text}>{noSendersText}</Text>
+            <Text style={styles.textCenter}>{noSendersText}</Text>
           </View>
         }
       />

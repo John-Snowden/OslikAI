@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 
-import {Themes} from '../../../../Theme';
-import {normalize} from '../../../../utils';
+import {Themes} from '../../../../../Theme';
+import {normalize} from '../../../../../utils';
 
 export const styles = StyleSheet.create({
   screen: {
@@ -27,6 +27,7 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Themes.grayf4,
     elevation: 4,
+    overflow: 'hidden',
   },
   row: {
     alignSelf: 'center',
@@ -90,5 +91,8 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     paddingLeft: normalize(24),
     paddingVertical: normalize(6),
+  },
+  noise: {
+    position: 'absolute',
   },
 });

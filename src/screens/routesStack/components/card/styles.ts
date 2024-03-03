@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 
-import {Themes} from '../../../../Theme';
-import {normalize} from '../../../../utils';
+import {Themes} from '../../../../../Theme';
+import {normalize} from '../../../../../utils';
 
 export const styles = StyleSheet.create({
   receiverCard: {
@@ -14,6 +14,7 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Themes.grayf4,
     elevation: 4,
+    overflow: 'hidden',
   },
   row: {
     flexDirection: 'row',
@@ -104,5 +105,8 @@ export const styles = StyleSheet.create({
     paddingVertical: normalize(12),
     paddingRight: normalize(12),
     backgroundColor: Themes.grayf4,
+  },
+  noise: {
+    position: 'absolute',
   },
 });

@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 
 import {styles} from './styles';
-import {BackGround, Header} from '../components';
+import {Header} from '../components';
 import {Joystick, Instructions, CompileRoute} from '../../../assets/svg';
 import {EMenuScreens} from '../../constants';
 import {NavigationService} from '../../services';
@@ -31,7 +31,6 @@ export const MenuScreen = () => {
 
   return (
     <>
-      <BackGround />
       <Header title="Меню" isBackButton isMenuButton={false} />
 
       <View style={styles.screen}>
@@ -65,7 +64,7 @@ export const MenuScreen = () => {
       </View>
 
       <View style={styles.versionBox}>
-        <Text style={[styles.title, styles.grey]}>v. 1.1</Text>
+        <Text style={[styles.title, styles.grey]}>v. 1.2</Text>
       </View>
     </>
   );

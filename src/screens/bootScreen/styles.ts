@@ -33,7 +33,7 @@ export const styles = StyleSheet.create({
     borderRadius: normalize(8),
     borderWidth: 1,
     borderColor: Themes.mudBlue,
-    backgroundColor: Themes.black + '4D',
+    backgroundColor: Themes.blue23,
   },
   iconWrapper: {
     flexDirection: 'row',

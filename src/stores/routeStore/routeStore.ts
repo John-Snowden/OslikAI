@@ -49,12 +49,25 @@ export class RouteStore {
     );
   };
 
+  resetCustomRoute = () => {
+    this.customRoute = [];
+  };
+
+  setCustomRoute = (route: TTask[]) => {
+    this.customRoute = route;
+  };
+
   setCurrentSender = (data: TSender) => {
     this.currentSender = data;
   };
 
   setCurrentReceiver = (data: TReceiver) => {
     this.currentReceiver = data;
+  };
+
+  saveCustomRoute = () => {
+    this.currentSender.route = [...this.customRoute];
+    this.root.fsStore.writeReceivers();
   };
 
   saveRoute = async (
@@ -107,6 +120,7 @@ export class RouteStore {
       this.root.fsStore.serverFilePath,
       JSON.stringify(this.root.fsStore.serverFile),
     );
+
     this.root.crossAppStore.showNotification('Новый маршрут сохранен');
     NavigationService.navigate('RoutesStack', {screen: 'ReceiversScreen'});
   };

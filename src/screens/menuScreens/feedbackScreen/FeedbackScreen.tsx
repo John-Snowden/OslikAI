@@ -15,7 +15,7 @@ export const FeedbackScreen: React.FC = () => {
           По вопросам приобретения пиши в телеграм-бот
         </Text>
         <View style={styles.tgBox}>
-          <TelegramIcon size={22} />
+          <TelegramIcon size={19} />
           <Text style={[styles.text, styles.margLeft]}>t.me/Oslik/Zakaz</Text>
         </View>
         <View style={styles.sep} />
@@ -23,7 +23,7 @@ export const FeedbackScreen: React.FC = () => {
           Вопросы по работе Ослика отправляй в телеграм-бот
         </Text>
         <View style={styles.tgBox}>
-          <TelegramIcon size={22} />
+          <TelegramIcon size={19} />
           <Text style={[styles.text, styles.margLeft]}>t.me/Oslik/Pomosh</Text>
         </View>
         <View style={styles.sep} />
@@ -31,7 +31,7 @@ export const FeedbackScreen: React.FC = () => {
           Отзывы, критику, предложения по оптимизации отправляй в телеграм-бот
         </Text>
         <View style={styles.tgBox}>
-          <TelegramIcon size={22} />
+          <TelegramIcon size={19} />
           <Text style={[styles.text, styles.margLeft]}>
             t.me/Oslik/Predlozheniya
           </Text>

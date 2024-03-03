@@ -1,23 +1,30 @@
 import React from 'react';
 import {format} from 'date-fns';
-import {TouchableOpacity, View, Text} from 'react-native';
+import {TouchableOpacity, View, Text, Image} from 'react-native';
 
 import {TReceiver, TSender} from '$src/types';
 
 import {styles} from './styles';
-import {Delete, Pencil, Edit} from '../../../../assets/svg';
-import {IconButton} from '../../components/iconButton';
+import {Delete, Pencil, Edit} from '../../../../../assets/svg';
+import {IconButton} from '../../../components/iconButton';
 import ru from 'date-fns/locale/ru';
 
 interface IProps {
   data: TReceiver | TSender;
   isShowDuration?: boolean;
   onPress: () => void;
-  onEdit: () => void;
+  onEditSenderRoute?: () => void;
+  onEditSender: () => void;
   onDelete: () => void;
 }
 
-export const Card: React.FC<IProps> = ({data, onPress, onEdit, onDelete}) => {
+export const Card: React.FC<IProps> = ({
+  data,
+  onPress,
+  onEditSenderRoute,
+  onEditSender,
+  onDelete,
+}) => {
   const gps = data.gps ? data.gps : 'gps не указан';
   const createdAt = `Создано ${format(new Date(data.date), 'd MMM в hh:mm', {
     locale: ru,
@@ -33,6 +40,10 @@ export const Card: React.FC<IProps> = ({data, onPress, onEdit, onDelete}) => {
       style={styles.receiverCard}
       onPress={onPress}
       activeOpacity={0.5}>
+      <Image
+        source={require('../../../../../assets/images/noise.png')}
+        style={styles.noise}
+      />
       <View style={styles.row}>
         <IconButton
           icon={<Delete />}
@@ -48,16 +59,16 @@ export const Card: React.FC<IProps> = ({data, onPress, onEdit, onDelete}) => {
           </Text>
         </View>
 
-        {route && (
+        {onEditSenderRoute && (
           <IconButton
             icon={<Edit />}
-            onPress={onEdit}
+            onPress={onEditSenderRoute}
             style={styles.viewRouteButton}
           />
         )}
         <IconButton
           icon={<Pencil size={18} />}
-          onPress={onEdit}
+          onPress={onEditSender}
           style={styles.buttonBox}
         />
       </View>
